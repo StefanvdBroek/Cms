@@ -6,6 +6,7 @@ use Opifer\CmsBundle\Form\Type\CKEditorType;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\CardBlock;
+use Opifer\ContentBundle\Form\Type\ContentPickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,24 +35,7 @@ class CardBlockService extends AbstractBlockService implements BlockServiceInter
                 'attr' => array('label_col' => 12, 'widget_col' => 12),
             ])
         ;
-
-        $builder->get('properties')
-            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id']])
-            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes']])
-            ->add('preset', ChoiceType::class, [
-                'label'       => 'Preset',
-                'attr'        => ['help_text' => 'Pick a preset'],
-                'choices'     => $this->config['presets'],
-                'required'    => true,
-            ])
-            ->add('styles', ChoiceType::class, [
-                'label' => 'label.styling',
-                'choices'  => $this->config['styles'],
-                'required' => false,
-                'expanded' => true,
-                'multiple' => true,
-                'attr' => ['help_text' => 'help.html_styles'],
-            ])
+        $builder->get('styles')
             ->add('displaySize', ChoiceType::class, [
                 'label' => 'label.list_display_size',
                 'choices'  => [
@@ -61,9 +45,38 @@ class CardBlockService extends AbstractBlockService implements BlockServiceInter
                     'lg' => 'Large',
                 ],
                 'required' => true,
-                'expanded' => false,
+                'expanded' => true,
                 'multiple' => false,
-                'attr' => ['help_text' => 'help.list_display_size'],
+                'attr' => ['help_text' => 'help.list_display_size', 'class' => 'btn-radio'],
+            ])
+            ->add('preset', ChoiceType::class, [
+                'label'       => 'Preset',
+                'attr'        => ['help_text' => 'Pick a preset'],
+                'choices'     => $this->config['presets'],
+                'required'    => true,
+            ])
+
+            ->add('background', ChoiceType::class, [
+                'required' => false,
+                'label' => 'label.background_color',
+                'choices' => $this->config['backgrounds']
+            ])
+            ->add('styles', ChoiceType::class, [
+                'label' => 'label.styling',
+                'choices'  => $this->config['styles'],
+                'required' => false,
+                'expanded' => true,
+                'multiple' => true,
+                'attr' => ['help_text' => 'help.html_styles'],
+            ])
+        ;
+
+        $builder->get('properties')
+            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id']])
+            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes']])
+            ->add('content',  ContentPickerType::class, [
+                'as_object' => false,
+                'label' => 'label.content',
             ])
             ->add('imageRatio', ChoiceType::class, [
                 'label' => 'label.list_image_ratio',
@@ -79,9 +92,9 @@ class CardBlockService extends AbstractBlockService implements BlockServiceInter
                     'bg' => 'Background cover',
                 ],
                 'required' => true,
-                'expanded' => false,
+                'expanded' => true,
                 'multiple' => false,
-                'attr' => ['help_text' => 'help.list_image_ratio']
+                'attr' => ['help_text' => 'help.list_image_ratio', 'class' => 'btn-radio']
             ])
         ;
     }
