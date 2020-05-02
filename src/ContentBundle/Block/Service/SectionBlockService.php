@@ -8,6 +8,7 @@ use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\SectionBlock;
 use Opifer\ContentBundle\Form\Type\BoxModelType;
 use Opifer\ContentBundle\Form\Type\StylesType;
+use Opifer\MediaBundle\Form\Type\MediaPickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,6 +44,12 @@ class SectionBlockService extends AbstractBlockService implements BlockServiceIn
                     'help_text' => 'help.section_footer',
                 ],
                 'required' => false
+            ])
+            ->add('media', MediaPickerType::class, [
+                'required'  => false,
+                'multiple' => false,
+                'label' => 'label.section_media',
+                'attr' => array('label_col' => 12, 'widget_col' => 12),
             ])
         ;
 

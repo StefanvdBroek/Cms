@@ -1,2 +1,0 @@
-parameters:
-    opifer.content.section_block.class: Opifer\BootstrapBlockBundle\Block\Service\SectionBlockService

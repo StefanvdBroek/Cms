@@ -37,5 +37,4 @@ return [
     \Opifer\ReviewBundle\OpiferReviewBundle::class => ['all' => true],
     \Opifer\MailingListBundle\OpiferMailingListBundle::class => ['all' => true],
     \Opifer\Revisions\OpiferRevisionsBundle::class => ['all' => true],
-    \Opifer\BootstrapBlockBundle\OpiferBootstrapBlockBundle::class => ['all' => true],
 ];

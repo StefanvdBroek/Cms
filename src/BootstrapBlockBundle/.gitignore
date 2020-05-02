@@ -1,6 +1,0 @@
-composer.lock
-node_modules/
-phpunit.xml
-Resources/public/components/*
-Resources/public/css/*
-vendor/
