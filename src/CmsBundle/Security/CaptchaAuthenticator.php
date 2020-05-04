@@ -33,10 +33,8 @@ class CaptchaAuthenticator implements SimpleFormAuthenticatorInterface
     /**
      * Constructor.
      *
-     * @param RequestStack                 $requestStack
-     * @param UserPasswordEncoderInterface $encoder
-     * @param string|null                  $secretKey
-     * @param string|null                  $siteKey
+     * @param string|null $secretKey
+     * @param string|null $siteKey
      */
     public function __construct(RequestStack $requestStack, UserPasswordEncoderInterface $encoder, $secretKey = null, $siteKey = null)
     {
@@ -47,21 +45,19 @@ class CaptchaAuthenticator implements SimpleFormAuthenticatorInterface
     }
 
     /**
-     * @param TokenInterface        $token
-     * @param UserProviderInterface $userProvider
-     * @param string                $providerKey
+     * @param string $providerKey
      *
      * @return UsernamePasswordToken
      */
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
-        if (empty($this->secretKey) == false) {
+        if (false == empty($this->secretKey)) {
             $captcha = $this->request->get('g-recaptcha-response');
 
             $reCaptcha = new ReCaptcha($this->secretKey);
             $response = $reCaptcha->verify($captcha, $this->request->getClientIp());
 
-            if ($response->isSuccess() == false) {
+            if (false == $response->isSuccess()) {
                 throw new AuthenticationException('Captcha not passed');
             }
         }

@@ -14,7 +14,7 @@ class DatePeriod extends Literal implements ConstraintInterface
     protected $date;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $date
      */
@@ -42,7 +42,7 @@ class DatePeriod extends Literal implements ConstraintInterface
     }
 
     /**
-     * Get the date format
+     * Get the date format.
      *
      * @return string
      */
@@ -59,6 +59,7 @@ class DatePeriod extends Literal implements ConstraintInterface
         // Since this class is final, we can check with instanceof
         return $other instanceof $this;
     }
+
     /**
      * {@inheritdoc}
      */

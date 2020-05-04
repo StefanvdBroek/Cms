@@ -12,9 +12,6 @@ class FormExtension extends \Twig_Extension
     /** @var FormRendererInterface */
     public $renderer;
 
-    /**
-     * @param FormRendererInterface $renderer
-     */
     public function __construct(FormRendererInterface $renderer)
     {
         $this->renderer = $renderer;
@@ -38,14 +35,12 @@ class FormExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('opifer_autocomplete', [$this, 'renderJavascript', ['is_safe' => ['html']]])
+            new \Twig_SimpleFunction('opifer_autocomplete', [$this, 'renderJavascript', ['is_safe' => ['html']]]),
         ];
     }
 
     /**
      * Render Function Form Javascript.
-     *
-     * @param FormView $view
      *
      * @return string
      */

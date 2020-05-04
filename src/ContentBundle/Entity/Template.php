@@ -182,8 +182,6 @@ class Template implements ContentInterface, TemplatedInterface, BlockOwnerInterf
     /**
      * Add block.
      *
-     * @param BlockInterface $block
-     *
      * @return BlockInterface
      */
     public function addBlock(BlockInterface $block)
@@ -195,8 +193,6 @@ class Template implements ContentInterface, TemplatedInterface, BlockOwnerInterf
 
     /**
      * Remove block.
-     *
-     * @param BlockInterface $block
      */
     public function removeBlock(BlockInterface $block)
     {
@@ -274,8 +270,6 @@ class Template implements ContentInterface, TemplatedInterface, BlockOwnerInterf
 
     /**
      * Set updated at.
-     *
-     * @param \DateTime $updatedAt
      *
      * @return $this
      */

@@ -43,9 +43,6 @@ class CronRunCommand extends ContainerAwareCommand
     /**
      * Execute.
      *
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
      * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -76,14 +73,12 @@ class CronRunCommand extends ContainerAwareCommand
      *
      * This can be overridden with any other lock check. E.g. usage of Redis in case of a load balanced environment
      *
-     * @param Cron $cron
-     *
      * @return bool
      */
     protected function isLocked(Cron $cron)
     {
         $hourAgo = new \DateTime('-65 minutes');
-        if ($cron->getState() === Cron::STATE_RUNNING && $cron->getStartedAt() > $hourAgo) {
+        if (Cron::STATE_RUNNING === $cron->getState() && $cron->getStartedAt() > $hourAgo) {
             return true;
         }
 
@@ -92,8 +87,6 @@ class CronRunCommand extends ContainerAwareCommand
 
     /**
      * Start a cron.
-     *
-     * @param Cron $cron
      */
     private function startCron(Cron $cron)
     {
@@ -120,7 +113,7 @@ class CronRunCommand extends ContainerAwareCommand
 
             if (!$process->isSuccessful()) {
                 $this->output->writeln(' > '.$process->getErrorOutput());
-                if(strpos($process->getErrorOutput(), 'timeout') !== false) {
+                if (false !== strpos($process->getErrorOutput(), 'timeout')) {
                     $this->changeState($cron, Cron::STATE_TERMINATED, $process->getErrorOutput());
                 } else {
                     $this->changeState($cron, Cron::STATE_FAILED, $process->getErrorOutput());
@@ -131,7 +124,7 @@ class CronRunCommand extends ContainerAwareCommand
         } catch (\Exception $e) {
             $message = $e->getMessage();
 
-            if(strpos($e->getMessage(), 'timeout') !== false) {
+            if (false !== strpos($e->getMessage(), 'timeout')) {
                 $this->output->writeln(' > '.$e->getMessage());
                 $this->changeState($cron, Cron::STATE_TERMINATED, $e->getMessage());
             } else {
@@ -144,7 +137,6 @@ class CronRunCommand extends ContainerAwareCommand
     /**
      * Change the state of the cron.
      *
-     * @param Cron   $cron
      * @param string $state
      */
     private function changeState(Cron $cron, $state, $lastError = null)

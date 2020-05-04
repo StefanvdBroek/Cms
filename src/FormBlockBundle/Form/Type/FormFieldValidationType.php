@@ -5,8 +5,8 @@ namespace Opifer\FormBlockBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class FormFieldValidationType extends AbstractType
@@ -28,10 +28,10 @@ class FormFieldValidationType extends AbstractType
         ;
 
         $builder->addModelTransformer(new CallbackTransformer(
-            function($original) {
+            function ($original) {
                 return $original;
             },
-            function($submitted) {
+            function ($submitted) {
                 if ($submitted) {
                     switch ($submitted['type']) {
                         case 'gte':

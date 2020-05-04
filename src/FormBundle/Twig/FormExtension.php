@@ -3,9 +3,9 @@
 namespace Opifer\FormBundle\Twig;
 
 use Opifer\EavBundle\Manager\EavManager;
+use Opifer\FormBundle\Form\Type\PostType;
 use Opifer\FormBundle\Model\FormInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Opifer\FormBundle\Form\Type\PostType;
 
 class FormExtension extends \Twig_Extension
 {
@@ -17,9 +17,6 @@ class FormExtension extends \Twig_Extension
 
     /**
      * Constructor.
-     *
-     * @param EavManager           $eavManager
-     * @param FormFactoryInterface $formFactory
      */
     public function __construct(EavManager $eavManager, FormFactoryInterface $formFactory)
     {
@@ -28,7 +25,7 @@ class FormExtension extends \Twig_Extension
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFunctions()
     {
@@ -40,8 +37,6 @@ class FormExtension extends \Twig_Extension
     /**
      * Builds a Symfony form from the passed Form entity and returns the related FormView,
      * so we can use our Form as a standard Symfony form in our templates.
-     *
-     * @param FormInterface $form
      *
      * @return \Symfony\Component\Form\FormView
      */

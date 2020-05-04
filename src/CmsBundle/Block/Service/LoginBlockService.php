@@ -3,22 +3,20 @@
 namespace Opifer\CmsBundle\Block\Service;
 
 use Opifer\CmsBundle\Entity\LoginBlock;
+use Opifer\CmsBundle\Form\Type\CKEditorType;
 use Opifer\ContentBundle\Block\BlockRenderer;
 use Opifer\ContentBundle\Block\Service\AbstractBlockService;
 use Opifer\ContentBundle\Block\Service\BlockServiceInterface;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
-use Opifer\ContentBundle\Model\BlockInterface;
-use Symfony\Component\Form\FormBuilderInterface;
 use Opifer\ContentBundle\Form\Type\ContentPickerType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Opifer\CmsBundle\Form\Type\CKEditorType;
+use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
@@ -39,11 +37,6 @@ class LoginBlockService extends AbstractBlockService implements BlockServiceInte
 
     /**
      * LoginBlockService constructor.
-     *
-     * @param BlockRenderer    $blockRenderer
-     * @param CsrfTokenManager $csrfTokenManager
-     * @param Session          $session
-     * @param array            $config
      */
     public function __construct(BlockRenderer $blockRenderer, CsrfTokenManager $csrfTokenManager, Session $session, array $config)
     {
@@ -70,54 +63,52 @@ class LoginBlockService extends AbstractBlockService implements BlockServiceInte
                 'label' => 'label.login_redirect_content_item',
                 'as_object' => false,
                 'attr' => [
-                    'help_text' => 'help.login_redirect'
-                ]
+                    'help_text' => 'help.login_redirect',
+                ],
             ])
             ->add('register_content', ContentPickerType::class, [
                 'label' => 'label.register_content_item',
                 'as_object' => false,
                 'attr' => [
-                    'help_text' => 'help.register_content_item'
-                ]
+                    'help_text' => 'help.register_content_item',
+                ],
             ])
             ->add('allowEmail', CheckboxType::class, [
                 'label' => 'label.allow_email',
                 'attr' => [
-                    'align_with_widget'     => true,
-                    'help_text'             => 'help_text.allow_email',
+                    'align_with_widget' => true,
+                    'help_text' => 'help_text.allow_email',
                 ],
             ])
             ->add('allowFacebook', CheckboxType::class, [
                 'label' => 'label.allow_facebook',
                 'attr' => [
-                    'align_with_widget'     => true,
-                    'help_text'             => 'help_text.allow_facebook',
+                    'align_with_widget' => true,
+                    'help_text' => 'help_text.allow_facebook',
                 ],
             ])
             ->add('facebookId', TextType::class, [
                 'label' => 'label.facebook_id',
                 'attr' => [
-                    'help_text'             => 'help_text.facebook_id',
+                    'help_text' => 'help_text.facebook_id',
                 ],
             ])
             ->add('allowLinkedIn', CheckboxType::class, [
                 'label' => 'label.allow_linkedin',
                 'attr' => [
-                    'align_with_widget'     => true,
-                    'help_text'             => 'help_text.allow_linkedin',
+                    'align_with_widget' => true,
+                    'help_text' => 'help_text.allow_linkedin',
                 ],
             ])
             ->add('linkedInKey', TextType::class, [
                 'label' => 'label.linkedin_key',
                 'attr' => [
-                    'help_text'             => 'help_text.linkedin_key',
+                    'help_text' => 'help_text.linkedin_key',
                 ],
             ]);
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     public function getViewParameters(BlockInterface $block)
@@ -147,7 +138,7 @@ class LoginBlockService extends AbstractBlockService implements BlockServiceInte
             'block' => $block,
             'last_username' => $lastUsername,
             'error' => $error,
-            'csrf_token' => $csrfToken
+            'csrf_token' => $csrfToken,
         ];
 
         return $parameters;
@@ -173,16 +164,13 @@ class LoginBlockService extends AbstractBlockService implements BlockServiceInte
         return $tool;
     }
 
-    /**
-     * @param RequestStack $requestStack
-     */
     public function setRequest(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
     }
 
     /**
-     * @return null|Request
+     * @return Request|null
      */
     protected function getRequest()
     {

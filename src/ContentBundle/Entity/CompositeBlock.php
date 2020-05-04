@@ -44,8 +44,6 @@ abstract class CompositeBlock extends Block implements BlockContainerInterface, 
     /**
      * Add child.
      *
-     * @param BlockInterface $block
-     *
      * @return BlockInterface
      */
     public function addChild(BlockInterface $block)
@@ -57,8 +55,6 @@ abstract class CompositeBlock extends Block implements BlockContainerInterface, 
 
     /**
      * Remove child.
-     *
-     * @param BlockInterface $block
      */
     public function removeChild(BlockInterface $block)
     {
@@ -121,9 +117,6 @@ abstract class CompositeBlock extends Block implements BlockContainerInterface, 
         return $this->getIterator()->next();
     }
 
-    /**
-     * @param VisitorInterface $visitor
-     */
     public function accept(VisitorInterface $visitor)
     {
         foreach ($this->getChildren() as $child) {

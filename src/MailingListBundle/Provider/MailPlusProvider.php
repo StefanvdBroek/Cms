@@ -2,16 +2,16 @@
 
 namespace Opifer\MailingListBundle\Provider;
 
-use Opifer\MailingListBundle\Entity\MailingList;
-use Opifer\MailingListBundle\Manager\SubscriptionManager;
-use Opifer\MailingListBundle\Entity\Subscription;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Subscriber\Oauth\Oauth1;
+use Opifer\MailingListBundle\Entity\MailingList;
+use Opifer\MailingListBundle\Entity\Subscription;
+use Opifer\MailingListBundle\Manager\SubscriptionManager;
 
 class MailPlusProvider implements MailingListProviderInterface
 {
-    /** @var SubscriptionManager  */
+    /** @var SubscriptionManager */
     protected $subscriptionManager;
 
     /** @var string */
@@ -26,7 +26,6 @@ class MailPlusProvider implements MailingListProviderInterface
     /**
      * Constructor.
      *
-     * @param SubscriptionManager $subscriptionManager
      * @param $consumerKey
      * @param $consumerSecret
      */
@@ -38,9 +37,8 @@ class MailPlusProvider implements MailingListProviderInterface
     }
 
     /**
-     * Synchronize a subscription
+     * Synchronize a subscription.
      *
-     * @param Subscription $subscription
      * @return bool
      */
     public function synchronise(Subscription $subscription)
@@ -59,7 +57,7 @@ class MailPlusProvider implements MailingListProviderInterface
 
             $response = $this->post('contact', $contact);
 
-            if ($response->getStatusCode() == '204') { //Contact added successfully status code
+            if ('204' == $response->getStatusCode()) { //Contact added successfully status code
                 $this->subscriptionManager->updateStatus($subscription, Subscription::STATUS_SYNCED);
 
                 return true;
@@ -77,13 +75,13 @@ class MailPlusProvider implements MailingListProviderInterface
 
     /**
      * @param string $method
-     * @param array $query
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     protected function get($method, array $query)
     {
         $response = $this->getClient()->get('/integrationservice-1.1.0/'.$method, [
-            'query' => $query
+            'query' => $query,
         ]);
 
         return $response;
@@ -91,13 +89,13 @@ class MailPlusProvider implements MailingListProviderInterface
 
     /**
      * @param string $method
-     * @param array $body
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     protected function post($method, array $body)
     {
         $response = $this->getClient()->post('/integrationservice-1.1.0/'.$method, [
-            'body' => json_encode($body)
+            'body' => json_encode($body),
         ]);
 
         return $response;
@@ -132,7 +130,7 @@ class MailPlusProvider implements MailingListProviderInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -140,7 +138,7 @@ class MailPlusProvider implements MailingListProviderInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function synchroniseList(MailingList $mailingList, \Closure $logger)
     {
@@ -148,11 +146,10 @@ class MailPlusProvider implements MailingListProviderInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getRemoteLists()
     {
         return [];
     }
-
 }

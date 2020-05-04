@@ -9,12 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Block Controller
+ * Block Controller.
  */
 class BlockController extends Controller
 {
     /**
-     * Renders a single block
+     * Renders a single block.
      *
      * Useful for Edge Side Includes (ESI)
      *
@@ -44,7 +44,7 @@ class BlockController extends Controller
 
         $response = $service->execute($block, $response, [
             'partial' => true,
-            'environment' => $environment
+            'environment' => $environment,
         ]);
 
         return $response;

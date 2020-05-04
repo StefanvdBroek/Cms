@@ -6,7 +6,6 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Opifer\ContentBundle\Block\BlockManager;
-use Opifer\ContentBundle\Entity\DocumentBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -25,8 +24,6 @@ class BlockListener implements EventSubscriber
      * Constructor.
      *
      * Requires the complete container, to avoid circular references.
-     *
-     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
@@ -50,10 +47,10 @@ class BlockListener implements EventSubscriber
     }
 
     /**
-     * Get the service
+     * Get the service.
      *
-     * @param LifecycleEventArgs $args
      * @return \Opifer\ContentBundle\Block\BlockServiceInterface
+     *
      * @throws \Exception
      */
     public function getService(LifecycleEventArgs $args)
@@ -77,8 +74,6 @@ class BlockListener implements EventSubscriber
 
     /**
      * Post Load handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function postLoad(LifecycleEventArgs $args)
     {
@@ -89,8 +84,6 @@ class BlockListener implements EventSubscriber
 
     /**
      * Pre persist handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function prePersist(LifecycleEventArgs $args)
     {
@@ -101,8 +94,6 @@ class BlockListener implements EventSubscriber
 
     /**
      * Post persist handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function postPersist(LifecycleEventArgs $args)
     {
@@ -113,8 +104,6 @@ class BlockListener implements EventSubscriber
 
     /**
      * Pre update handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function preUpdate(LifecycleEventArgs $args)
     {
@@ -125,8 +114,6 @@ class BlockListener implements EventSubscriber
 
     /**
      * Post update handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function postUpdate(LifecycleEventArgs $args)
     {
@@ -137,8 +124,6 @@ class BlockListener implements EventSubscriber
 
     /**
      * Pre remove handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function preRemove(LifecycleEventArgs $args)
     {
@@ -149,8 +134,6 @@ class BlockListener implements EventSubscriber
 
     /**
      * Post remove handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function postRemove(LifecycleEventArgs $args)
     {

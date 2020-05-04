@@ -3,7 +3,7 @@
 namespace Opifer\EavBundle\Entity;
 
 /**
- * Option value
+ * Option value.
  */
 abstract class OptionValue extends Value
 {
@@ -16,7 +16,7 @@ abstract class OptionValue extends Value
     }
 
     /**
-     * Turn value into a simple array
+     * Turn value into a simple array.
      *
      * @return array
      */
@@ -32,7 +32,7 @@ abstract class OptionValue extends Value
     }
 
     /**
-     * Turn the options into a json string
+     * Turn the options into a json string.
      *
      * @return string
      */
@@ -42,7 +42,7 @@ abstract class OptionValue extends Value
     }
 
     /**
-     * Get an array of option ids
+     * Get an array of option ids.
      *
      * @return array
      */
@@ -58,7 +58,7 @@ abstract class OptionValue extends Value
     }
 
     /**
-     * Get the option ids as a string
+     * Get the option ids as a string.
      *
      * @return string
      */
@@ -70,7 +70,7 @@ abstract class OptionValue extends Value
     }
 
     /**
-     * Get names of options
+     * Get names of options.
      *
      * @return array
      */
@@ -84,9 +84,9 @@ abstract class OptionValue extends Value
 
         return $array;
     }
-    
+
     /**
-     * Get display names of the options
+     * Get display names of the options.
      *
      * @return array
      */
@@ -102,7 +102,7 @@ abstract class OptionValue extends Value
     }
 
     /**
-     * Get the value
+     * Get the value.
      *
      * @return array
      */

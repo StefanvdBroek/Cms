@@ -5,7 +5,6 @@ namespace Opifer\ReviewBundle\Controller;
 use Opifer\ReviewBundle\Form\Type\ReviewType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ReviewController extends Controller
 {
@@ -24,8 +23,6 @@ class ReviewController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
@@ -53,8 +50,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */

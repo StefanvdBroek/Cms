@@ -3,14 +3,13 @@
 namespace Opifer\FormBlockBundle\Block\Service;
 
 use Opifer\CmsBundle\Form\Type\CKEditorType;
-use Opifer\FormBlockBundle\Entity\RichCheckItemBlock;
 use Opifer\ContentBundle\Block\Service\BlockServiceInterface;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Model\BlockInterface;
+use Opifer\FormBlockBundle\Entity\RichCheckItemBlock;
 use Opifer\MediaBundle\Form\Type\MediaPickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -30,18 +29,18 @@ class RichCheckItemBlockService extends FormFieldBlockService implements BlockSe
             ->add('title', TextType::class)
             ->add('value', CKEditorType::class, ['label' => 'label.description', 'attr' => ['label_col' => 12, 'widget_col' => 12]])
             ->add('media', MediaPickerType::class, [
-                'required'  => false,
+                'required' => false,
                 'multiple' => false,
                 'attr' => ['label_col' => 12, 'widget_col' => 12],
             ]);
 
         if (isset($this->config['templates'])) {
             $builder->get('properties')->add('template', ChoiceType::class, [
-                'label'       => 'label.template',
+                'label' => 'label.template',
                 'placeholder' => 'placeholder.choice_optional',
-                'attr'        => ['help_text' => 'help.block_template'],
-                'choices'     => $this->config['templates'],
-                'required'    => false,
+                'attr' => ['help_text' => 'help.block_template'],
+                'choices' => $this->config['templates'],
+                'required' => false,
             ]);
         }
 
@@ -50,8 +49,8 @@ class RichCheckItemBlockService extends FormFieldBlockService implements BlockSe
                 'label' => 'label.long_description',
                 'attr' => [
                     'label_col' => 12,
-                    'widget_col' => 12
-                ]
+                    'widget_col' => 12,
+                ],
             ])
         ;
     }

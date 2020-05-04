@@ -6,33 +6,29 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class SchemaManager
 {
-
     /** @var EntityManager */
     protected $em;
 
     /** @var string */
     protected $class;
 
-
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param EntityManagerInterface $em
-     * @param string                 $class
+     * @param string $class
      */
     public function __construct(EntityManagerInterface $em, $class)
     {
-        if ( ! is_subclass_of($class, 'Opifer\EavBundle\Model\SchemaInterface')) {
-            throw new \Exception($class . ' must implement Opifer\EavBundle\Model\SchemaInterface');
+        if (!is_subclass_of($class, 'Opifer\EavBundle\Model\SchemaInterface')) {
+            throw new \Exception($class.' must implement Opifer\EavBundle\Model\SchemaInterface');
         }
 
-        $this->em    = $em;
+        $this->em = $em;
         $this->class = $class;
     }
 
-
     /**
-     * Get class
+     * Get class.
      *
      * @return string
      */
@@ -41,25 +37,21 @@ class SchemaManager
         return $this->class;
     }
 
-
     /**
-     * Create a new schema instance
+     * Create a new schema instance.
      *
      * @return SchemaInterface
      */
     public function create()
     {
-        $class    = $this->getClass();
+        $class = $this->getClass();
         $schema = new $class();
 
         return $schema;
     }
 
-
     /**
-     * Save schema
-     *
-     * @param SchemaInterface $schema
+     * Save schema.
      *
      * @return SchemaInterface
      */
@@ -75,9 +67,8 @@ class SchemaManager
         return $schema;
     }
 
-
     /**
-     * Get repository
+     * Get repository.
      *
      * @return \Doctrine\ORM\EntityRepository
      */

@@ -7,7 +7,6 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Opifer\ContentBundle\Environment\Environment;
 use Opifer\ContentBundle\Model\ContentInterface;
 use Opifer\ContentBundle\Provider\TemplateBlockProvider;
-use Opifer\ContentBundle\Serializer\BlockExclusionStrategy;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

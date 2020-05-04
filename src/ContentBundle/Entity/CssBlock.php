@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * CssBlock
+ * CssBlock.
  *
  * @ORM\Entity
  */

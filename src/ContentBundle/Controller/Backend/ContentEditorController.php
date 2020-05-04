@@ -5,21 +5,18 @@ namespace Opifer\ContentBundle\Controller\Backend;
 use GuzzleHttp\Client;
 use Opifer\ContentBundle\Block\BlockManager;
 use Opifer\ContentBundle\Designer\AbstractDesignSuite;
-use Opifer\ContentBundle\Entity\DocumentBlock;
-use Opifer\ContentBundle\Environment\ContentEnvironment;
 use Opifer\ContentBundle\Environment\Environment;
 use Opifer\ContentBundle\Provider\BlockProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ContentEditorController extends Controller
 {
     /**
-     * Graphical Content editor
+     * Graphical Content editor.
      *
-     * @param string  $owner
-     * @param integer $ownerId
+     * @param string $owner
+     * @param int    $ownerId
      *
      * @return Response
      */
@@ -54,10 +51,10 @@ class ContentEditorController extends Controller
     }
 
     /**
-     * Table of Contents tree
+     * Table of Contents tree.
      *
-     * @param string  $owner
-     * @param integer $ownerId
+     * @param string $owner
+     * @param int    $ownerId
      *
      * @return Response
      */
@@ -84,8 +81,8 @@ class ContentEditorController extends Controller
     }
 
     /**
-     * @param string  $owner
-     * @param integer $ownerId
+     * @param string $owner
+     * @param int    $ownerId
      *
      * @return mixed
      */
@@ -94,7 +91,7 @@ class ContentEditorController extends Controller
         $frontendUrl = $this->container->getParameter('opifer_content.frontend_url');
         if ($frontendUrl) {
             $client = new Client();
-            if ($owner == 'template') {
+            if ('template' == $owner) {
                 $res = $client->request('GET', sprintf('%s/templates/%d?manage=true', $frontendUrl, $ownerId));
             } else {
                 $res = $client->request('GET', sprintf('%s/%d?manage=true', $frontendUrl, $ownerId));

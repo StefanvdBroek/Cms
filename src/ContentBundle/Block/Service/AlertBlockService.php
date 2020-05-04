@@ -2,14 +2,12 @@
 
 namespace Opifer\ContentBundle\Block\Service;
 
-use Opifer\ContentBundle\Entity\AlertBlock;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
+use Opifer\ContentBundle\Entity\AlertBlock;
 use Opifer\ContentBundle\Form\Type\StylesType;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -29,30 +27,29 @@ class AlertBlockService extends AbstractBlockService implements BlockServiceInte
             ->add('value', TextareaType::class, [
                 'label' => 'Message',
                 'attr' => [
-                    'help_text' => 'help.alert_message'
-                ]
+                    'help_text' => 'help.alert_message',
+                ],
             ]);
 
         $builder->get('properties')
             ->add('id', TextType::class, [
                 'attr' => [
                     'help_text' => 'help.html_id',
-                    'tag' => 'settings'
+                    'tag' => 'settings',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('extra_classes', TextType::class, [
                 'attr' => [
                     'help_text' => 'help.extra_classes',
-                    'tag' => 'settings'
+                    'tag' => 'settings',
                 ],
-                'required' => false
+                'required' => false,
             ]);
-
 
         $builder->get('properties')
             ->add('styles', StylesType::class, [
-                'choices'  => $this->config['styles'],
+                'choices' => $this->config['styles'],
             ]);
     }
 
@@ -79,6 +76,7 @@ class AlertBlockService extends AbstractBlockService implements BlockServiceInte
 
     /**
      * @param BlockInterface $block
+     *
      * @return mixed
      */
     public function getDescription(BlockInterface $block = null)

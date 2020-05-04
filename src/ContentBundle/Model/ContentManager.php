@@ -4,17 +4,9 @@ namespace Opifer\ContentBundle\Model;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Opifer\ContentBundle\Block\BlockManager;
-use Opifer\ContentBundle\Exception\NestedContentFormException;
 use Opifer\ContentBundle\Provider\BlockProviderInterface;
-use Opifer\EavBundle\Entity\NestedValue;
-use Opifer\EavBundle\Form\Type\NestedType;
 use Opifer\EavBundle\Manager\EavManager;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-
-use Pagerfanta\Pagerfanta;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
 
 class ContentManager implements ContentManagerInterface, BlockProviderInterface
 {
@@ -36,9 +28,6 @@ class ContentManager implements ContentManagerInterface, BlockProviderInterface
     /**
      * Constructor.
      *
-     * @param EntityManagerInterface $em
-     * @param FormFactoryInterface $formFactory
-     * @param EavManager $eavManager
      * @param string $class
      * @param string $templateClass
      *
@@ -47,7 +36,7 @@ class ContentManager implements ContentManagerInterface, BlockProviderInterface
     public function __construct(EntityManagerInterface $em, FormFactoryInterface $formFactory, EavManager $eavManager, $class, $templateClass)
     {
         if (!is_subclass_of($class, 'Opifer\ContentBundle\Model\ContentInterface')) {
-            throw new \Exception($class .' must implement Opifer\ContentBundle\Model\ContentInterface');
+            throw new \Exception($class.' must implement Opifer\ContentBundle\Model\ContentInterface');
         }
 
         $this->em = $em;
@@ -68,7 +57,7 @@ class ContentManager implements ContentManagerInterface, BlockProviderInterface
     }
 
     /**
-     * Get the class
+     * Get the class.
      *
      * @return string
      */
@@ -94,7 +83,7 @@ class ContentManager implements ContentManagerInterface, BlockProviderInterface
     }
 
     /**
-     * Get the content by a reference
+     * Get the content by a reference.
      *
      * If the passed reference is a numeric, it must be the content ID from a
      * to-be-updated content item.
@@ -171,11 +160,11 @@ class ContentManager implements ContentManagerInterface, BlockProviderInterface
      */
     public function remove($content)
     {
-        if (! is_array($content)) {
+        if (!is_array($content)) {
             $content = [$content];
         }
 
-        if (! is_object($content[0])) {
+        if (!is_object($content[0])) {
             $content = $this->getRepository()->findByIds($content);
         }
 
@@ -191,9 +180,7 @@ class ContentManager implements ContentManagerInterface, BlockProviderInterface
     }
 
     /**
-     * Duplicate a content item
-     *
-     * @param ContentInterface $content
+     * Duplicate a content item.
      *
      * @return ContentInterface $duplicate
      */
@@ -201,7 +188,7 @@ class ContentManager implements ContentManagerInterface, BlockProviderInterface
     {
         //duplicate content
         $duplicatedContent = clone $content;
-        $duplicatedContent->setTitle(sprintf("%s copy %s", $duplicatedContent->getTitle(), date('r')));
+        $duplicatedContent->setTitle(sprintf('%s copy %s', $duplicatedContent->getTitle(), date('r')));
         $duplicatedContent->setSlug(null);
         $duplicatedContent->setActive(false);
         $duplicatedContent->setCreatedAt(new \DateTime());
@@ -221,11 +208,12 @@ class ContentManager implements ContentManagerInterface, BlockProviderInterface
         if ($valueset) {
             //iterate values, clone each and assign duplicate valueset to it
             foreach ($valueset->getValues() as $value) {
-
                 //skip empty attributes
-                if (is_null($value->getId())) continue;
+                if (is_null($value->getId())) {
+                    continue;
+                }
 
-                $duplicatedValue = clone ($value);
+                $duplicatedValue = clone $value;
                 $duplicatedValue->setValueSet($duplicatedValueset);
 
                 $this->detachAndPersist($duplicatedValue);
@@ -236,14 +224,13 @@ class ContentManager implements ContentManagerInterface, BlockProviderInterface
         return $duplicatedContent;
     }
 
-
     public function getEntityManager()
     {
         return $this->em;
     }
 
     /**
-     * For cloning purpose
+     * For cloning purpose.
      *
      * @param ContentInterface|\Opifer\EavBundle\Model\ValueSetInterface|\Opifer\EavBundle\Entity\Value $entity
      */
@@ -254,7 +241,7 @@ class ContentManager implements ContentManagerInterface, BlockProviderInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getBlockOwner($id)
     {

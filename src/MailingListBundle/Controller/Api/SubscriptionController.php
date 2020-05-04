@@ -5,7 +5,6 @@ namespace Opifer\MailingListBundle\Controller\Api;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Opifer\MailingListBundle\Entity\MailingList;
 use Opifer\MailingListBundle\Entity\Subscription;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -25,15 +24,14 @@ class SubscriptionController extends FOSRestController
         $mailinglist = $em->getRepository('OpiferMailingListBundle:MailingList')->find($mailinglistId);
         $subscription->setMailingList($mailinglist);
 
-
         if (!filter_var($subscription->getEmail(), FILTER_VALIDATE_EMAIL)) {
             return 'E-mail address validation failed';
         }
 
         $exists = $em->getRepository('OpiferMailingListBundle:Subscription')
-            ->findOneBy(array('mailingList' => $mailinglist, 'email' => $subscription->getEmail()));
+            ->findOneBy(['mailingList' => $mailinglist, 'email' => $subscription->getEmail()]);
 
-        if($exists) {
+        if ($exists) {
             return 'E-mail address already subscribed';
         }
 

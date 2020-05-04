@@ -20,7 +20,7 @@ interface FormInterface
     public function getNotificationEmail();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function requiresConfirmation();
 }

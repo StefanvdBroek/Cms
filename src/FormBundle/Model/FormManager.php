@@ -25,11 +25,7 @@ class FormManager
     protected $formFactory;
 
     /**
-     * @param EntityManagerInterface $em
-     * @param FormFactory            $formFactory
-     * @param SchemaManager          $schemaManager
-     * @param PostManager            $postManager
-     * @param string                 $class
+     * @param string $class
      *
      * @throws \Exception
      */
@@ -76,10 +72,7 @@ class FormManager
     }
 
     /**
-     * Create a Symfony Form instance
-     *
-     * @param FormInterface $form
-     * @param PostInterface $post
+     * Create a Symfony Form instance.
      *
      * @return \Symfony\Component\Form\FormInterface
      */
@@ -90,8 +83,6 @@ class FormManager
 
     /**
      * Save attribute.
-     *
-     * @param Form $form
      *
      * @return Form
      */

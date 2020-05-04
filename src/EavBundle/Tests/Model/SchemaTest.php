@@ -3,7 +3,6 @@
 namespace Opifer\EavBundle\Tests\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Mockery as m;
 use Opifer\EavBundle\Model\Schema;
 use PHPUnit\Framework\TestCase;
 
@@ -12,7 +11,7 @@ class SchemaTest extends TestCase
     public function testObjectClass()
     {
         $schema = new Schema();
-        $objectClass= 'Some ObjectClass';
+        $objectClass = 'Some ObjectClass';
 
         $expected = $objectClass;
         $schema->setObjectClass($objectClass);

@@ -5,7 +5,7 @@ namespace Opifer\ContentBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CarouselBlock
+ * CarouselBlock.
  *
  * @ORM\Entity
  */

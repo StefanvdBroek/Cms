@@ -3,23 +3,22 @@
 namespace Opifer\ContentBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
-use Opifer\CmsBundle\Entity\Site;
+use Opifer\CmsBundle\Entity\ContentType as ContentTypeEntity;
 use Opifer\ContentBundle\Form\DataTransformer\SlugTransformer;
 use Opifer\EavBundle\Form\Type\DateTimePickerType;
 use Opifer\EavBundle\Form\Type\ValueSetType;
-use Opifer\CmsBundle\Entity\ContentType as ContentTypeEntity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Callback;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * Content Form Type
+ * Content Form Type.
  */
 class ContentType extends AbstractType
 {
@@ -41,11 +40,11 @@ class ContentType extends AbstractType
     {
         $this->roles = $roles;
         $this->contentClass = $contentClass;
-        $this->defaultAccessRoles = implode(', ',$defaultAccessRoles);
+        $this->defaultAccessRoles = implode(', ', $defaultAccessRoles);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -59,12 +58,12 @@ class ContentType extends AbstractType
                 'required' => false,
             ])
             ->add('template', EntityType::class, [
-                'class'    => 'OpiferContentBundle:Template',
+                'class' => 'OpiferContentBundle:Template',
                 'choice_label' => 'displayName',
-                'attr'     => [
-                    'help_text' => 'help.template'
+                'attr' => [
+                    'help_text' => 'help.template',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('locale', EntityType::class, [
                 'label' => 'label.language',
@@ -73,24 +72,24 @@ class ContentType extends AbstractType
                 'attr' => [
                     'help_text' => 'help.content_language',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('site', EntityType::class, [
-                'class'    => 'OpiferCmsBundle:Site',
+                'class' => 'OpiferCmsBundle:Site',
                 'choice_label' => 'name',
-                'attr'     => [
-                    'help_text' => 'help.site'
+                'attr' => [
+                    'help_text' => 'help.site',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('contentTranslations', ContentListPickerType::class, [
                 'as_collection' => true,
                 'attr' => [
-                    'help_text' => 'This page in other languages'
+                    'help_text' => 'This page in other languages',
                 ],
                 'required' => false,
                 'constraints' => [
-                    new Callback(function($translationContents, ExecutionContextInterface $context) {
+                    new Callback(function ($translationContents, ExecutionContextInterface $context) {
                         if (is_array($translationContents) && !empty($translationContents)) {
                             $content = $context->getRoot()->getNormData();
                             $uniqueLanguages = [$content->getLocale()->getLocale()];
@@ -105,7 +104,7 @@ class ContentType extends AbstractType
                                         ->addViolation();
 
                                     break;
-                                } else if ($translationContent->getTranslationGroup() !== null &&
+                                } elseif (null !== $translationContent->getTranslationGroup() &&
                                     $translationContent->getTranslationGroup()->getId() !== $content->getTranslationGroup()->getId()) {
                                     // Already assigned to another group
                                     $context->buildViolation('Content can only be assigned to one translation group')
@@ -118,8 +117,8 @@ class ContentType extends AbstractType
                                 $uniqueLanguages[] = $locale;
                             }
                         }
-                    })
-                ]
+                    }),
+                ],
             ])
             ->add('title', TextType::class, [
                 'label' => 'label.title',
@@ -138,7 +137,7 @@ class ContentType extends AbstractType
                     'placeholder' => 'placeholder.content_short_title',
                     'help_text' => 'help.content_short_title',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('description', TextType::class, [
                 'label' => 'label.description',
@@ -146,7 +145,7 @@ class ContentType extends AbstractType
                     'placeholder' => 'placeholder.content_description',
                     'help_text' => 'help.content_description',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add(
                 $builder->create(
@@ -154,20 +153,20 @@ class ContentType extends AbstractType
                         'attr' => [
                             'placeholder' => 'placeholder.slug',
                             'help_text' => 'help.slug',
-                        ]
+                        ],
                     ]
                 )->addViewTransformer(new SlugTransformer())
             )
             ->add('publishAt', DateTimePickerType::class, [
                 'label' => 'label.publish_at',
-                'attr'  => [
+                'attr' => [
                     'help_text' => 'help.publish_at',
                     'class' => 'datetimepicker',
                 ],
-                'required' => false
+                'required' => false,
             ]);
 
-        if(isset($site)){
+        if (isset($site)) {
             $builder->add('parent', ContentParentType::class, [
                 'class' => $this->contentClass,
                 'choice_label' => 'title',
@@ -194,12 +193,12 @@ class ContentType extends AbstractType
                 'attr' => [
                     'help_text' => 'help.alias',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('active', CheckboxType::class, [
                 'attr' => [
                     'align_with_widget' => true,
-                    'help_text' => 'help.active'
+                    'help_text' => 'help.active',
                 ],
             ])
             ->add('indexable', CheckboxType::class, [
@@ -221,15 +220,15 @@ class ContentType extends AbstractType
             ->add('showInNavigation', CheckboxType::class, [
                 'attr' => [
                     'align_with_widget' => true,
-                    'help_text' => 'help.show_in_navigation'
+                    'help_text' => 'help.show_in_navigation',
                 ],
             ])
             ->add('roles', ChoiceType::class, [
                 'multiple' => true,
                 'choices' => $this->flattenRoles($this->roles),
                 'attr' => [
-                    'help_text' => 'Roles that can make changes to this content. If no roles selected the default roles will have access ('.$this->defaultAccessRoles.')'
-                ]
+                    'help_text' => 'Roles that can make changes to this content. If no roles selected the default roles will have access ('.$this->defaultAccessRoles.')',
+                ],
             ])
         ;
 
@@ -248,9 +247,9 @@ class ContentType extends AbstractType
      */
     public function flattenRoles($data)
     {
-        $result = array();
+        $result = [];
         foreach ($data as $key => $value) {
-            if (substr($key, 0, 4) === 'ROLE') {
+            if ('ROLE' === substr($key, 0, 4)) {
                 $result[$key] = $key;
             }
             if (is_array($value)) {
@@ -266,4 +265,3 @@ class ContentType extends AbstractType
         return array_unique($result);
     }
 }
-

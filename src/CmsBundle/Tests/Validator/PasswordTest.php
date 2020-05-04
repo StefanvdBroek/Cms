@@ -1,4 +1,5 @@
 <?php
+
 namespace Opifer\CmsBundle\Tests\Validator;
 
 use Opifer\CmsBundle\Validator\Constraints\Password;

@@ -2,7 +2,6 @@
 
 namespace Opifer\ContentBundle\Tests\TestData;
 
-
 class Entity
 {
     protected $id;

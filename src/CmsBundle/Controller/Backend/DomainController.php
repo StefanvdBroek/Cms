@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DomainController extends Controller
 {
@@ -37,9 +36,7 @@ class DomainController extends Controller
     }
 
     /**
-     * Create an event
-     *
-     * @param Request $request
+     * Create an event.
      *
      * @return RedirectResponse|Response
      */
@@ -64,13 +61,13 @@ class DomainController extends Controller
 
         return $this->render('@OpiferCms/Backend/Domain/create.html.twig', [
             'domain' => $domain,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function editAction(Request $request, $id = null)
@@ -99,7 +96,7 @@ class DomainController extends Controller
 
         return $this->render('@OpiferCms/Backend/Domain/edit.html.twig', [
             'domain' => $domain,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }

@@ -29,9 +29,8 @@ class FormType extends AbstractType
     protected $recaptchaSecretKey;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param EntityManager $em
      * @param $postClass
      * @param string|null $recaptchaSiteKey
      * @param string|null $recaptchaSecretKey
@@ -82,19 +81,19 @@ class FormType extends AbstractType
             ])
             ->add('uploadDirectory', EntityType::class, [
                 'label' => 'Upload directory',
-                'class'    => MediaDirectory::class,
+                'class' => MediaDirectory::class,
                 'choice_label' => 'name',
-                'attr'     => [
-                    'help_text'   => 'In case this form supports uploads, we can place the upload in a specified directory. If empty, the file will be placed in the root of the media manager',
+                'attr' => [
+                    'help_text' => 'In case this form supports uploads, we can place the upload in a specified directory. If empty, the file will be placed in the root of the media manager',
                 ],
                 'required' => false,
             ])
             ->add('locale', EntityType::class, [
                 'label' => 'label.language',
-                'class'    => Locale::class,
+                'class' => Locale::class,
                 'choice_label' => 'name',
-                'attr'     => [
-                    'help_text'   => 'help.content_language',
+                'attr' => [
+                    'help_text' => 'help.content_language',
                 ],
             ])
             ->add('recaptchaEnabled', ChoiceType::class, [

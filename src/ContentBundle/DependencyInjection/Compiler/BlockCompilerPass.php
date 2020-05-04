@@ -7,18 +7,14 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Class BlockCompilerPass
- *
- * @package Opifer\ContentBundle\DependencyInjection\Compiler
+ * Class BlockCompilerPass.
  */
 class BlockCompilerPass implements CompilerPassInterface
 {
     /**
-     * Process the compiler pass
+     * Process the compiler pass.
      *
      * Adds all tagged provider services to the provider pool
-     *
-     * @param ContainerBuilder $container
      *
      * @return void
      */
@@ -35,7 +31,7 @@ class BlockCompilerPass implements CompilerPassInterface
             foreach ($tagAttributes as $attributes) {
                 $definition->addMethodCall(
                     'addService',
-                    array(new Reference($id), $attributes['alias'])
+                    [new Reference($id), $attributes['alias']]
                 );
             }
         }
@@ -48,7 +44,7 @@ class BlockCompilerPass implements CompilerPassInterface
             foreach ($tagAttributes as $attributes) {
                 $definition->addMethodCall(
                     'addProvider',
-                    array(new Reference($id), $attributes['alias'])
+                    [new Reference($id), $attributes['alias']]
                 );
             }
         }

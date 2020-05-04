@@ -7,16 +7,15 @@ use Opifer\ReviewBundle\Model\ReviewInterface;
 
 class ReviewManager
 {
-    /** @var EntityManager  */
+    /** @var EntityManager */
     protected $em;
 
-    /** @var string  */
+    /** @var string */
     protected $class;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param EntityManager $em
      * @param string $class
      */
     public function __construct(EntityManager $em, $class)

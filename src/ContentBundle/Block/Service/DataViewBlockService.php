@@ -2,26 +2,25 @@
 
 namespace Opifer\ContentBundle\Block\Service;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Opifer\CmsBundle\Entity\Media;
+use Opifer\CmsBundle\Form\Type\CKEditorType;
 use Opifer\ContentBundle\Block\BlockRenderer;
-use Opifer\ContentBundle\Model\ContentManagerInterface;
-use Opifer\ContentBundle\Entity\DataViewBlock;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
+use Opifer\ContentBundle\Entity\DataViewBlock;
+use Opifer\ContentBundle\Form\Type\ContentListPickerType;
+use Opifer\ContentBundle\Form\Type\ContentPickerType;
+use Opifer\ContentBundle\Model\BlockInterface;
+use Opifer\MediaBundle\Form\Type\MediaPickerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Opifer\MediaBundle\Form\Type\MediaPickerType;
-use Opifer\ContentBundle\Form\Type\ContentPickerType;
-use Opifer\ContentBundle\Form\Type\ContentListPickerType;
-use Opifer\CmsBundle\Form\Type\CKEditorType;
-use Opifer\ContentBundle\Model\BlockInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * DataView Block Service.
@@ -31,17 +30,13 @@ class DataViewBlockService extends AbstractBlockService implements LayoutBlockSe
     /** @var EntityManagerInterface */
     protected $em;
 
-    /**
-     * @param BlockRenderer           $blockRenderer
-     * @param EntityManagerInterface $em
-     * @param array $config
-     */
     public function __construct(BlockRenderer $blockRenderer, EntityManagerInterface $em, array $config)
     {
         parent::__construct($blockRenderer, $config);
 
         $this->em = $em;
     }
+
     /**
      * {@inheritdoc}
      */
@@ -61,7 +56,7 @@ class DataViewBlockService extends AbstractBlockService implements LayoutBlockSe
                     'attr' => [
                         'help_text' => (isset($field['description'])) ? $field['description'] : null,
                         'tag' => (isset($field['tag'])) ? $field['tag'] : null,
-                    ]
+                    ],
                 ];
 
                 switch ($field['type']) {
@@ -109,7 +104,6 @@ class DataViewBlockService extends AbstractBlockService implements LayoutBlockSe
 
                 $form->get('properties')->add($field['name'], $type, $options);
             }
-
         });
 
         // Manually map the media items from the properties to the `medias` property, to store medias as an association
@@ -120,7 +114,7 @@ class DataViewBlockService extends AbstractBlockService implements LayoutBlockSe
 
             $ids = [];
             foreach ($fields as $field) {
-                if ($field['type'] == 'media') {
+                if ('media' == $field['type']) {
                     $ids[] = $properties[$field['name']];
                 }
             }
@@ -193,6 +187,7 @@ class DataViewBlockService extends AbstractBlockService implements LayoutBlockSe
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

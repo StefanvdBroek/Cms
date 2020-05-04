@@ -41,12 +41,12 @@ class SpanCollectionType extends AbstractType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'entry_type' => ColumnEnumType::class,
             'entry_options' => ['label' => false],
             'column_count' => 1,
             'choices' => [0, 1, 2, 3, 4, 5],
-        ));
+        ]);
     }
 
     /**

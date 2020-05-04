@@ -45,7 +45,7 @@ class FilterType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'help_text' => 'Adds a placeholder to the search field.',
-                    'tag' => 'general'
+                    'tag' => 'general',
                 ],
             ])
         ;

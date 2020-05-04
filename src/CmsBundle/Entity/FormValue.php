@@ -6,7 +6,7 @@ use Opifer\EavBundle\Entity\Value;
 use Opifer\FormBundle\Model\FormInterface;
 
 /**
- * FormValue
+ * FormValue.
  */
 class FormValue extends Value
 {

@@ -5,7 +5,7 @@ namespace Opifer\CmsBundle\Grid;
 use APY\DataGridBundle\Grid\Grid as BaseGrid;
 
 /**
- * Grid
+ * Grid.
  *
  * Overrides the APYDataGridBundle Grid to show/hide columns
  */
@@ -24,7 +24,7 @@ class Grid extends BaseGrid
     }
 
     /**
-     * Process columns
+     * Process columns.
      *
      * @param array $columnIds
      *
@@ -47,7 +47,7 @@ class Grid extends BaseGrid
         parent::processSessionData();
 
         // Columns
-        if (($columnIds = $this->get(self::REQUEST_QUERY_COLUMNS)) !== null) {
+        if (null !== ($columnIds = $this->get(self::REQUEST_QUERY_COLUMNS))) {
             if (count((array) $columnIds)) {
                 foreach ($this->columns as $column) {
                     if (!in_array($column->getId(), $columnIds)) {

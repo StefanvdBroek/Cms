@@ -71,7 +71,7 @@ class PostController extends Controller
         if (!$post) {
             return $this->createNotFoundException();
         }
-        
+
         $form = $post->getForm();
 
         $em = $this->getDoctrine()->getManager();
@@ -82,9 +82,10 @@ class PostController extends Controller
     }
 
     /**
-     * Re-sends a notification email for the given form post
+     * Re-sends a notification email for the given form post.
      *
      * @param int $id
+     *
      * @return RedirectResponse|\Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function notificationAction($id)

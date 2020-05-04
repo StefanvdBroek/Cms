@@ -3,12 +3,12 @@
 namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Opifer\ContentBundle\Block\BlockContainerInterface;
 use Opifer\MediaBundle\Model\MediaInterface;
 use Opifer\Revisions\Mapping\Annotation as Revisions;
-use Opifer\ContentBundle\Block\BlockContainerInterface;
 
 /**
- * ModalBlock
+ * ModalBlock.
  *
  * @ORM\Entity
  */
@@ -111,6 +111,7 @@ class ModalBlock extends CompositeBlock implements BlockContainerInterface
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 

@@ -43,7 +43,7 @@ class ClipboardBlockService extends AbstractBlockService implements BlockService
         $block = $this->blockManager->find($args['id'], true);
 
         // Duplicate function likes to have arrays
-        $blocks = $this->blockManager->duplicate(array($block), $args['owner']);
+        $blocks = $this->blockManager->duplicate([$block], $args['owner']);
 
         $block = array_shift($blocks);
 
@@ -113,7 +113,7 @@ class ClipboardBlockService extends AbstractBlockService implements BlockService
      */
     public function getTool(BlockInterface $block = null)
     {
-        $tools = array();
+        $tools = [];
 
         foreach ($this->getClipboardBlocks() as $block) {
             /** @var ToolsetMemberInterface $copyService */
@@ -136,6 +136,5 @@ class ClipboardBlockService extends AbstractBlockService implements BlockService
 
     public function load(BlockInterface $block)
     {
-
     }
 }

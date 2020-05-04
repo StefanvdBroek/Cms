@@ -3,18 +3,17 @@
 namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Opifer\ContentBundle\Block\BlockContainerInterface;
 use Opifer\MediaBundle\Model\MediaInterface;
 use Opifer\Revisions\Mapping\Annotation as Revisions;
-use Opifer\ContentBundle\Block\BlockContainerInterface;
 
 /**
- * CardBlock
+ * CardBlock.
  *
  * @ORM\Entity
  */
 class CardBlock extends CompositeBlock implements BlockContainerInterface
 {
-
     /**
      * @var string
      *
@@ -31,7 +30,6 @@ class CardBlock extends CompositeBlock implements BlockContainerInterface
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $media;
-
 
     /**
      * @return string

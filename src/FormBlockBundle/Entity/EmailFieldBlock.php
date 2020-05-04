@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\ContentBundle\Entity\Block;
 
 /**
- * Email Field Block
+ * Email Field Block.
  *
  * @ORM\Entity
  */

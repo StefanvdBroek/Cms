@@ -2,17 +2,17 @@
 
 namespace Opifer\ContentBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use APY\DataGridBundle\Grid\Mapping as GRID;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Opifer\Revisions\Mapping\Annotation as Revisions;
-use Opifer\Revisions\DraftInterface;
 use JMS\Serializer\Annotation as JMS;
 use Opifer\ContentBundle\Block\VisitorInterface;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Opifer\ContentBundle\Model\Content;
 use Opifer\ContentBundle\Model\ContentInterface;
+use Opifer\Revisions\DraftInterface;
+use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
  * Block.
@@ -127,7 +127,7 @@ abstract class Block implements BlockInterface, DraftInterface
     protected $sort = 0;
 
     /**
-     * @var null|int
+     * @var int|null
      *
      * @JMS\Expose
      * @JMS\Groups({"tree", "detail", "list"})
@@ -292,7 +292,7 @@ abstract class Block implements BlockInterface, DraftInterface
             $this->content = $owner;
         } elseif ($owner instanceof Template) {
             $this->template = $owner;
-        } elseif ($owner === null) {
+        } elseif (null === $owner) {
             $this->template = null;
             $this->content = null;
         } else {
@@ -306,7 +306,7 @@ abstract class Block implements BlockInterface, DraftInterface
     {
         $owner = $this->getOwner();
 
-        if ($owner === null) {
+        if (null === $owner) {
             return;
         } elseif ($owner instanceof Content) {
             return $owner->getTitle();
@@ -401,7 +401,6 @@ abstract class Block implements BlockInterface, DraftInterface
     }
 
     /**
-     *
      * @param array $properties
      */
     public function setProperties($properties)
@@ -419,8 +418,6 @@ abstract class Block implements BlockInterface, DraftInterface
 
     /**
      * Set created at.
-     *
-     * @param \DateTime|null $date
      *
      * @return $this
      */
@@ -615,16 +612,13 @@ abstract class Block implements BlockInterface, DraftInterface
     {
         $parent = $this->getParent();
 
-        if ($parent != null && ($parent->isShared() || $parent->hasSharedParent())) {
+        if (null != $parent && ($parent->isShared() || $parent->hasSharedParent())) {
             return true;
         }
 
         return false;
     }
 
-    /**
-     * @param VisitorInterface $visitor
-     */
     public function accept(VisitorInterface $visitor)
     {
         $visitor->visit($this);

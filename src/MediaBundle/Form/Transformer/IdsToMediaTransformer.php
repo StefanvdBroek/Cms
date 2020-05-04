@@ -16,9 +16,6 @@ class IdsToMediaTransformer implements DataTransformerInterface
      */
     private $mediaManager;
 
-    /**
-     * @param MediaManagerInterface $mm
-     */
     public function __construct(MediaManagerInterface $mm)
     {
         $this->mediaManager = $mm;
@@ -59,10 +56,7 @@ class IdsToMediaTransformer implements DataTransformerInterface
         ;
 
         if (!$media) {
-            throw new TransformationFailedException(sprintf(
-                'Media items with the ids "%s" do not exist!',
-                implode(', ', $ids)
-            ));
+            throw new TransformationFailedException(sprintf('Media items with the ids "%s" do not exist!', implode(', ', $ids)));
         }
 
         return $media;

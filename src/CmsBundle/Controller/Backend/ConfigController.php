@@ -7,13 +7,10 @@ use Opifer\CmsBundle\Manager\ConfigManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ConfigController extends Controller
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function indexAction(Request $request)

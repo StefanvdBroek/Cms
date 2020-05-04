@@ -10,9 +10,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class OpiferCmsBundle extends Bundle
 {
     /**
-     * Registers the compiler passes
-     *
-     * @param ContainerBuilder $container
+     * Registers the compiler passes.
      */
     public function build(ContainerBuilder $container)
     {

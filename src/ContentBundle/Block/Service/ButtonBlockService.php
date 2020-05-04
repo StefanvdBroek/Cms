@@ -8,12 +8,11 @@ use Opifer\ContentBundle\Entity\ButtonBlock;
 use Opifer\ContentBundle\Form\Type\StylesType;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Button Block Service
+ * Button Block Service.
  */
 class ButtonBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -27,22 +26,21 @@ class ButtonBlockService extends AbstractBlockService implements BlockServiceInt
         $builder->get('properties')
             ->add('url', TextType::class, [
                 'label' => 'label.url',
-                'attr' => ['help_text' => 'help.button_url']
+                'attr' => ['help_text' => 'help.button_url'],
             ])
             ->add('target', ChoiceType::class, [
                 'label' => 'label.target',
                 'choices' => ['_blank' => '_blank', '_self' => '_self'],
                 'required' => false,
-                'attr' => ['help_text' => 'help.button_target']
+                'attr' => ['help_text' => 'help.button_target'],
             ])
-            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'],'required' => false])
-            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'],'required' => false]);
-
+            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'], 'required' => false])
+            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'], 'required' => false]);
 
         if ($this->config['styles']) {
             $builder->get('properties')
                 ->add('styles', StylesType::class, [
-                    'choices'  => $this->config['styles'],
+                    'choices' => $this->config['styles'],
                 ]);
         }
 
@@ -50,23 +48,23 @@ class ButtonBlockService extends AbstractBlockService implements BlockServiceInt
             ->add('value', TextType::class, [
                 'label' => 'label.label',
                 'attr' => [
-                    'help_text' => 'help.button_label'
-                ]
+                    'help_text' => 'help.button_label',
+                ],
             ])
             ->add('name', TextType::class, [
                 'attr' => [
-                    'help_text' => 'help.block_name'
+                    'help_text' => 'help.block_name',
                 ],
-                'required' => false
+                'required' => false,
             ]);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
-        return new ButtonBlock;
+        return new ButtonBlock();
     }
 
     /**
@@ -78,7 +76,7 @@ class ButtonBlockService extends AbstractBlockService implements BlockServiceInt
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {

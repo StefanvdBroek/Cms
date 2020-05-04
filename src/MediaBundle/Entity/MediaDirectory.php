@@ -15,7 +15,7 @@ use Opifer\MediaBundle\Model\MediaInterface;
 class MediaDirectory implements MediaDirectoryInterface
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -61,7 +61,7 @@ class MediaDirectory implements MediaDirectoryInterface
     protected $children;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -118,8 +118,6 @@ class MediaDirectory implements MediaDirectoryInterface
     }
 
     /**
-     * @param MediaInterface $media
-     *
      * @return $this
      */
     public function addItem(MediaInterface $media)
@@ -130,8 +128,6 @@ class MediaDirectory implements MediaDirectoryInterface
     }
 
     /**
-     * @param MediaInterface $media
-     *
      * @return $this
      */
     public function removeItem(MediaInterface $media)
@@ -193,8 +189,6 @@ class MediaDirectory implements MediaDirectoryInterface
     }
 
     /**
-     * @param MediaDirectory $child
-     *
      * @return $this
      */
     public function addChild(MediaDirectory $child)
@@ -205,8 +199,6 @@ class MediaDirectory implements MediaDirectoryInterface
     }
 
     /**
-     * @param MediaDirectory $child
-     *
      * @return $this
      */
     public function removeChild(MediaDirectory $child)

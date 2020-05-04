@@ -12,9 +12,9 @@ class CollectionToStringTransformer implements DataTransformerInterface
     protected $object;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param Object $object
+     * @param object $object
      */
     public function __construct($object = null)
     {
@@ -28,7 +28,7 @@ class CollectionToStringTransformer implements DataTransformerInterface
      *
      * @param \Doctrine\ORM\PersistentCollection $value
      *
-     * @return Object
+     * @return object
      */
     public function transform($value)
     {
@@ -49,9 +49,9 @@ class CollectionToStringTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms a single Object to an ArrayCollection
+     * Transforms a single Object to an ArrayCollection.
      *
-     * @param Object $value
+     * @param object $value
      *
      * @return ArrayCollection
      */

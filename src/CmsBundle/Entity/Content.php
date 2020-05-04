@@ -4,14 +4,13 @@ namespace Opifer\CmsBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
+use Opifer\ContentBundle\Model\Content as BaseContent;
+use Opifer\ContentBundle\Model\ContentTypeInterface;
 use Opifer\EavBundle\Entity\CheckListValue;
 use Opifer\MediaBundle\Model\MediaInterface;
 use Opifer\Revisions\Mapping\Annotation as Revisions;
-use Opifer\ContentBundle\Model\Content as BaseContent;
-use Opifer\ContentBundle\Model\ContentTypeInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -94,7 +93,6 @@ class Content extends BaseContent
 
     /**
      * @var bool
-
      * @GRID\Column(title="Layout", type="boolean", visible=false)
      */
     protected $layout = false;
@@ -235,8 +233,6 @@ class Content extends BaseContent
     }
 
     /**
-     * @param MediaInterface $media
-     *
      * @return Content
      */
     public function addMedia(MediaInterface $media)
@@ -247,8 +243,6 @@ class Content extends BaseContent
     }
 
     /**
-     * @param MediaInterface $media
-     *
      * @return Content
      */
     public function removeMedia(MediaInterface $media)
@@ -257,7 +251,6 @@ class Content extends BaseContent
 
         return $this;
     }
-
 
     /**
      * @JMS\VirtualProperty
@@ -269,7 +262,6 @@ class Content extends BaseContent
     {
         return $this->site ? $this->site->getId() : null;
     }
-
 
     /**
      * @todo clean this mess up
@@ -320,7 +312,6 @@ class Content extends BaseContent
     }
 
     /**
-     * @param Locale $locale
      * @return $this
      */
     public function setLocale(Locale $locale)
@@ -335,7 +326,7 @@ class Content extends BaseContent
      */
     public function setRoles(array $roles)
     {
-        $this->roles = array();
+        $this->roles = [];
 
         foreach ($roles as $role) {
             $this->addRole($role);
@@ -352,6 +343,7 @@ class Content extends BaseContent
         $role = strtoupper($role);
 
         $this->roles[] = $role;
+
         return $this;
     }
 

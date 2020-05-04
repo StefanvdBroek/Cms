@@ -3,7 +3,6 @@
 namespace Opifer\MailingListBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Guzzle\Tests\Service\Mock\Command\Sub\Sub;
 use Opifer\MailingListBundle\Entity\MailingList;
 use Opifer\MailingListBundle\Entity\Subscription;
 use Opifer\MailingListBundle\Repository\SubscriptionRepository;
@@ -15,8 +14,6 @@ class SubscriptionManager
 
     /**
      * Constructor.
-     *
-     * @param EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)
     {
@@ -24,8 +21,7 @@ class SubscriptionManager
     }
 
     /**
-     * @param Subscription $subscription
-     * @param string       $status
+     * @param string $status
      *
      * @return $this
      */
@@ -33,7 +29,7 @@ class SubscriptionManager
     {
         $subscription->setStatus($status);
 
-        if ($status == Subscription::STATUS_SUBSCRIBED) {
+        if (Subscription::STATUS_SUBSCRIBED == $status) {
             $subscription->setSyncedAt(new \DateTime());
         }
 
@@ -44,10 +40,9 @@ class SubscriptionManager
     }
 
     /**
-     * @param MailingList $list
-     * @param             $email
+     * @param $email
      *
-     * @return null|Subscription
+     * @return Subscription|null
      */
     public function findOrCreate(MailingList $list, $email)
     {
@@ -56,7 +51,7 @@ class SubscriptionManager
 
         $subscription = $repo->findInListByEmail($list, $email);
 
-        if (! $subscription) {
+        if (!$subscription) {
             $subscription = new Subscription();
             $subscription->setMailingList($list);
             $subscription->setEmail($email);
@@ -66,8 +61,6 @@ class SubscriptionManager
     }
 
     /**
-     * @param MailingList $list
-     *
      * @return array
      */
     public function findOutOfSync(MailingList $list)
@@ -78,24 +71,18 @@ class SubscriptionManager
         return $repo->findInListOutOfSync($list);
     }
 
-    /**
-     * @param Subscription $subscription
-     */
     public function save(Subscription $subscription)
     {
-        if (! $subscription->getId()) {
+        if (!$subscription->getId()) {
             $this->em->persist($subscription);
         }
 
         $this->em->flush($subscription);
     }
 
-    /**
-     * @param MailingList $list
-     */
     public function saveList(MailingList $list)
     {
-        if (! $list->getId()) {
+        if (!$list->getId()) {
             $this->em->persist($list);
         }
 

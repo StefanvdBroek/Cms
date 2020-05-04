@@ -1,6 +1,8 @@
 <?php
+
 namespace Opifer\ExpressionEngine;
 
-interface ConstraintInterface {
+interface ConstraintInterface
+{
     public function getLeft($key);
 }

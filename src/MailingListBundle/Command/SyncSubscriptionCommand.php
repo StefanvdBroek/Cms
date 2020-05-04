@@ -2,15 +2,14 @@
 
 namespace Opifer\MailingListBundle\Command;
 
+use Opifer\MailingListBundle\Entity\MailingList;
+use Opifer\MailingListBundle\Entity\Subscription;
 use Opifer\MailingListBundle\Provider\MailingListProviderInterface;
 use Opifer\MailingListBundle\Provider\MailPlusProvider;
-use Opifer\MailingListBundle\Repository\SubscriptionRepository;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Opifer\MailingListBundle\Entity\MailingList;
-use Opifer\MailingListBundle\Entity\Subscription;
 
 class SyncSubscriptionCommand extends ContainerAwareCommand
 {
@@ -27,7 +26,7 @@ class SyncSubscriptionCommand extends ContainerAwareCommand
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
@@ -41,10 +40,6 @@ class SyncSubscriptionCommand extends ContainerAwareCommand
         }
     }
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $providerPool = $this->getContainer()->get('opifer.mailinglist.provider_pool');
@@ -52,7 +47,8 @@ class SyncSubscriptionCommand extends ContainerAwareCommand
         $lists = $this->em->getRepository('OpiferMailingListBundle:MailingList')->findWithProviders();
 
         if (empty($lists)) {
-            $output->writeln("<info>0 lists found to synchronise: exiting…</info>");
+            $output->writeln('<info>0 lists found to synchronise: exiting…</info>');
+
             return;
         }
 
@@ -67,9 +63,6 @@ class SyncSubscriptionCommand extends ContainerAwareCommand
 
             $logger(sprintf('Finished synchronisation on %s with %s', $list->getName(), $provider->getName()), 1);
         }
-
-        
-
 
 //
 //            /** @var MailingList $mailingList */
@@ -114,7 +107,7 @@ class SyncSubscriptionCommand extends ContainerAwareCommand
 
             $progress->setMessage(sprintf('<info>%s</info>', $message));
 
-            ($increment == null) ? $progress->display() : $progress->advance($increment);
+            (null == $increment) ? $progress->display() : $progress->advance($increment);
         };
     }
 

@@ -14,7 +14,7 @@ class RadioValueProvider extends AbstractValueProvider implements ValueProviderI
     protected $optionClass;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $optionClass
      */
@@ -30,15 +30,15 @@ class RadioValueProvider extends AbstractValueProvider implements ValueProviderI
     {
         $attributeId = $options['attribute']->getId();
         $transformer = new CollectionToObjectTransformer();
-        
+
         $builder->add(
             $builder->create('options', EntityType::class, [
-                'required'      => ($options['attribute']->getRequired()) ? true : false,
-                'label'         => $options['attribute']->getDisplayName(),
-                'multiple'      => false,   // Only allow single selection
-                'expanded'      => true,   // Render as radio buttons
-                'choice_label'  => 'displayName', // Assuming that the entity has a "name" property
-                'class'         => $this->optionClass,
+                'required' => ($options['attribute']->getRequired()) ? true : false,
+                'label' => $options['attribute']->getDisplayName(),
+                'multiple' => false,   // Only allow single selection
+                'expanded' => true,   // Render as radio buttons
+                'choice_label' => 'displayName', // Assuming that the entity has a "name" property
+                'class' => $this->optionClass,
                 'query_builder' => function (EntityRepository $optionRepository) use ($attributeId) {
                     return $optionRepository->createQueryBuilder('o')
                         ->add('orderBy', 'o.sort ASC')
@@ -47,7 +47,7 @@ class RadioValueProvider extends AbstractValueProvider implements ValueProviderI
                         ->setParameter('attributeId', $attributeId)
                     ;
                 },
-                'choice_attr' => function($option) {
+                'choice_attr' => function ($option) {
                     // add description as attr on the choice
                     return ['description' => $option->getDescription()];
                 },

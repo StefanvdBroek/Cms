@@ -21,8 +21,6 @@ class NotificationMailListener implements EventSubscriberInterface
 
     /**
      * Constructor.
-     *
-     * @param Mailer $mailer
      */
     public function __construct(Mailer $mailer)
     {
@@ -43,8 +41,6 @@ class NotificationMailListener implements EventSubscriberInterface
      * This method is called right after the post is stored in the database during the Form submit.
      * It checks whether the form has a notification email set, and if so, it sends out a notification
      * email.
-     *
-     * @param FormSubmitEvent $event
      */
     public function postFormSubmit(FormSubmitEvent $event)
     {

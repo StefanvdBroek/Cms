@@ -13,15 +13,11 @@ interface MediaManagerInterface
 
     /**
      * Save a media item.
-     *
-     * @param MediaInterface $media
      */
     public function save(MediaInterface $media);
 
     /**
      * Remove a media item.
-     *
-     * @param MediaInterface $media
      */
     public function remove(MediaInterface $media);
 

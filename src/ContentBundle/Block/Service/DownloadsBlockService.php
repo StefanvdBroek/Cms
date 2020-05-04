@@ -8,17 +8,14 @@ use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\DownloadsBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
-use Opifer\MediaBundle\Model\MediaManager;
 use Opifer\MediaBundle\Form\Type\MediaPickerType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Opifer\MediaBundle\Model\MediaManager;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
-use Gaufrette\FileSystem;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Video Block Service
+ * Video Block Service.
  */
 class DownloadsBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -27,10 +24,6 @@ class DownloadsBlockService extends AbstractBlockService implements BlockService
 
     /**
      * Constructor.
-     *
-     * @param BlockRenderer $blockRenderer
-     * @param array $config
-     * @param MediaManager $mediaManager
      */
     public function __construct(BlockRenderer $blockRenderer, array $config, MediaManager $mediaManager, Container $container)
     {
@@ -54,8 +47,8 @@ class DownloadsBlockService extends AbstractBlockService implements BlockService
                 'required' => false,
                 'label' => 'label.content',
                 'attr' => [
-                    'help_text' => 'help.download_media'
-                ]
+                    'help_text' => 'help.download_media',
+                ],
             ]);
     }
 
@@ -65,7 +58,7 @@ class DownloadsBlockService extends AbstractBlockService implements BlockService
      * @param string $filename
      *
      * @return Response
-    */
+     */
     public function downloadMediaAction($filename)
     {
         $media = $this->mediaManager->getRepository()->findOneByReference($filename);
@@ -75,47 +68,44 @@ class DownloadsBlockService extends AbstractBlockService implements BlockService
 
         $fileSystem = $provider->getFileSystem();
         $file = $fileSystem->read($media->getReference());
-        
+
         $response = new Response();
         $response->headers->set('Content-type', $media->getContentType());
         $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', basename($mediaUrl)));
         $response->setContent($file);
-        
+
         return $response;
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function load(BlockInterface $block)
     {
         $ids = json_decode($block->getValue());
 
-        if (empty($ids) || ! count($ids)) {
+        if (empty($ids) || !count($ids)) {
             return;
         }
 
         $items = $this->mediaManager->getRepository()->findByIds($ids);
 
         uasort($items, function ($a, $b) use ($ids) {
-            return (array_search($a->getId(), $ids) > array_search($b->getId(), $ids));
+            return array_search($a->getId(), $ids) > array_search($b->getId(), $ids);
         });
 
         if ($items) {
             $block->setItems(new ArrayCollection($items));
         }
-    }    
-
-    /**
-     * {@inheritDoc}
-     */
-    public function createBlock()
-    {
-        return new DownloadsBlock;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
+     */
+    public function createBlock()
+    {
+        return new DownloadsBlock();
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -129,6 +119,7 @@ class DownloadsBlockService extends AbstractBlockService implements BlockService
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

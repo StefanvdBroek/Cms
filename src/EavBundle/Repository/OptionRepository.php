@@ -5,7 +5,7 @@ namespace Opifer\EavBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * OptionRepository
+ * OptionRepository.
  */
 class OptionRepository extends EntityRepository
 {

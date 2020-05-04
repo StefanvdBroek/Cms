@@ -3,7 +3,6 @@
 namespace Opifer\CmsBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
-use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Opifer\ContentBundle\Model\ContentType as BaseContentType;
 
@@ -26,7 +25,7 @@ class ContentType extends BaseContentType
 
     /**
      * @var string
-     * 
+     *
      * @JMS\Expose
      * @JMS\Groups({"detail", "list"})
      */

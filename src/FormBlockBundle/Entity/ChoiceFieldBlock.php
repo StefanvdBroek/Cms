@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\ContentBundle\Entity\Block;
 
 /**
- * Choice Field Block
+ * Choice Field Block.
  *
  * @ORM\Entity
  */

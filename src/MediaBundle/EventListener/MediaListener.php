@@ -30,8 +30,6 @@ class MediaListener implements EventSubscriber
      * Constructor.
      *
      * Requires the complete container, to avoid circular references.
-     *
-     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
@@ -72,8 +70,6 @@ class MediaListener implements EventSubscriber
 
     /**
      * Post Load handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function postLoad(LifecycleEventArgs $args)
     {
@@ -84,8 +80,6 @@ class MediaListener implements EventSubscriber
 
     /**
      * Pre persist handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function prePersist(LifecycleEventArgs $args)
     {
@@ -96,8 +90,6 @@ class MediaListener implements EventSubscriber
 
     /**
      * Post persist handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function postPersist(LifecycleEventArgs $args)
     {
@@ -108,8 +100,6 @@ class MediaListener implements EventSubscriber
 
     /**
      * Pre update handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function preUpdate(LifecycleEventArgs $args)
     {
@@ -120,8 +110,6 @@ class MediaListener implements EventSubscriber
 
     /**
      * Post update handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function postUpdate(LifecycleEventArgs $args)
     {
@@ -132,8 +120,6 @@ class MediaListener implements EventSubscriber
 
     /**
      * Pre remove handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function preRemove(LifecycleEventArgs $args)
     {
@@ -144,8 +130,6 @@ class MediaListener implements EventSubscriber
 
     /**
      * Post remove handler.
-     *
-     * @param LifecycleEventArgs $args
      */
     public function postRemove(LifecycleEventArgs $args)
     {

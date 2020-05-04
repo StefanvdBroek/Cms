@@ -9,14 +9,14 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
 class OpiferEavExtension extends Extension implements PrependExtensionInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -26,9 +26,7 @@ class OpiferEavExtension extends Extension implements PrependExtensionInterface
     }
 
     /**
-     * Simplifying parameter syntax
-     *
-     * @param array $config
+     * Simplifying parameter syntax.
      *
      * @return array
      */
@@ -36,10 +34,10 @@ class OpiferEavExtension extends Extension implements PrependExtensionInterface
     {
         $params = [
             'opifer_eav.attribute_class' => $config['attribute_class'],
-            'opifer_eav.media_class'     => $config['media_class'],
-            'opifer_eav.option_class'    => $config['option_class'],
-            'opifer_eav.schema_class'  => $config['schema_class'],
-            'opifer_eav.valueset_class'  => $config['valueset_class'],
+            'opifer_eav.media_class' => $config['media_class'],
+            'opifer_eav.option_class' => $config['option_class'],
+            'opifer_eav.schema_class' => $config['schema_class'],
+            'opifer_eav.valueset_class' => $config['valueset_class'],
         ];
 
         foreach ($config['entities'] as $label => $entity) {
@@ -51,9 +49,7 @@ class OpiferEavExtension extends Extension implements PrependExtensionInterface
 
     /**
      * Prepend our config before other bundles, so we can preset
-     * their config with our parameters
-     *
-     * @param ContainerBuilder $container
+     * their config with our parameters.
      *
      * @return void
      */
@@ -69,19 +65,19 @@ class OpiferEavExtension extends Extension implements PrependExtensionInterface
 
         $resolvableEntities = [
             'Opifer\EavBundle\Model\AttributeInterface' => $config['attribute_class'],
-            'Opifer\EavBundle\Model\OptionInterface'    => $config['option_class'],
-            'Opifer\EavBundle\Model\SchemaInterface'  => $config['schema_class'],
-            'Opifer\EavBundle\Model\ValueSetInterface'  => $config['valueset_class'],
+            'Opifer\EavBundle\Model\OptionInterface' => $config['option_class'],
+            'Opifer\EavBundle\Model\SchemaInterface' => $config['schema_class'],
+            'Opifer\EavBundle\Model\ValueSetInterface' => $config['valueset_class'],
         ];
 
-        if ($config['media_class'] != '') {
+        if ('' != $config['media_class']) {
             $resolvableEntities['Opifer\EavBundle\Model\MediaInterface'] = $config['media_class'];
         }
 
         foreach ($container->getExtensions() as $name => $extension) {
             switch ($name) {
                 case 'doctrine':
-                    $container->prependExtensionConfig($name,  [
+                    $container->prependExtensionConfig($name, [
                         'orm' => [
                             'resolve_target_entities' => $resolvableEntities,
                         ],

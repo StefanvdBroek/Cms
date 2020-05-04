@@ -7,9 +7,9 @@ use Opifer\MailingListBundle\Provider\ProviderPool;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * MailingListType Type.
@@ -31,7 +31,7 @@ class MailingListType extends AbstractType
     {
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            array($this, 'onPreSetData')
+            [$this, 'onPreSetData']
         );
 
         $builder
@@ -72,7 +72,7 @@ class MailingListType extends AbstractType
             $provider = $this->pool->getProvider($list->getProvider());
             $remoteLists = $provider->getRemoteLists();
 
-            $lists = array();
+            $lists = [];
 
             array_map(function ($list) use (&$lists) {
                 $lists[$list['id']] = $list['name'];

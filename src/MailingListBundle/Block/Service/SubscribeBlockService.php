@@ -4,7 +4,6 @@ namespace Opifer\MailingListBundle\Block\Service;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
-use Guzzle\Tests\Service\Mock\Command\Sub\Sub;
 use Opifer\CmsBundle\Form\Type\CKEditorType;
 use Opifer\ContentBundle\Block\BlockRenderer;
 use Opifer\ContentBundle\Block\Service\AbstractBlockService;
@@ -22,7 +21,6 @@ use Opifer\MailingListBundle\Form\DataTransformer\MailingListToArrayTransformer;
 use Opifer\MailingListBundle\Form\Type\SubscribeType;
 use Opifer\MailingListBundle\Manager\SubscriptionManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -69,14 +67,6 @@ class SubscribeBlockService extends AbstractBlockService implements BlockService
 
     /**
      * SubscribeBlockService constructor.
-     *
-     * @param BlockRenderer     $blockRenderer
-     * @param array               $config
-     * @param FormFactory         $formFactory
-     * @param RouterInterface      $router
-     * @param ObjectManager       $em
-     * @param ContentManager      $contentManager
-     * @param SubscriptionManager $subscriptionManager
      */
     public function __construct(BlockRenderer $blockRenderer, array $config, FormFactory $formFactory, RouterInterface $router, ObjectManager $em, ContentManager $contentManager, SubscriptionManager $subscriptionManager)
     {
@@ -124,22 +114,22 @@ class SubscribeBlockService extends AbstractBlockService implements BlockService
                     'multiple' => false,
                     'attr' => [
                         'tag' => 'general',
-                        'help_text' => 'help.subscribe_response_type'
-                    ]
+                        'help_text' => 'help.subscribe_response_type',
+                    ],
                 ])
                 ->add('responseMessage', CKEditorType::class, [
                     'label' => 'label.subscribe_response_message',
                     'attr' => [
                         'tag' => 'general',
-                        'help_text' => 'help.subscribe_message'
-                    ]
+                        'help_text' => 'help.subscribe_message',
+                    ],
                 ])
                 ->add('responseContent', ContentPickerType::class, [
                     'label' => 'label.subscribe_response_page',
                     'attr' => [
                         'tag' => 'general',
-                        'help_text' => 'help.subscribe_redirect'
-                    ]
+                        'help_text' => 'help.subscribe_redirect',
+                    ],
                 ])
                 ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id']])
                 ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes']])
@@ -173,15 +163,12 @@ class SubscribeBlockService extends AbstractBlockService implements BlockService
         $this->request = $request->getCurrentRequest();
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function load(BlockInterface $block)
     {
         $properties = $block->getProperties();
-        $opts = array();
+        $opts = [];
 
-        if (isset($properties['responseType']) && $properties['responseType'] == 'redirect') {
+        if (isset($properties['responseType']) && 'redirect' == $properties['responseType']) {
             $opts['action'] = $this->router->generate('opifer_mailing_list_subscribe_block', ['id' => $block->getId()]);
         }
 
@@ -208,8 +195,6 @@ class SubscribeBlockService extends AbstractBlockService implements BlockService
     /**
      * Processes a POST request to subscribe.
      *
-     * @param Block $block
-     *
      * @return Response
      */
     public function subscribeAction(Block $block)
@@ -217,11 +202,11 @@ class SubscribeBlockService extends AbstractBlockService implements BlockService
         $response = $this->execute($block);
         $properties = $block->getProperties();
 
-        if ($this->subscribed && isset($properties['responseType']) && $properties['responseType'] == 'redirect') {
+        if ($this->subscribed && isset($properties['responseType']) && 'redirect' == $properties['responseType']) {
             $content = $this->contentManager->getRepository()->find($properties['responseContent']);
             $response = new RedirectResponse($this->router->generate('_content', ['slug' => $content->getSlug()]));
         }
-        
+
         return $response;
     }
 

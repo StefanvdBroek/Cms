@@ -2,8 +2,8 @@
 
 namespace Opifer\CmsBundle\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Domain
 {
@@ -66,6 +66,7 @@ class Domain
 
     /**
      * @param Site $site
+     *
      * @return Domain
      */
     public function setSite($site)

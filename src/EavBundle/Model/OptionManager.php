@@ -13,12 +13,11 @@ class OptionManager
     protected $class;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @throws \Exception If the passed class is no sub class of OptionInterface
      *
-     * @param EntityManagerInterface $em
-     * @param string                 $class
+     * @param string $class
      */
     public function __construct(EntityManagerInterface $em, $class)
     {
@@ -31,7 +30,7 @@ class OptionManager
     }
 
     /**
-     * Get class
+     * Get class.
      *
      * @return string
      */
@@ -41,7 +40,7 @@ class OptionManager
     }
 
     /**
-     * Create a new option instance
+     * Create a new option instance.
      *
      * @return OptionInterface
      */
@@ -54,9 +53,7 @@ class OptionManager
     }
 
     /**
-     * Save option
-     *
-     * @param OptionInterface $option
+     * Save option.
      *
      * @return OptionInterface
      */
@@ -69,7 +66,7 @@ class OptionManager
     }
 
     /**
-     * Get repository
+     * Get repository.
      *
      * @return \Doctrine\ORM\EntityRepository
      */

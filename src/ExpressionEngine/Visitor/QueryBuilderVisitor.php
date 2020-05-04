@@ -5,8 +5,6 @@ namespace Opifer\ExpressionEngine\Visitor;
 use Doctrine\ORM\Query\Expr\Comparison;
 use Doctrine\ORM\QueryBuilder;
 use Opifer\ExpressionEngine\ConstraintInterface;
-use Opifer\ExpressionEngine\SelectQueryStatement;
-use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Webmozart\Expression\Constraint\Contains;
 use Webmozart\Expression\Constraint\EndsWith;
 use Webmozart\Expression\Constraint\GreaterThan;
@@ -43,8 +41,6 @@ class QueryBuilderVisitor implements ExpressionVisitor
 
     /**
      * Constructor.
-     *
-     * @param QueryBuilder $qb
      */
     public function __construct(QueryBuilder $qb)
     {
@@ -81,7 +77,7 @@ class QueryBuilderVisitor implements ExpressionVisitor
     }
 
     /**
-     * Adds the AndX and OrX Doctrine expressions to the query
+     * Adds the AndX and OrX Doctrine expressions to the query.
      *
      * {@inheritdoc}
      */
@@ -115,8 +111,6 @@ class QueryBuilderVisitor implements ExpressionVisitor
     /**
      * Transforms the \Webmozart\Expression\Expression to a Doctrine \Doctrine\ORM\Query\Expr.
      *
-     * @param Key $expr
-     *
      * @return Comparison|\Doctrine\ORM\Query\Expr\Func
      */
     protected function toExpr(Key $expr)
@@ -124,7 +118,7 @@ class QueryBuilderVisitor implements ExpressionVisitor
         $left = $expr->getKey();
         $paramName = uniqid('K');
 
-        if (strpos($left, '.') !== false) {
+        if (false !== strpos($left, '.')) {
             $left = $this->shouldJoin($left);
         } else {
             $left = $this->getRootAlias().'.'.$left;
@@ -134,7 +128,7 @@ class QueryBuilderVisitor implements ExpressionVisitor
 
         if ($comparator instanceof StartsWith) {
             $right = $comparator->getAcceptedPrefix();
-        } elseif($comparator instanceof EndsWith){
+        } elseif ($comparator instanceof EndsWith) {
             $right = $comparator->getAcceptedSuffix();
         } else {
             $right = $comparator->getComparedValue();
@@ -158,19 +152,23 @@ class QueryBuilderVisitor implements ExpressionVisitor
             return $this->qb->expr()->lte($left, ':'.$paramName);
         } elseif ($comparator instanceof StartsWith) {
             $this->qb->setParameter($paramName, $right.'%');
+
             return $this->qb->expr()->like($left, ':'.$paramName);
         } elseif ($comparator instanceof EndsWith) {
             $this->qb->setParameter($paramName, '%'.$right);
+
             return $this->qb->expr()->like($left, ':'.$paramName);
         } elseif ($comparator instanceof Contains) {
             $this->qb->setParameter($paramName, '%'.$right.'%');
-            return $this->qb->expr()->like($left,':'.$paramName);
+
+            return $this->qb->expr()->like($left, ':'.$paramName);
         } elseif ($comparator instanceof In) {
             if (is_array($right)) {
-                return $this->qb->expr()->in($left,':'.$paramName);
+                return $this->qb->expr()->in($left, ':'.$paramName);
             } else {
                 $this->qb->setParameter($paramName, '%'.$right.'%');
-                return $this->qb->expr()->like($left,':'.$paramName);
+
+                return $this->qb->expr()->like($left, ':'.$paramName);
             }
         }
 
@@ -207,7 +205,7 @@ class QueryBuilderVisitor implements ExpressionVisitor
     }
 
     /**
-     * Returns the root alias
+     * Returns the root alias.
      *
      * @return string
      */

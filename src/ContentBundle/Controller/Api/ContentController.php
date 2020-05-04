@@ -3,12 +3,13 @@
 namespace Opifer\ContentBundle\Controller\Api;
 
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcher;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Opifer\CmsBundle\Entity\Content;
-use Opifer\CmsBundle\Entity\Site;
+use Opifer\CmsBundle\Entity\Option;
 use Opifer\ContentBundle\Block\BlockManager;
 use Opifer\ContentBundle\Environment\Environment;
 use Opifer\ContentBundle\Model\ContentInterface;
@@ -16,15 +17,12 @@ use Opifer\ContentBundle\Model\ContentManager;
 use Opifer\ContentBundle\Model\ContentManagerInterface;
 use Opifer\ContentBundle\Model\ContentRepository;
 use Opifer\ContentBundle\Serializer\BlockExclusionStrategy;
-use Opifer\CmsBundle\Entity\Option;
 use Opifer\EavBundle\Entity\OptionValue;
 use Opifer\ExpressionEngine\Visitor\QueryBuilderVisitor;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Doctrine\ORM\Tools\Pagination\Paginator;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ContentController extends Controller
 {
@@ -40,14 +38,10 @@ class ContentController extends Controller
      * @QueryParam(name="search", description="Search on any field")
      * @QueryParam(name="page", description="Used for pagination", default="1")
      *
-     * @param Request      $request
-     * @param ParamFetcher $paramFetcher
-     *
      * @return ContentInterface[]
      */
     public function getContentsAction(Request $request, ParamFetcher $paramFetcher)
     {
-
         if ($ids = $paramFetcher->get('ids')) {
             /** @var Content[] $items */
             $items = $this->get('opifer.content.content_manager')
@@ -137,7 +131,7 @@ class ContentController extends Controller
             $qb->andWhere('a.publishAt < :now OR a.publishAt IS NULL')
                 ->andWhere('a.active = :active')
                 ->setParameter('active', true)
-                ->setParameter('now',  new \DateTime());
+                ->setParameter('now', new \DateTime());
 
             $paginator = new Paginator($qb);
 
@@ -164,7 +158,7 @@ class ContentController extends Controller
         $context = SerializationContext::create()->setGroups(['Default', 'detail'])->enableMaxDepthChecks();
         $json = $this->get('jms_serializer')->serialize([
             'results' => $items,
-            'total_results' => $count
+            'total_results' => $count,
         ], 'json', $context);
 
         $json = $stringHelper->replaceLinks($json);
@@ -182,9 +176,6 @@ class ContentController extends Controller
      * @QueryParam(name="direction", description="Define the order direction", default="asc")
      * @QueryParam(name="limit", requirements="\d+", description="The amount of results to return", default="3")
      * @QueryParam(name="order_by", description="Define the order")
-     *
-     * @param Request      $request
-     * @param ParamFetcher $paramFetcher
      *
      * @return ContentInterface[]
      */
@@ -251,8 +242,6 @@ class ContentController extends Controller
 
     /**
      * Index.
-     *
-     * @param Request $request
      *
      * @return JsonResponse
      */
@@ -326,9 +315,8 @@ class ContentController extends Controller
     /**
      * Get a single content item.
      *
-     * @param Request $request
-     * @param int     $id
-     * @param string  $structure
+     * @param int    $id
+     * @param string $structure
      *
      * @return JsonResponse
      */
@@ -339,7 +327,7 @@ class ContentController extends Controller
         /** @var ContentRepository $contentRepository */
         $contentRepository = $this->get('opifer.content.content_manager')->getRepository();
         $content = $contentRepository->findOneByIdOrSlug($id, true);
-        if ($content->getSlug() === '404') {
+        if ('404' === $content->getSlug()) {
             // If the original content was not found and the 404 page was returned, set the correct status code
             $response->setStatusCode(404);
         }
@@ -358,7 +346,7 @@ class ContentController extends Controller
         /** @var Environment $environment */
         $environment = $this->get('opifer.content.block_environment');
         $environment->setObject($content);
-        
+
         if (null !== $version) {
             if ($this->isGranted('ROLE_EDITOR', $content)) {
                 $environment->setDraft(true);
@@ -372,7 +360,7 @@ class ContentController extends Controller
             // ->setGroups(['Default', 'detail'])
         ;
 
-        if ($structure == 'tree') {
+        if ('tree' == $structure) {
             $blocks = $environment->getRootBlocks();
             $context->setGroups(['Default', 'tree', 'detail']);
         } else {
@@ -434,8 +422,6 @@ class ContentController extends Controller
     /**
      * Duplicates content based on their id.
      *
-     * @param Request $request
-     *
      * @return Response
      */
     public function duplicateAction(Request $request)
@@ -478,8 +464,6 @@ class ContentController extends Controller
 
     /**
      * @ApiDoc()
-     *
-     * @param Request $request
      *
      * @return JsonResponse
      */

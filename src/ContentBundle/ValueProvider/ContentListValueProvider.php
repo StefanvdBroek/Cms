@@ -16,7 +16,7 @@ class ContentListValueProvider extends AbstractValueProvider implements ValuePro
     protected $contentClass;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $contentClass
      *
@@ -24,11 +24,11 @@ class ContentListValueProvider extends AbstractValueProvider implements ValuePro
      */
     public function __construct($contentClass)
     {
-        if ($contentClass != '' && !is_subclass_of($contentClass, ContentInterface::class)) {
+        if ('' != $contentClass && !is_subclass_of($contentClass, ContentInterface::class)) {
             throw new \Exception($contentClass.' must implement '.ContentInterface::class);
         }
 
-        if ($contentClass == '') {
+        if ('' == $contentClass) {
             $this->enabled = false;
         }
 
@@ -42,7 +42,7 @@ class ContentListValueProvider extends AbstractValueProvider implements ValuePro
     {
         $builder->add('sort', HiddenType::class);
         $builder->add('content', ContentListPickerType::class, [
-            'label' => $options['attribute']->getDisplayName()
+            'label' => $options['attribute']->getDisplayName(),
         ]);
     }
 

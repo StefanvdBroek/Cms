@@ -21,10 +21,6 @@ class BlockRenderer
 
     /**
      * Constructor.
-     *
-     * @param EngineInterface $templating
-     * @param FragmentHandler $fragmentHandler
-     * @param RequestStack    $requestStack
      */
     public function __construct(EngineInterface $templating, FragmentHandler $fragmentHandler, RequestStack $requestStack)
     {
@@ -35,7 +31,6 @@ class BlockRenderer
 
     /**
      * @param string $view
-     * @param array  $parameters
      * @param null   $response
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -46,9 +41,7 @@ class BlockRenderer
     }
 
     /**
-     * @param BlockInterface $block
-     *
-     * @return null|string
+     * @return string|null
      */
     public function renderEsi(BlockInterface $block)
     {
@@ -62,7 +55,7 @@ class BlockRenderer
     }
 
     /**
-     * @return null|\Symfony\Component\HttpFoundation\Request
+     * @return \Symfony\Component\HttpFoundation\Request|null
      */
     protected function getRequest()
     {

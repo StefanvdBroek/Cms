@@ -3,7 +3,6 @@
 namespace Opifer\ContentBundle\Designer;
 
 use Opifer\ContentBundle\Environment\Environment;
-use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Intl\Exception\NotImplementedException;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -31,7 +30,6 @@ abstract class AbstractDesignSuite implements DesignSuiteInterface
     {
         throw new NotImplementedException('Design Context must implement load method');
     }
-
 
     /**
      * Displays in navbar at the top of the designer window.
@@ -136,10 +134,9 @@ abstract class AbstractDesignSuite implements DesignSuiteInterface
     }
 
     /**
-     * Event hook for post publishing actions
+     * Event hook for post publishing actions.
      */
     public function postPublish()
     {
-
     }
 }

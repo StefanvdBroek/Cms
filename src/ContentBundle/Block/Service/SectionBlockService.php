@@ -8,14 +8,14 @@ use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\SectionBlock;
 use Opifer\ContentBundle\Form\Type\BoxModelType;
 use Opifer\ContentBundle\Form\Type\StylesType;
+use Opifer\ContentBundle\Model\BlockInterface;
 use Opifer\MediaBundle\Form\Type\MediaPickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Opifer\ContentBundle\Model\BlockInterface;
 
 /**
- * Section Block Service
+ * Section Block Service.
  */
 class SectionBlockService extends AbstractBlockService implements BlockServiceInterface, LayoutBlockServiceInterface, ToolsetMemberInterface
 {
@@ -34,7 +34,7 @@ class SectionBlockService extends AbstractBlockService implements BlockServiceIn
                     'widget_col' => 12,
                     'help_text' => 'help.section_header',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('footer', CKEditorType::class, [
                 'label' => 'label.footer',
@@ -43,21 +43,21 @@ class SectionBlockService extends AbstractBlockService implements BlockServiceIn
                     'widget_col' => 12,
                     'help_text' => 'help.section_footer',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('media', MediaPickerType::class, [
-                'required'  => false,
+                'required' => false,
                 'multiple' => false,
                 'label' => 'label.section_media',
-                'attr' => array('label_col' => 12, 'widget_col' => 12),
+                'attr' => ['label_col' => 12, 'widget_col' => 12],
             ])
         ;
 
         $builder->get('properties')
-            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'],'required' => false])
-            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'],'required' => false])
+            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'], 'required' => false])
+            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'], 'required' => false])
             ->add('styles', StylesType::class, [
-                'choices'  => $this->config['styles'],
+                'choices' => $this->config['styles'],
             ])
             ->add('padding', BoxModelType::class, [
                 'type' => 'padding',
@@ -65,7 +65,7 @@ class SectionBlockService extends AbstractBlockService implements BlockServiceIn
                     'help_text' => 'Spacing inside',
                     'tag' => 'styles',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('margin', BoxModelType::class, [
                 'type' => 'margin',
@@ -73,7 +73,7 @@ class SectionBlockService extends AbstractBlockService implements BlockServiceIn
                     'help_text' => 'Spacing outside',
                     'tag' => 'styles',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('container_size', ChoiceType::class, [
                 'label' => 'label.container_sizing',
@@ -131,6 +131,7 @@ class SectionBlockService extends AbstractBlockService implements BlockServiceIn
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

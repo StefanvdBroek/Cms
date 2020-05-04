@@ -8,7 +8,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class TemplateType extends AbstractType
 {
-
     /**
      * {@inheritdoc}
      */
@@ -17,24 +16,24 @@ class TemplateType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'form.name',
-                'attr'  => [
+                'attr' => [
                     'placeholder' => 'template.form.name.placeholder',
-                    'help_text'   => 'template.form.name.help_text',
-                ]
+                    'help_text' => 'template.form.name.help_text',
+                ],
             ])
             ->add('display_name', TextType::class, [
                 'label' => 'form.display_name',
-                'attr'  => [
+                'attr' => [
                     'placeholder' => 'template.form.display_name.placeholder',
-                    'help_text'   => 'template.form.display_name.help_text',
-                ]
+                    'help_text' => 'template.form.display_name.help_text',
+                ],
             ])
             ->add('view', TextType::class, [
                 'label' => 'form.view',
-                'attr'  => [
+                'attr' => [
                     'placeholder' => 'template.form.view.placeholder',
-                    'help_text'   => 'template.form.view.help_text',
-                ]
+                    'help_text' => 'template.form.view.help_text',
+                ],
             ])
         ;
     }

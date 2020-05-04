@@ -7,7 +7,7 @@ class Toolset
     /**
      * @var Tool[]
      */
-    protected $tools = array();
+    protected $tools = [];
 
     /**
      * @return array
@@ -34,8 +34,6 @@ class Toolset
     }
 
     /**
-     * @param Tool $tool
-     *
      * @return Toolset
      */
     public function addTool(Tool $tool)
@@ -46,8 +44,6 @@ class Toolset
     }
 
     /**
-     * @param array $tools
-     *
      * @return Toolset
      */
     public function addTools(array $tools)

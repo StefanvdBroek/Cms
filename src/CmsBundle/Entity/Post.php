@@ -3,14 +3,12 @@
 namespace Opifer\CmsBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Opifer\EavBundle\Model\EntityInterface;
 use Opifer\FormBundle\Model\Post as BasePost;
 
 /**
- * Post
+ * Post.
  *
  * @JMS\ExclusionPolicy("all")
  * @GRID\Source(columns="id, submittedAt")

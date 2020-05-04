@@ -4,8 +4,6 @@ namespace Opifer\CmsBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Cron\CronExpression;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Cron job.
@@ -59,7 +57,6 @@ class Cron
 
     /**
      * @var string
-     *
      */
     protected $lastError;
 
@@ -331,8 +328,8 @@ class Cron
      *                                           time. Setting this value to 1 will skip the first match and go to
      *                                           the second match. Setting this value to 2 will skip the first 2
      *                                           matches and so on.
-     * @param bool             $allowCurrentDate Set to TRUE to return the current date if
-     *                                           it matches the cron expression.
+     * @param bool             $allowCurrentDate set to TRUE to return the current date if
+     *                                           it matches the cron expression
      *
      * @return \DateTime
      *

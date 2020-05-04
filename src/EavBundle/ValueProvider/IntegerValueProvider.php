@@ -19,8 +19,8 @@ class IntegerValueProvider extends AbstractValueProvider implements ValueProvide
 
         $builder->add('value', IntegerType::class, [
             'required' => ($options['attribute']->getRequired()) ? true : false,
-            'label'    => false,
-            'attr'     => $attr
+            'label' => false,
+            'attr' => $attr,
         ]);
     }
 

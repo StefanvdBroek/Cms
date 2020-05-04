@@ -26,14 +26,14 @@ class ContentTypeType extends AbstractType
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', TextType::class)
             ->add('schema', SchemaType::class, [
-                'object_class' => $this->contentClass
+                'object_class' => $this->contentClass,
             ])
         ;
     }

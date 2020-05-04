@@ -46,7 +46,7 @@ class CodeMirrorType extends AbstractType
         $resolver->setDefaults([
             'parameters' => [
                 'mode' => 'javascript',
-            ]
+            ],
         ]);
     }
 }

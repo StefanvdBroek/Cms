@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Redirect
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
@@ -34,7 +34,7 @@ class Redirect
     protected $target;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="permanent", type="boolean")
      */
@@ -47,15 +47,15 @@ class Redirect
      */
     protected $requirements;
 
-    function __construct()
+    public function __construct()
     {
         $this->requirements = [];
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -63,7 +63,7 @@ class Redirect
     }
 
     /**
-     * Set origin
+     * Set origin.
      *
      * @param string $origin
      *
@@ -77,7 +77,7 @@ class Redirect
     }
 
     /**
-     * Get origin
+     * Get origin.
      *
      * @return string
      */
@@ -87,7 +87,7 @@ class Redirect
     }
 
     /**
-     * Set target
+     * Set target.
      *
      * @param string $target
      *
@@ -101,7 +101,7 @@ class Redirect
     }
 
     /**
-     * Get target
+     * Get target.
      *
      * @return string
      */
@@ -111,9 +111,9 @@ class Redirect
     }
 
     /**
-     * Set permanent
+     * Set permanent.
      *
-     * @param boolean $permanent
+     * @param bool $permanent
      *
      * @return Redirect
      */
@@ -125,9 +125,9 @@ class Redirect
     }
 
     /**
-     * Is permanent
+     * Is permanent.
      *
-     * @return boolean
+     * @return bool
      */
     public function isPermanent()
     {
@@ -135,8 +135,6 @@ class Redirect
     }
 
     /**
-     * @param array $requirement
-     *
      * @return Redirect
      */
     public function addRequirement(array $requirement)
@@ -147,8 +145,6 @@ class Redirect
     }
 
     /**
-     * @param array $requirement
-     *
      * @return Redirect
      */
     public function removeRequirement(array $requirement)
@@ -161,7 +157,7 @@ class Redirect
         }
 
         $this->requirements = $newArray;
-        
+
         return $this;
     }
 
@@ -173,4 +169,3 @@ class Redirect
         return $this->requirements;
     }
 }
-

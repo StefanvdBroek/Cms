@@ -2,9 +2,7 @@
 
 namespace Opifer\ContentBundle\Controller\Api;
 
-use Imagine\Image\Point;
 use Opifer\ContentBundle\Block\BlockManager;
-use Opifer\ContentBundle\Block\ContentBlockAdapter;
 use Opifer\ContentBundle\Block\Service\AbstractBlockService;
 use Opifer\ContentBundle\Block\Service\ClipboardBlockService;
 use Opifer\ContentBundle\Entity\CompositeBlock;
@@ -17,18 +15,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class ContentEditorController
- *
- * @package Opifer\ContentBundle\Controller\Api
+ * Class ContentEditorController.
  */
 class ContentEditorController extends Controller
 {
     /**
-     * Retrieve the manage view for a block
+     * Retrieve the manage view for a block.
      *
-     * @param string  $owner
-     * @param integer $ownerId
-     * @param integer $id
+     * @param string $owner
+     * @param int    $ownerId
+     * @param int    $id
      *
      * @return JsonResponse
      */
@@ -53,16 +49,14 @@ class ContentEditorController extends Controller
 
         $this->get('opifer.content.twig.content_extension')->setBlockEnvironment($environment);
 
-
         return new JsonResponse(['view' => $service->manage($block)->getContent()]);
     }
 
     /**
-     * Creates a new block
+     * Creates a new block.
      *
-     * @param Request $request
-     * @param string  $owner
-     * @param integer $ownerId
+     * @param string $owner
+     * @param int    $ownerId
      *
      * @return JsonResponse
      */
@@ -71,19 +65,19 @@ class ContentEditorController extends Controller
         $this->getDoctrine()->getManager()->getFilters()->disable('draft');
 
         /** @var BlockManager $manager */
-        $manager  = $this->get('opifer.content.block_manager');
-        $response = new JsonResponse;
+        $manager = $this->get('opifer.content.block_manager');
+        $response = new JsonResponse();
 
-        $sort        = $request->request->get('sort');
-        $parentId    = $request->request->get('parent');
-        $className   = $request->request->get('className');
+        $sort = $request->request->get('sort');
+        $parentId = $request->request->get('parent');
+        $className = $request->request->get('className');
         $placeholder = (int) $request->request->get('placeholder');
-        $bOwnerId    = (int) $request->request->get('ownerId');
-        $data        = $request->request->get('data');
-        $data        = json_decode($data, true);
+        $bOwnerId = (int) $request->request->get('ownerId');
+        $data = $request->request->get('data');
+        $data = json_decode($data, true);
 
         // In case of editing shared blocks they have no owner
-        if ($bOwnerId === 0 && $parentId !== null) {
+        if (0 === $bOwnerId && null !== $parentId) {
             $object = null;
         } else {
             $object = $this->get('opifer.content.block_provider_pool')->getProvider($owner)->getBlockOwner($ownerId);
@@ -104,17 +98,17 @@ class ContentEditorController extends Controller
     }
 
     /**
-     * Removes a block
+     * Removes a block.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return JsonResponse
      */
     public function removeBlockAction($id)
     {
         /** @var BlockManager $manager */
-        $manager  = $this->get('opifer.content.block_manager');
-        $response = new JsonResponse;
+        $manager = $this->get('opifer.content.block_manager');
+        $response = new JsonResponse();
 
         try {
             $block = $manager->find($id, true);
@@ -129,20 +123,20 @@ class ContentEditorController extends Controller
     }
 
     /**
-     * Copies a reference of a block to the clipboard
+     * Copies a reference of a block to the clipboard.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return JsonResponse
      */
     public function clipboardBlockAction($id)
     {
         /** @var BlockManager $manager */
-        $manager  = $this->get('opifer.content.block_manager');
+        $manager = $this->get('opifer.content.block_manager');
 
         /** @var ClipboardBlockService $clipboardService */
-        $clipboardService  = $this->get('opifer.content.clipboard_block');
-        $response = new JsonResponse;
+        $clipboardService = $this->get('opifer.content.clipboard_block');
+        $response = new JsonResponse();
 
         try {
             $block = $manager->find($id, true);
@@ -158,23 +152,20 @@ class ContentEditorController extends Controller
         return $response;
     }
 
-
     /**
-     * Creates a new block
-     *
-     * @param Request $request
+     * Creates a new block.
      *
      * @return JsonResponse
      */
     public function moveBlockAction(Request $request)
     {
         /** @var BlockManager $manager */
-        $manager  = $this->get('opifer.content.block_manager');
-        $response = new JsonResponse;
+        $manager = $this->get('opifer.content.block_manager');
+        $response = new JsonResponse();
 
-        $id          = (int) $request->request->get('id');
-        $parentId    = (int) $request->request->get('parent');
-        $sort        = $request->request->get('sort');
+        $id = (int) $request->request->get('id');
+        $parentId = (int) $request->request->get('parent');
+        $sort = $request->request->get('sort');
         $placeholder = (int) $request->request->get('placeholder');
 
         try {
@@ -191,13 +182,13 @@ class ContentEditorController extends Controller
     }
 
     /**
-     * Makes a block shared and created a PointerBlock in its place
+     * Makes a block shared and created a PointerBlock in its place.
      *
-     * @param Request $request
-     * @param         $owner
-     * @param         $ownerId
+     * @param $owner
+     * @param $ownerId
      *
      * @return JsonResponse
+     *
      * @throws \Exception
      */
     public function makeSharedAction(Request $request, $owner, $ownerId)
@@ -205,8 +196,8 @@ class ContentEditorController extends Controller
         /** @var BlockManager $manager */
         $manager = $this->get('opifer.content.block_manager');
 
-        $response = new JsonResponse;
-        $id       = (int) $request->request->get('id');
+        $response = new JsonResponse();
+        $id = (int) $request->request->get('id');
 
         try {
             /** @var PointerBlock $pointerBlock */
@@ -224,9 +215,7 @@ class ContentEditorController extends Controller
     }
 
     /**
-     * Publishes a shared block and it's members
-     *
-     * @param Request $request
+     * Publishes a shared block and it's members.
      *
      * @return JsonResponse
      */
@@ -235,9 +224,9 @@ class ContentEditorController extends Controller
         $this->getDoctrine()->getManager()->getFilters()->disable('draft');
 
         /** @var BlockManager $manager */
-        $manager  = $this->get('opifer.content.block_manager');
-        $response = new JsonResponse;
-        $id       = (int) $request->request->get('id');
+        $manager = $this->get('opifer.content.block_manager');
+        $response = new JsonResponse();
+        $id = (int) $request->request->get('id');
 
         try {
             $block = $manager->find($id, true);
@@ -252,16 +241,14 @@ class ContentEditorController extends Controller
             $response->setData(['state' => 'published']);
         } catch (\Exception $e) {
             $response->setStatusCode(500);
-            $response->setData(['error' => $e->getMessage() . $e->getTraceAsString()]);
+            $response->setData(['error' => $e->getMessage().$e->getTraceAsString()]);
         }
 
         return $response;
     }
 
     /**
-     * Publishes a block and it's members
-     *
-     * @param Request $request
+     * Publishes a block and it's members.
      *
      * @return JsonResponse
      */
@@ -270,14 +257,14 @@ class ContentEditorController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->getFilters()->disable('draft');
 
-        $owner        = $request->request->get('owner');
-        $ownerId      = (int) $request->request->get('ownerId');
+        $owner = $request->request->get('owner');
+        $ownerId = (int) $request->request->get('ownerId');
 
         /** @var BlockManager $manager */
-        $manager  = $this->get('opifer.content.block_manager');
+        $manager = $this->get('opifer.content.block_manager');
         /** @var BlockProviderInterface $provider */
         $provider = $this->get('opifer.content.block_provider_pool')->getProvider($owner);
-        $response = new JsonResponse;
+        $response = new JsonResponse();
 
         $object = $provider->getBlockOwner($ownerId);
         $object->setUpdatedAt(new \DateTime());
@@ -289,7 +276,7 @@ class ContentEditorController extends Controller
             $response->setData(['state' => 'published']);
         } catch (\Exception $e) {
             $response->setStatusCode(500);
-            $response->setData(['error' => $e->getMessage() . $e->getTraceAsString()]);
+            $response->setData(['error' => $e->getMessage().$e->getTraceAsString()]);
         }
 
         $em->flush($object);
@@ -297,11 +284,8 @@ class ContentEditorController extends Controller
         return $response;
     }
 
-
     /**
-     * Discards all changes to block and it's members
-     *
-     * @param Request $request
+     * Discards all changes to block and it's members.
      *
      * @return JsonResponse
      */
@@ -312,7 +296,7 @@ class ContentEditorController extends Controller
         /** @var BlockManager $manager */
         $manager = $this->get('opifer.content.block_manager');
 
-        $response = new JsonResponse;
+        $response = new JsonResponse();
         $id = (int) $request->request->get('id');
 
         try {
@@ -329,8 +313,7 @@ class ContentEditorController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param integer $id
+     * @param int $id
      *
      * @return JsonResponse
      *
@@ -364,13 +347,13 @@ class ContentEditorController extends Controller
             'block_service' => $service,
             'block' => $block,
             'form' => $form->createView(),
-            'update_preview' => $updatePreview
+            'update_preview' => $updatePreview,
         ]);
 
         return new JsonResponse([
             'title' => $service->getName($block),
             'view' => $viewResponse->getContent(),
-            'updatePreview' => $updatePreview
+            'updatePreview' => $updatePreview,
         ]);
     }
 }

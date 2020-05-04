@@ -8,7 +8,6 @@ use Opifer\MediaBundle\Model\MediaInterface;
 use Opifer\MediaBundle\Model\MediaManagerInterface;
 use Opifer\MediaBundle\Validator\Constraint\YoutubeUrl;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -29,15 +28,13 @@ class YoutubeProvider extends AbstractProvider
     /** @var TranslatorInterface */
     protected $translator;
 
-    /** @var  string */
+    /** @var string */
     private $apikey;
 
     /**
      * Constructor.
      *
-     * @param MediaManagerInterface $mm
-     * @param TranslatorInterface   $tr
-     * @param string                $apikey
+     * @param string $apikey
      */
     public function __construct(MediaManagerInterface $mm, TranslatorInterface $tr, $apikey)
     {
@@ -74,7 +71,7 @@ class YoutubeProvider extends AbstractProvider
                 'required' => false,
                 'attr' => [
                     'help_text' => $this->translator->trans('youtube.helper'),
-                ]
+                ],
             ])
             ->add('thumb', MediaPickerType::class, [
                 'multiple' => false,
@@ -110,7 +107,6 @@ class YoutubeProvider extends AbstractProvider
     /**
      * pre saving handler.
      *
-     * @param MediaInterface $media
      * @throws \Exception
      */
     public function preSave(MediaInterface $media)
@@ -134,8 +130,7 @@ class YoutubeProvider extends AbstractProvider
     /**
      * Update metadata.
      *
-     * @param MediaInterface $media
-     * @param bool           $force
+     * @param bool $force
      */
     public function updateMedadata(MediaInterface $media)
     {
@@ -186,8 +181,7 @@ class YoutubeProvider extends AbstractProvider
     /**
      * @throws \RuntimeException
      *
-     * @param MediaInterface $media
-     * @param string         $url
+     * @param string $url
      *
      * @return mixed
      */
@@ -239,8 +233,6 @@ class YoutubeProvider extends AbstractProvider
 
     /**
      * Get the full url to the original video.
-     *
-     * @param MediaInterface $media
      *
      * @return string
      */

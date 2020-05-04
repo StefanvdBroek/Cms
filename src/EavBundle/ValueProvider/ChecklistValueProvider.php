@@ -13,7 +13,7 @@ class ChecklistValueProvider extends AbstractValueProvider implements ValueProvi
     protected $optionClass;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $optionClass
      */
@@ -29,12 +29,12 @@ class ChecklistValueProvider extends AbstractValueProvider implements ValueProvi
     {
         $attributeId = $options['attribute']->getId();
         $builder->add('options', EntityType::class, [
-            'required'      => ($options['attribute']->getRequired()) ? true : false,
-            'label'         => $options['attribute']->getDisplayName(),
-            'multiple'      => true,   // Multiple selection allowed
-            'expanded'      => true,   // Render as checkboxes
-            'choice_label'  => 'displayName', // Assuming that the entity has a "name" property
-            'class'         => $this->optionClass,
+            'required' => ($options['attribute']->getRequired()) ? true : false,
+            'label' => $options['attribute']->getDisplayName(),
+            'multiple' => true,   // Multiple selection allowed
+            'expanded' => true,   // Render as checkboxes
+            'choice_label' => 'displayName', // Assuming that the entity has a "name" property
+            'class' => $this->optionClass,
             'query_builder' => function (EntityRepository $optionRepository) use ($attributeId) {
                 return $optionRepository->createQueryBuilder('o')
                     ->add('orderBy', 'o.sort ASC')

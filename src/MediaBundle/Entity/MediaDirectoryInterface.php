@@ -4,5 +4,4 @@ namespace Opifer\MediaBundle\Entity;
 
 interface MediaDirectoryInterface
 {
-
 }

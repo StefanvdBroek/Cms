@@ -5,7 +5,7 @@ namespace Opifer\EavBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CheckListValue
+ * CheckListValue.
  *
  * @ORM\Entity
  */
@@ -13,6 +13,6 @@ class CheckListValue extends OptionValue
 {
     public function getValue()
     {
-       return $this->value;
+        return $this->value;
     }
 }

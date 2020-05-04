@@ -35,9 +35,6 @@ class RedirectRouter implements RouterInterface
 
     /**
      * The constructor for this service.
-     *
-     * @param RequestStack $requestStack
-     * @param RedirectManagerInterface $redirectManager
      */
     public function __construct(RequestStack $requestStack, RedirectManagerInterface $redirectManager)
     {
@@ -60,7 +57,7 @@ class RedirectRouter implements RouterInterface
         if (!empty($matches) && isset($matches[1])) {
             foreach ($matches[1] as $match) {
                 if (array_key_exists($match, $result)) {
-                    $path = str_replace('{'.$match .'}', $result[$match], $path);
+                    $path = str_replace('{'.$match.'}', $result[$match], $path);
                 }
             }
         }
@@ -73,9 +70,9 @@ class RedirectRouter implements RouterInterface
     /**
      * {@inheritdoc}
      */
-    public function generate($name, $parameters = array(), $absolute = false)
+    public function generate($name, $parameters = [], $absolute = false)
     {
-        throw new RouteNotFoundException("You cannot generate a url from a redirect");
+        throw new RouteNotFoundException('You cannot generate a url from a redirect');
     }
 
     /**
@@ -101,7 +98,7 @@ class RedirectRouter implements RouterInterface
 
     public function getRoutes()
     {
-        if ($this->redirects === null) {
+        if (null === $this->redirects) {
             $this->redirects = $this->redirectManager->getRepository()->findAll();
 
             /** @var Redirect $redirect */
@@ -111,7 +108,7 @@ class RedirectRouter implements RouterInterface
                     'path' => $redirect->getTarget(),
                     'permanent' => $redirect->isPermanent(),
                 ], $this->redirectManager->formatRouteRequirements($redirect), [
-                    'utf8' => true
+                    'utf8' => true,
                 ]));
             }
         }

@@ -18,7 +18,7 @@ class ContentVoter extends Voter
     public function __construct(Security $security, ContainerInterface $container, $roles)
     {
         $this->security = $security;
-        $this->container= $container;
+        $this->container = $container;
         $this->roles = $roles;
     }
 
@@ -42,7 +42,7 @@ class ContentVoter extends Voter
             $subjectRoles = $this->container->getParameter('opifer_cms.default_content_access');
         }
 
-        foreach($user->getRoles() as $role) {
+        foreach ($user->getRoles() as $role) {
             if (in_array($role, $subjectRoles)) {
                 return true;
             }
@@ -53,6 +53,6 @@ class ContentVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        return ($subject instanceof Content);
+        return $subject instanceof Content;
     }
 }

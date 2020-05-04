@@ -3,17 +3,14 @@
 namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Opifer\Revisions\Mapping\Annotation as Revisions;
-use Opifer\ContentBundle\Entity\Block;
 
 /**
- * SearchResultsBlock
+ * SearchResultsBlock.
  *
  * @ORM\Entity
  */
 class SearchResultsBlock extends Block
 {
-
     /**
      * @return string
      */

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\EavBundle\Model\ValueInterface;
 
 /**
- * Boolean Value
+ * Boolean Value.
  *
  * Boolean values have to be stored as string, cause we're extending the Value.
  * Value uses a generic 'text' property to store any kinds of values.
@@ -21,7 +21,7 @@ class BooleanValue extends Value
     protected $value = self::FALSE;
 
     /**
-     * Turn value into string for form field value purposes
+     * Turn value into string for form field value purposes.
      *
      * @return string
      */
@@ -31,9 +31,9 @@ class BooleanValue extends Value
     }
 
     /**
-     * Set value
+     * Set value.
      *
-     * @param boolean $value
+     * @param bool $value
      *
      * @return ValueInterface
      */
@@ -45,12 +45,12 @@ class BooleanValue extends Value
     }
 
     /**
-     * Get the value as a boolean
+     * Get the value as a boolean.
      *
-     * @return boolean
+     * @return bool
      */
     public function getValue()
     {
-        return ($this->value == self::TRUE) ? true : false;
+        return (self::TRUE == $this->value) ? true : false;
     }
 }

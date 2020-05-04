@@ -8,7 +8,7 @@ use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
 class RelativeSlugHandler extends BaseRelativeSlugHandler
 {
     /**
-     * Used options
+     * Used options.
      *
      * @var array
      */
@@ -41,11 +41,10 @@ class RelativeSlugHandler extends BaseRelativeSlugHandler
     }
 
     /**
-     * Check if the given object has a changed parent recursively
+     * Check if the given object has a changed parent recursively.
      *
-     * @param SluggableAdapter $ea
-     * @param object           $object
-     * @param string           $getter
+     * @param object $object
+     * @param string $getter
      *
      * @return bool
      */

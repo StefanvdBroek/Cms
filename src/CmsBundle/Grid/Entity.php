@@ -4,21 +4,22 @@ namespace Opifer\CmsBundle\Grid;
 
 use APY\DataGridBundle\Grid\Column\Column;
 use APY\DataGridBundle\Grid\Filter;
-use APY\DataGridBundle\Grid\Rows;
 use APY\DataGridBundle\Grid\Row;
-use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+use APY\DataGridBundle\Grid\Rows;
 use APY\DataGridBundle\Grid\Source\Entity as BaseEntity;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class Entity extends BaseEntity
 {
     /**
      * @param \APY\DataGridBundle\Grid\Column\Column[] $columns
-     * @param int $page Page Number
-     * @param int $limit Rows Per Page
-     * @param int $gridDataJunction  Grid data junction
+     * @param int                                      $page             Page Number
+     * @param int                                      $limit            Rows Per Page
+     * @param int                                      $gridDataJunction Grid data junction
+     *
      * @return \APY\DataGridBundle\Grid\Rows
      */
     public function execute($columns, $page = 0, $limit = 0, $maxResults = null, $gridDataJunction = Column::DATA_CONJUNCTION)
@@ -27,26 +28,26 @@ class Entity extends BaseEntity
         $this->querySelectfromSource = clone $this->query;
 
         $bindIndex = 123;
-        $serializeColumns = array();
-        $where = $gridDataJunction === Column::DATA_CONJUNCTION ? $this->query->expr()->andx() : $this->query->expr()->orx();
+        $serializeColumns = [];
+        $where = Column::DATA_CONJUNCTION === $gridDataJunction ? $this->query->expr()->andx() : $this->query->expr()->orx();
 
-        $columnsById = array();
+        $columnsById = [];
         foreach ($columns as $column) {
             $columnsById[$column->getId()] = $column;
         }
 
         foreach ($columns as $column) {
             // If a column is a manual field, ie a.col*b.col as myfield, it is added to select from user.
-            if($column->getIsManualField() === false) {
+            if (false === $column->getIsManualField()) {
                 $fieldName = $this->getFieldName($column, true);
                 $this->query->addSelect($fieldName);
                 $this->querySelectfromSource->addSelect($fieldName);
             }
 
             if ($column->isSorted()) {
-                if ($column->getType() === 'join') {
+                if ('join' === $column->getType()) {
                     $this->query->resetDQLPart('orderBy');
-                    foreach($column->getJoinColumns() as $columnName) {
+                    foreach ($column->getJoinColumns() as $columnName) {
                         $this->query->addOrderBy($this->getFieldName($columnsById[$columnName]), $column->getOrder());
                     }
                 } else {
@@ -58,7 +59,7 @@ class Entity extends BaseEntity
                 // Some attributes of the column can be changed in this function
                 $filters = $column->getFilters('entity');
 
-                $isDisjunction = $column->getDataJunction() === Column::DATA_DISJUNCTION;
+                $isDisjunction = Column::DATA_DISJUNCTION === $column->getDataJunction();
 
                 $hasHavingClause = $column->hasDQLFunction() || $column->getIsAggregate();
 
@@ -68,24 +69,24 @@ class Entity extends BaseEntity
                 foreach ($filters as $filter) {
                     $operator = $this->normalizeOperator($filter->getOperator());
 
-                    $columnForFilter = ($column->getType() !== 'join') ? $column : $columnsById[$filter->getColumnName()];
+                    $columnForFilter = ('join' !== $column->getType()) ? $column : $columnsById[$filter->getColumnName()];
 
                     $fieldName = $this->getFieldName($columnForFilter, false);
                     $bindIndexPlaceholder = "?$bindIndex";
-                    if (in_array($filter->getOperator(), array(Column::OPERATOR_LIKE,Column::OPERATOR_RLIKE,Column::OPERATOR_LLIKE,Column::OPERATOR_NLIKE,))) {
+                    if (in_array($filter->getOperator(), [Column::OPERATOR_LIKE, Column::OPERATOR_RLIKE, Column::OPERATOR_LLIKE, Column::OPERATOR_NLIKE])) {
                         $fieldName = "LOWER($fieldName)";
                         $bindIndexPlaceholder = "LOWER($bindIndexPlaceholder)";
                     }
 
                     $q = $this->query->expr()->$operator($fieldName, $bindIndexPlaceholder);
 
-                    if ($filter->getOperator() == Column::OPERATOR_NLIKE || $filter->getOperator() == Column::OPERATOR_NSLIKE) {
+                    if (Column::OPERATOR_NLIKE == $filter->getOperator() || Column::OPERATOR_NSLIKE == $filter->getOperator()) {
                         $q = $this->query->expr()->not($q);
                     }
 
                     $sub->add($q);
 
-                    if ($filter->getValue() !== null) {
+                    if (null !== $filter->getValue()) {
                         $this->query->setParameter($bindIndex++, $this->normalizeValue($filter->getOperator(), $filter->getValue()));
                     }
                 }
@@ -101,19 +102,19 @@ class Entity extends BaseEntity
                 }
             }
 
-            if ($column->getType() === 'array') {
+            if ('array' === $column->getType()) {
                 $serializeColumns[] = $column->getId();
             }
         }
 
-        if ($where->count()> 0) {
+        if ($where->count() > 0) {
             //Using ->andWhere here to make sure we preserve any other where clauses present in the query builder
             //the other where clauses may have come from an external builder
             $this->query->andWhere($where);
         }
 
         foreach ($this->joins as $alias => $field) {
-            if (null !== $field['type'] && strtolower($field['type']) === 'inner') {
+            if (null !== $field['type'] && 'inner' === strtolower($field['type'])) {
                 $join = 'join';
             } else {
                 $join = 'leftJoin';
@@ -128,12 +129,12 @@ class Entity extends BaseEntity
         }
 
         if ($limit > 0) {
-            if ($maxResults !== null && ($maxResults - $page * $limit < $limit)) {
+            if (null !== $maxResults && ($maxResults - $page * $limit < $limit)) {
                 $limit = $maxResults - $page * $limit;
             }
 
             $this->query->setMaxResults($limit);
-        } elseif ($maxResults !== null) {
+        } elseif (null !== $maxResults) {
             $this->query->setMaxResults($maxResults);
         }
 
@@ -192,7 +193,7 @@ class Entity extends BaseEntity
             $row->setRepository($repository);
 
             //call overridden prepareRow or associated closure
-            if (($modifiedRow = $this->prepareRow($row)) != null) {
+            if (null != ($modifiedRow = $this->prepareRow($row))) {
                 $result->addRow($modifiedRow);
             }
         }
@@ -201,8 +202,7 @@ class Entity extends BaseEntity
     }
 
     /**
-     * @param QueryBuilder $qb
-     * @return boolean
+     * @return bool
      */
     protected function checkIfQueryHasFetchJoin(QueryBuilder $qb)
     {
@@ -213,7 +213,7 @@ class Entity extends BaseEntity
         }
 
         foreach ($join[$this->getTableAlias()] as $join) {
-            if ($join->getJoinType() === Join::INNER_JOIN || $join->getJoinType() === Join::LEFT_JOIN) {
+            if (Join::INNER_JOIN === $join->getJoinType() || Join::LEFT_JOIN === $join->getJoinType()) {
                 return true;
             }
         }

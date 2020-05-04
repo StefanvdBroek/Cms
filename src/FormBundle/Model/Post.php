@@ -78,9 +78,6 @@ class Post implements PostInterface, EntityInterface
         return $this->form;
     }
 
-    /**
-     * @param FormInterface $form
-     */
     public function setForm(FormInterface $form)
     {
         $this->form = $form;
@@ -109,7 +106,7 @@ class Post implements PostInterface, EntityInterface
      */
     public function getValueSet()
     {
-        if ($this->valueSet === null) {
+        if (null === $this->valueSet) {
             $this->valueSet = new ValueSet();
         }
 
@@ -128,8 +125,6 @@ class Post implements PostInterface, EntityInterface
 
     /**
      * Set submittedAt.
-     *
-     * @param \DateTime $submittedAt
      *
      * @return Post
      */

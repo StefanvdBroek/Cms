@@ -12,8 +12,6 @@ class VendorCompilerPass implements CompilerPassInterface
      * Process the compiler pass.
      *
      * Updates configuration for bundles that do not offer abilities to override services.
-     *
-     * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)
     {

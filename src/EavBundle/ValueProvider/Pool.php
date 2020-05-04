@@ -3,7 +3,7 @@
 namespace Opifer\EavBundle\ValueProvider;
 
 /**
- * This pool holds the services tagged with 'opifer.eav.value_provider'
+ * This pool holds the services tagged with 'opifer.eav.value_provider'.
  */
 class Pool
 {
@@ -11,19 +11,18 @@ class Pool
     protected $values;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->values = array();
+        $this->values = [];
     }
 
     /**
      * Adds all the values, tagged with 'opifer.media.value' to the
-     * value pool
+     * value pool.
      *
-     * @param ValueProviderInterface $value
-     * @param string                 $alias
+     * @param string $alias
      */
     public function addValue(ValueProviderInterface $value, $alias)
     {
@@ -35,7 +34,7 @@ class Pool
     }
 
     /**
-     * Get value by its alias
+     * Get value by its alias.
      *
      * @param string $alias
      *
@@ -47,7 +46,7 @@ class Pool
     }
 
     /**
-     * Get a valueprovider by it's entity class
+     * Get a valueprovider by it's entity class.
      *
      * @param string|object $entity
      *
@@ -70,7 +69,7 @@ class Pool
     }
 
     /**
-     * Get all registered values
+     * Get all registered values.
      *
      * @return ValueProviderInterface[]
      */

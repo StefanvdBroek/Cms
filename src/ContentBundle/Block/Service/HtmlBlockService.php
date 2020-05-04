@@ -8,12 +8,11 @@ use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\HtmlBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * HTML Block Service
+ * HTML Block Service.
  */
 class HtmlBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -25,17 +24,17 @@ class HtmlBlockService extends AbstractBlockService implements BlockServiceInter
         parent::buildManageForm($builder, $options);
 
         $builder->get('properties')
-            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'],'required' => false])
-            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'],'required' => false]);
+            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'], 'required' => false])
+            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'], 'required' => false]);
 
         if (isset($this->config['templates'])) {
             $builder->get('properties')
                 ->add('template', ChoiceType::class, [
-                    'label'       => 'label.template',
+                    'label' => 'label.template',
                     'placeholder' => 'placeholder.choice_optional',
-                    'attr'        => ['help_text' => 'help.block_template', 'tag' => 'styles'],
-                    'choices'     => $this->config['templates'],
-                    'required'    => false,
+                    'attr' => ['help_text' => 'help.block_template', 'tag' => 'styles'],
+                    'choices' => $this->config['templates'],
+                    'required' => false,
                 ]);
         }
         // Default panel
@@ -45,22 +44,22 @@ class HtmlBlockService extends AbstractBlockService implements BlockServiceInter
                 'attr' => [
                     'label_col' => 12,
                     'widget_col' => 12,
-                    'help_text' => 'help.html_rich_text'
+                    'help_text' => 'help.html_rich_text',
                 ],
-                'required' => false
+                'required' => false,
             ]);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
-        return new HtmlBlock;
+        return new HtmlBlock();
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -74,6 +73,7 @@ class HtmlBlockService extends AbstractBlockService implements BlockServiceInter
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

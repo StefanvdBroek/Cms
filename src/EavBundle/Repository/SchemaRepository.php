@@ -8,9 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 class SchemaRepository extends EntityRepository
 {
     /**
-     * Find schemas by request
-     *
-     * @param Request $request
+     * Find schemas by request.
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
      */

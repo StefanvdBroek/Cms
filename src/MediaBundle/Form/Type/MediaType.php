@@ -16,9 +16,6 @@ class MediaType extends AbstractType
 {
     /**
      * Build the form.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -36,8 +33,6 @@ class MediaType extends AbstractType
      *
      * Sets defaults, but also enables custom options that should be able to get
      * passed to the buildForm method from the controller. (e.g. 'provider')
-     *
-     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {

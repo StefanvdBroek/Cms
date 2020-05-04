@@ -6,7 +6,7 @@ use JMS\Serializer\Annotation as JMS;
 use Opifer\EavBundle\Model\ValueSet as BaseValueSet;
 
 /**
- * ValueSet
+ * ValueSet.
  *
  * @JMS\ExclusionPolicy("all")
  */

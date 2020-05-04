@@ -10,9 +10,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class GutterCollectionType
- *
- * @package Opifer\ContentBundle\Form\Type
+ * Class GutterCollectionType.
  */
 class GutterCollectionType extends AbstractType
 {
@@ -27,8 +25,8 @@ class GutterCollectionType extends AbstractType
             $data = $event->getData();
 
             if (empty($data) || !count($data)) {
-                $sizeKeys = range(0, $columnCount-1);
-                $data = array_fill_keys(['xs','sm','md','lg'], array_fill_keys($sizeKeys, 30));
+                $sizeKeys = range(0, $columnCount - 1);
+                $data = array_fill_keys(['xs', 'sm', 'md', 'lg'], array_fill_keys($sizeKeys, 30));
                 $event->setData($data);
             }
         });
@@ -43,15 +41,15 @@ class GutterCollectionType extends AbstractType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'entry_type' => ColumnGutterType::class,
             'column_count' => 1,
             'entry_options' => ['label' => false],
-        ));
+        ]);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getParent()
     {

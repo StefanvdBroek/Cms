@@ -11,8 +11,6 @@ class MediaRepository extends EntityRepository
     /**
      * Create the query builder from request.
      *
-     * @param Request $request
-     *
      * @return QueryBuilder
      */
     public function createQueryBuilderFromRequest(Request $request)
@@ -43,7 +41,7 @@ class MediaRepository extends EntityRepository
             $qb->leftJoin('m.directory', 'dir')
                 ->andWhere('dir.id = :directory')
                 ->setParameter('directory', $dir);
-        } else if ($dir === '0') {
+        } elseif ('0' === $dir) {
             $qb->andWhere('m.directory IS NULL');
         }
 
@@ -66,10 +64,10 @@ class MediaRepository extends EntityRepository
 
         $qb->where('m.name LIKE :term')
             ->andWhere('m.status IN (:statuses)')
-            ->setParameters(array(
+            ->setParameters([
                 'term' => '%'.$term.'%',
-                'statuses' => array(0, 1),
-            )
+                'statuses' => [0, 1],
+            ]
         );
 
         if ($limit) {

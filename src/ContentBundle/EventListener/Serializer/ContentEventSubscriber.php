@@ -11,21 +11,17 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ContentEventSubscriber implements EventSubscriberInterface
 {
-    /** @var CacheManager  */
+    /** @var CacheManager */
     private $imageCacheManager;
 
-    /** @var RouterInterface  */
+    /** @var RouterInterface */
     private $router;
 
     /** @var CacheProvider */
     protected $cache;
 
     /**
-     * Constructor
-     *
-     * @param CacheManager $imageCacheManager
-     * @param RouterInterface $router
-     * @param CacheProvider $cacheProvider
+     * Constructor.
      */
     public function __construct(CacheManager $imageCacheManager, RouterInterface $router, CacheProvider $cacheProvider)
     {
@@ -44,9 +40,6 @@ class ContentEventSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param ObjectEvent $event
-     */
     public function onPostSerialize(ObjectEvent $event)
     {
         $object = $event->getObject();
@@ -64,9 +57,7 @@ class ContentEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Finds first available image for listing purposes
-     *
-     * @param Content $content
+     * Finds first available image for listing purposes.
      *
      * @return string
      */

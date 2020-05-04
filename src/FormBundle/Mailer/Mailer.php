@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Mailer
+ * Mailer.
  */
 class Mailer
 {
@@ -31,11 +31,7 @@ class Mailer
     /**
      * Mailer constructor.
      *
-     * @param TranslatorInterface $translator
-     * @param RequestStack        $requestStack
-     * @param EngineInterface     $templating
-     * @param \Swift_mailer       $mailer
-     * @param                     $sender
+     * @param $sender
      */
     public function __construct(TranslatorInterface $translator, RequestStack $requestStack, EngineInterface $templating, \Swift_mailer $mailer, $sender)
     {
@@ -46,14 +42,10 @@ class Mailer
         $this->translator = $translator;
     }
 
-    /**
-     * @param FormInterface $form
-     * @param PostInterface $post
-     */
     public function sendNotificationMail(FormInterface $form, PostInterface $post)
     {
         $body = $this->templating->render('OpiferFormBundle:Email:notification.html.twig', ['post' => $post]);
-        $subject = $form->getName() . ' (post ' . $post->getId() . ')';
+        $subject = $form->getName().' (post '.$post->getId().')';
 
         $message = $this->createMessage($form->getNotificationEmail(), $subject, $body);
 
@@ -61,9 +53,7 @@ class Mailer
     }
 
     /**
-     * @param FormInterface $form
-     * @param PostInterface $post
-     * @param string        $recipient
+     * @param string $recipient
      */
     public function sendConfirmationMail(FormInterface $form, PostInterface $post, $recipient)
     {
@@ -99,8 +89,6 @@ class Mailer
     }
 
     /**
-     * @param \Swift_Mime_Message $message
-     *
      * @return int
      */
     protected function send(\Swift_Mime_Message $message)

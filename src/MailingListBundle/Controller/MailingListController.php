@@ -4,12 +4,11 @@ namespace Opifer\MailingListBundle\Controller;
 
 use APY\DataGridBundle\Grid\Action\RowAction;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Opifer\MailingListBundle\Entity\MailingList;
 use Opifer\MailingListBundle\Form\Type\MailingListType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class MailingListController extends Controller
 {
@@ -44,8 +43,7 @@ class MailingListController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param         $id
+     * @param $id
      *
      * @return Response
      */
@@ -59,7 +57,7 @@ class MailingListController extends Controller
         $tableAlias = $source->getTableAlias();
 
         $source->manipulateQuery(function ($qb) use ($tableAlias, $id) {
-            $qb->innerJoin($tableAlias . '.mailingList', 'm')
+            $qb->innerJoin($tableAlias.'.mailingList', 'm')
                 ->andWhere('m.id = :list_id')
                 ->setParameter('list_id', $id);
         });
@@ -102,8 +100,7 @@ class MailingListController extends Controller
     /**
      * Edit Mailing List.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      */
     public function editAction(Request $request, $id)
     {

@@ -7,19 +7,6 @@ use Opifer\ContentBundle\Entity\Block;
 use Opifer\ContentBundle\Environment\Environment;
 use Opifer\ContentBundle\Form\Type\DisplayLogicType;
 use Opifer\ContentBundle\Model\BlockInterface;
-use Opifer\ExpressionEngine\Form\Type\ExpressionEngineType;
-use Opifer\ExpressionEngine\Prototype\AndXPrototype;
-use Opifer\ExpressionEngine\Prototype\Choice;
-use Opifer\ExpressionEngine\Prototype\EventPrototype;
-use Opifer\ExpressionEngine\Prototype\NumberPrototype;
-use Opifer\ExpressionEngine\Prototype\OrXPrototype;
-use Opifer\ExpressionEngine\Prototype\PrototypeCollection;
-use Opifer\ExpressionEngine\Prototype\SelectPrototype;
-use Opifer\ExpressionEngine\Prototype\TextPrototype;
-use Opifer\FormBlockBundle\Entity\ChoiceFieldBlock;
-use Opifer\FormBlockBundle\Entity\NumberFieldBlock;
-use Opifer\FormBlockBundle\Entity\RangeFieldBlock;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,7 +15,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractBlockService implements BlockServiceInterface
 {
@@ -53,10 +39,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
      */
     protected $config;
 
-    /**
-     * @param BlockRenderer $blockRenderer
-     * @param array         $config
-     */
     public function __construct(BlockRenderer $blockRenderer, array $config)
     {
         $this->blockRenderer = $blockRenderer;
@@ -84,16 +66,14 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
         $parameters = array_merge($parameters, $this->getViewParameters($block));
 
-        if ($this->getEnvironment() !== null && $this->getEnvironment()->getBlockMode() === Environment::MODE_MANAGE) {
+        if (null !== $this->getEnvironment() && Environment::MODE_MANAGE === $this->getEnvironment()->getBlockMode()) {
             $parameters = array_merge($parameters, $this->getManageViewParameters($block));
         }
 
-        return $this->renderResponse($block, $parameters,  $response);
+        return $this->renderResponse($block, $parameters, $response);
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     public function getViewParameters(BlockInterface $block)
@@ -108,8 +88,6 @@ abstract class AbstractBlockService implements BlockServiceInterface
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     public function getManageViewParameters(BlockInterface $block)
@@ -162,17 +140,10 @@ abstract class AbstractBlockService implements BlockServiceInterface
         return $shortName;
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function preFormSubmit(BlockInterface $block)
     {
     }
 
-    /**
-     * @param FormInterface  $form
-     * @param BlockInterface $block
-     */
     public function postFormSubmit(FormInterface $form, BlockInterface $block)
     {
     }
@@ -295,23 +266,23 @@ abstract class AbstractBlockService implements BlockServiceInterface
                     'label' => 'label.name',
                     'attr' => [
                         'help_text' => 'help.block_name',
-                        'tag' => 'settings'
+                        'tag' => 'settings',
                     ],
-                    'required' => false
+                    'required' => false,
                 ])
                 ->add('displayName', TextType::class, [
                     'label' => 'label.display_name',
                     'attr' => [
                         'help_text' => 'help.block_display_name',
-                        'tag' => 'settings'
+                        'tag' => 'settings',
                     ],
-                    'required' => false
+                    'required' => false,
                 ])
                 ->add('active', ChoiceType::class, [
                     'label' => 'label.active',
                     'attr' => [
                         'help_text' => 'help.block_active',
-                        'tag' => 'settings'
+                        'tag' => 'settings',
                     ],
                     'choices' => [
                         'Active' => true,
@@ -330,7 +301,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
             $form->get('properties')
                 ->add('displayLogic', DisplayLogicType::class, [
                     'block' => $block,
-                    'required' => false
+                    'required' => false,
                 ])
             ;
 
@@ -360,13 +331,11 @@ abstract class AbstractBlockService implements BlockServiceInterface
     /**
      * Returns a Response object that can be cache-able.
      *
-     * @param BlockInterface $block
-     * @param array          $parameters
-     * @param Response       $response
+     * @param Response $response
      *
      * @return Response
      */
-    public function renderResponse(BlockInterface $block, array $parameters = array(), Response $response = null)
+    public function renderResponse(BlockInterface $block, array $parameters = [], Response $response = null)
     {
         $view = $this->getView($block);
 
@@ -378,10 +347,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
     }
 
     /**
-     * Allows defining custom headers in case of edge side includes
-     *
-     * @param BlockInterface $block
-     * @param Response       $response
+     * Allows defining custom headers in case of edge side includes.
      */
     protected function setResponseHeaders(BlockInterface $block, Response $response)
     {
@@ -389,7 +355,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
     }
 
     /**
-     * Returns if ESI is enabled on the block service
+     * Returns if ESI is enabled on the block service.
      *
      * @return bool
      */
@@ -400,6 +366,7 @@ abstract class AbstractBlockService implements BlockServiceInterface
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

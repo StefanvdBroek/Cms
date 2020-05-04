@@ -8,7 +8,7 @@ use Opifer\CmsBundle\Entity\Domain;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * DomainManager
+ * DomainManager.
  */
 class DomainManager
 {
@@ -29,9 +29,6 @@ class DomainManager
 
     /**
      * DomainManager constructor.
-     *
-     * @param EntityManager $entityManager
-     * @param RequestStack $requestStack
      */
     public function __construct(EntityManager $entityManager, RequestStack $requestStack)
     {
@@ -71,7 +68,7 @@ class DomainManager
      */
     public function getRepository()
     {
-        if ($this->repository === null) {
+        if (null === $this->repository) {
             $this->repository = $this->em->getRepository(Domain::class);
         }
 

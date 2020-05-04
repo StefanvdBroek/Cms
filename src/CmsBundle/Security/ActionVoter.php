@@ -17,7 +17,7 @@ class ActionVoter extends Voter
     public function __construct(Security $security, ContainerInterface $container)
     {
         $this->security = $security;
-        $this->container= $container;
+        $this->container = $container;
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
@@ -29,7 +29,7 @@ class ActionVoter extends Voter
             return false;
         }
 
-        foreach ($user->getRoles() as $role){
+        foreach ($user->getRoles() as $role) {
             $permissions = $this->container->getParameter('opifer_cms.permissions');
             if (in_array($attribute, $permissions[$role])) {
                 return true;

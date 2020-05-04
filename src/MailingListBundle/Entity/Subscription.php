@@ -2,11 +2,10 @@
 
 namespace Opifer\MailingListBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use APY\DataGridBundle\Grid\Mapping as Grid;
-
+use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\UserInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Subscription.
@@ -297,6 +296,7 @@ class Subscription
     public function setUser($user)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -316,7 +316,7 @@ class Subscription
     public function setSyncedAt($syncedAt)
     {
         $this->syncedAt = $syncedAt;
+
         return $this;
     }
-
 }

@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class SiteController extends Controller
 {
@@ -40,8 +39,6 @@ class SiteController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -74,8 +71,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return RedirectResponse|Response
      */
@@ -94,9 +90,7 @@ class SiteController extends Controller
         $form = $this->createForm(SiteType::class, $site);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             // Remove deleted domains
             foreach ($originalDomains as $domain) {
                 if (false === $site->getDomains()->contains($domain)) {

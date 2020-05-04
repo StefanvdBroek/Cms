@@ -21,7 +21,7 @@ class CookieWallBlock extends Block
     protected $value;
 
     /**
-     * Defines if cookies are accepted by the user
+     * Defines if cookies are accepted by the user.
      *
      * @var bool
      */

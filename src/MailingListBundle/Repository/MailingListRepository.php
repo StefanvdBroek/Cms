@@ -22,9 +22,10 @@ class MailingListRepository extends EntityRepository
     }
 
     /**
-     * Find the mailinglist by an array of IDs
+     * Find the mailinglist by an array of IDs.
      *
      * @param array|string $ids
+     *
      * @return MailingList[]
      */
     public function findByIds($ids)

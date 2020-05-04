@@ -7,17 +7,16 @@ use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\CarouselBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Carousel Block
+ * Carousel Block.
  */
 class CarouselBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getManageFormTypeName()
     {
@@ -35,39 +34,39 @@ class CarouselBlockService extends AbstractBlockService implements BlockServiceI
         $builder->get('properties')
             ->add('id', TextType::class, [
                 'attr' => [
-                    'help_text' => 'help.html_id'
+                    'help_text' => 'help.html_id',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('extra_classes', TextType::class, [
                 'attr' => [
-                    'help_text' => 'help.extra_classes'
+                    'help_text' => 'help.extra_classes',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('show_indicators', ChoiceType::class, [
                 'choices' => [
                     'Yes' => true,
-                    'No' => false
+                    'No' => false,
                 ],
                 'attr' => [
-                    'help_text' => 'help.carousel_indicator'
-                ]
+                    'help_text' => 'help.carousel_indicator',
+                ],
             ])
             ->add('show_controls', ChoiceType::class, [
                 'choices' => [
                     'Yes' => true,
-                    'No' => false
+                    'No' => false,
                 ],
                 'attr' => [
-                    'help_text' => 'help.carousel_controls'
+                    'help_text' => 'help.carousel_controls',
                 ],
-                'required' => false
+                'required' => false,
             ]);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
@@ -75,7 +74,7 @@ class CarouselBlockService extends AbstractBlockService implements BlockServiceI
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -89,6 +88,7 @@ class CarouselBlockService extends AbstractBlockService implements BlockServiceI
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

@@ -21,7 +21,7 @@ class ValueType extends AbstractType
     protected $providerPool;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \Opifer\EavBundle\ValueProvider\Pool
      */
@@ -48,7 +48,7 @@ class ValueType extends AbstractType
         $resolver->setRequired([
             'attribute',
             'entity',
-            'value'
+            'value',
         ]);
 
         $resolver->setDefaults([

@@ -45,10 +45,9 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
+
     /**
      * Add Block specific configuration.
-     *
-     * @param ArrayNodeDefinition $node
      */
     private function addBlocksSection(ArrayNodeDefinition $node)
     {

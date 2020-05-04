@@ -2,24 +2,20 @@
 
 namespace Opifer\ContentBundle\Controller\Api;
 
-use Opifer\ContentBundle\Entity\DataView;
+use FOS\RestBundle\Controller\Annotations\Put;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Opifer\ContentBundle\Entity\DataView;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
-use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\NoRoute;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class DataViewController extends FOSRestController
 {
     /**
      * @ParamConverter()
      * @ApiDoc()
-     *
-     * @param DataView $dataView
      *
      * @return DataView
      */
@@ -58,13 +54,12 @@ class DataViewController extends FOSRestController
         $cacheDriver->deleteAll();
 
         $view = $this->view(['message' => 'saved'], 200);
+
         return $this->handleView($view);
     }
 
     /**
      * @ApiDoc()
-     *
-     * @param DataView $dataView
      *
      * @return Response
      */
@@ -76,10 +71,9 @@ class DataViewController extends FOSRestController
         return new Response('', Response::HTTP_NO_CONTENT);
     }
 
-
     private function handleValidationErrors(ConstraintViolationListInterface $validationErrors)
     {
-        $errors = array();
+        $errors = [];
 
         foreach ($validationErrors as $validationError) {
             $errors[$validationError->getPropertyPath()] = $validationError->getMessage();
@@ -91,13 +85,11 @@ class DataViewController extends FOSRestController
         return $this->handleView($view);
     }
 
-
     public function normalize(array &$data)
     {
-        $normalizedData = array();
+        $normalizedData = [];
 
         foreach ($data as $key => $val) {
-
             $snakeCasedName = '';
 
             $len = strlen($key);

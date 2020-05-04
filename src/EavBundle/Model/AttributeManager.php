@@ -14,10 +14,9 @@ class AttributeManager
     protected $class;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param EntityManagerInterface $em
-     * @param                        $class
+     * @param $class
      *
      * @throws \Exception If the passed classname does not implement AttributeInterface
      */
@@ -32,7 +31,7 @@ class AttributeManager
     }
 
     /**
-     * Get class
+     * Get class.
      *
      * @return string
      */
@@ -42,7 +41,7 @@ class AttributeManager
     }
 
     /**
-     * Create a new attribute instance
+     * Create a new attribute instance.
      *
      * @return AttributeInterface
      */
@@ -55,9 +54,7 @@ class AttributeManager
     }
 
     /**
-     * Save attribute
-     *
-     * @param AttributeInterface $attribute
+     * Save attribute.
      *
      * @return AttributeInterface
      */
@@ -70,7 +67,7 @@ class AttributeManager
     }
 
     /**
-     * Get repository
+     * Get repository.
      *
      * @return \Doctrine\ORM\EntityRepository
      */

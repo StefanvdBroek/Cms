@@ -5,7 +5,7 @@ namespace Opifer\ContentBundle\Block\Service;
 use Opifer\ContentBundle\Model\BlockInterface;
 
 /**
- * Interface LayoutBlockServiceInterface
+ * Interface LayoutBlockServiceInterface.
  */
 interface LayoutBlockServiceInterface
 {

@@ -2,14 +2,11 @@
 
 namespace Opifer\ContentBundle\Block\Service;
 
-use Doctrine\ORM\EntityRepository;
-use Opifer\CmsBundle\Entity\Attribute;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Entity\RelatedCollectionBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Opifer\ContentBundle\Model\ContentInterface;
 use Opifer\EavBundle\Model\AttributeInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -34,7 +31,7 @@ class RelatedCollectionBlockService extends CollectionBlockService
                 'attr' => [
                     'help_text' => 'Define on what attribute the content should be related',
                     'tag' => 'general',
-                ]
+                ],
             ])
             // Remove some fields that were added in the CollectionBlockService but are not needed here
             ->remove('conditions')
@@ -45,9 +42,7 @@ class RelatedCollectionBlockService extends CollectionBlockService
     }
 
     /**
-     * Get the selectable attributes
-     *
-     * @param ContentInterface $owner
+     * Get the selectable attributes.
      *
      * @return array
      */
@@ -98,6 +93,7 @@ class RelatedCollectionBlockService extends CollectionBlockService
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

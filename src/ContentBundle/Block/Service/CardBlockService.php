@@ -8,14 +8,14 @@ use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\CardBlock;
 use Opifer\ContentBundle\Form\Type\ContentPickerType;
 use Opifer\ContentBundle\Form\Type\StylesType;
+use Opifer\ContentBundle\Model\BlockInterface;
+use Opifer\MediaBundle\Form\Type\MediaPickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Opifer\MediaBundle\Form\Type\MediaPickerType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Opifer\ContentBundle\Model\BlockInterface;
 
 /**
- * Card Block Service
+ * Card Block Service.
  */
 class CardBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -30,36 +30,36 @@ class CardBlockService extends AbstractBlockService implements BlockServiceInter
             ->add('header', CKEditorType::class, [
                 'label' => 'label.header',
                 'attr' => ['label_col' => 12, 'widget_col' => 12],
-                'required' => false
+                'required' => false,
             ])
             ->add('value', CKEditorType::class, [
                 'label' => 'label.body',
                 'attr' => [
                     'label_col' => 12,
-                    'widget_col' => 12
+                    'widget_col' => 12,
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('media', MediaPickerType::class, [
-                'required'  => false,
+                'required' => false,
                 'multiple' => false,
-                'attr' => array('label_col' => 12, 'widget_col' => 12),
+                'attr' => ['label_col' => 12, 'widget_col' => 12],
             ])
         ;
 
         $builder->get('properties')
             ->add('preset', ChoiceType::class, [
-                'label'       => 'Preset',
-                'attr'        => ['help_text' => 'Pick a preset', 'tag' => 'styles'],
-                'choices'     => $this->config['presets'],
-                'required'    => true,
+                'label' => 'Preset',
+                'attr' => ['help_text' => 'Pick a preset', 'tag' => 'styles'],
+                'choices' => $this->config['presets'],
+                'required' => true,
             ])
             ->add('styles', StylesType::class, [
-                'choices'  => $this->config['styles'],
+                'choices' => $this->config['styles'],
                 'attr' => [
                     'help_text' => 'help.html_styles',
                     'class' => 'radio-rows',
-                    'tag' => 'styles'
+                    'tag' => 'styles',
                 ],
             ])
             ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id']])
@@ -69,14 +69,14 @@ class CardBlockService extends AbstractBlockService implements BlockServiceInter
                 'label' => 'label.content',
                 'attr' => [
                     'help_text' => 'help.card_content_picker',
-                    'tag' => 'general'
-                ]
+                    'tag' => 'general',
+                ],
             ])
         ;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getManageFormTypeName()
     {
@@ -84,15 +84,15 @@ class CardBlockService extends AbstractBlockService implements BlockServiceInter
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
-        return new CardBlock;
+        return new CardBlock();
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -108,6 +108,7 @@ class CardBlockService extends AbstractBlockService implements BlockServiceInter
 
     /**
      * @param BlockInterface $block
+     *
      * @return mixed
      */
     public function getDescription(BlockInterface $block = null)

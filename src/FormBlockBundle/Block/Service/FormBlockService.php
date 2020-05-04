@@ -3,19 +3,19 @@
 namespace Opifer\FormBlockBundle\Block\Service;
 
 use Opifer\CmsBundle\Entity\Form;
-use Opifer\FormBlockBundle\Entity\FormBlock;
 use Opifer\ContentBundle\Block\BlockRenderer;
 use Opifer\ContentBundle\Block\Service\AbstractBlockService;
 use Opifer\ContentBundle\Block\Service\BlockServiceInterface;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Model\BlockInterface;
+use Opifer\EavBundle\Manager\EavManager;
+use Opifer\FormBlockBundle\Entity\FormBlock;
 use Opifer\FormBundle\Model\FormManager;
 use Opifer\FormBundle\Model\PostInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Opifer\EavBundle\Manager\EavManager;
 
 /**
  * Form Block Service.
@@ -29,18 +29,12 @@ class FormBlockService extends AbstractBlockService implements BlockServiceInter
     protected $formManager;
 
     /**
-     * ESI should be enabled, since the configuration of Twig forms is handled outside the block configuration
+     * ESI should be enabled, since the configuration of Twig forms is handled outside the block configuration.
      *
      * @var bool {@inheritdoc}
      */
     protected $esiEnabled = true;
 
-    /**
-     * @param BlockRenderer $blockRenderer
-     * @param EavManager    $eavManager
-     * @param FormManager   $formManager
-     * @param array         $config
-     */
     public function __construct(BlockRenderer $blockRenderer, EavManager $eavManager, FormManager $formManager, array $config)
     {
         parent::__construct($blockRenderer, $config);
@@ -97,8 +91,6 @@ class FormBlockService extends AbstractBlockService implements BlockServiceInter
 
     /**
      * Allows setting pre filled data on form fields.
-     *
-     * @param PostInterface $post
      */
     protected function prefillPost(PostInterface $post)
     {

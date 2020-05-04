@@ -5,14 +5,14 @@ namespace Opifer\EavBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TextValue
+ * TextValue.
  *
  * @ORM\Entity
  */
 class TextValue extends Value
 {
     /**
-     * Turn value into string for form field value purposes
+     * Turn value into string for form field value purposes.
      *
      * @return string
      */

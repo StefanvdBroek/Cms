@@ -6,15 +6,13 @@ use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\IFrameBlock;
 use Opifer\ContentBundle\Form\Type\StylesType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * iFrame Block Service
+ * iFrame Block Service.
  */
 class IFrameBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -29,15 +27,15 @@ class IFrameBlockService extends AbstractBlockService implements BlockServiceInt
             ->add('url', TextType::class, [
                 'attr' => [
                     'help_text' => 'help.iframe_url',
-                    'tag' => 'general'
+                    'tag' => 'general',
                 ],
                 'required' => true,
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
-            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'],'required' => false])
-            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'],'required' => false])
+            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'], 'required' => false])
+            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'], 'required' => false])
             ->add('width', TextType::class, ['attr' => ['tag' => 'styles']])
             ->add('height', TextType::class, ['attr' => ['tag' => 'styles']]);
 
@@ -50,15 +48,15 @@ class IFrameBlockService extends AbstractBlockService implements BlockServiceInt
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
-        return new IFrameBlock;
+        return new IFrameBlock();
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -72,6 +70,7 @@ class IFrameBlockService extends AbstractBlockService implements BlockServiceInt
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

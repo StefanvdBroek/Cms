@@ -2,6 +2,6 @@
 
 namespace Opifer\ContentBundle\Designer;
 
-interface DesignSuiteInterface {
-
+interface DesignSuiteInterface
+{
 }

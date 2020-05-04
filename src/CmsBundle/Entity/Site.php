@@ -5,11 +5,11 @@ namespace Opifer\CmsBundle\Entity;
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Site
+ * Site.
  *
  * @JMS\ExclusionPolicy("all")
  * @GRID\Source(columns="id, name, domains, defaultLocale")
@@ -73,7 +73,7 @@ class Site
     protected $content;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -164,8 +164,6 @@ class Site
     }
 
     /**
-     * @param Domain $domain
-     *
      * @return $this
      */
     public function addDomain(Domain $domain)

@@ -3,7 +3,7 @@
 namespace Opifer\ContentBundle\Provider;
 
 /**
- * This pool holds the services tagged with 'opifer.content.block_provider'
+ * This pool holds the services tagged with 'opifer.content.block_provider'.
  */
 class BlockProviderPool
 {
@@ -11,19 +11,18 @@ class BlockProviderPool
     protected $providers;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->providers = array();
+        $this->providers = [];
     }
 
     /**
      * Adds all the providers, tagged with 'opifer.content.block_provider' to the
-     * provider pool
+     * provider pool.
      *
-     * @param BlockProviderInterface $provider
-     * @param string                 $alias
+     * @param string $alias
      */
     public function addProvider(BlockProviderInterface $provider, $alias)
     {
@@ -31,7 +30,7 @@ class BlockProviderPool
     }
 
     /**
-     * Get provider by its alias
+     * Get provider by its alias.
      *
      * @param string $alias
      *
@@ -43,7 +42,7 @@ class BlockProviderPool
     }
 
     /**
-     * Get all registered providers
+     * Get all registered providers.
      *
      * @return BlockProviderInterface[]
      */

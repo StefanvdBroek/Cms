@@ -7,7 +7,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Routing\RouterInterface;
 
 /**
  * NavLink Form Type.
@@ -18,9 +17,7 @@ class NavLinkType extends AbstractType
     protected $contentManager;
 
     /**
-     * Constructor
-     *
-     * @param ContentManagerInterface $contentManager
+     * Constructor.
      */
     public function __construct(ContentManagerInterface $contentManager)
     {
@@ -45,7 +42,7 @@ class NavLinkType extends AbstractType
                         return [];
                     }
 
-                    if (substr($original, 0, 4) == 'http' || substr($original, 0, 1) == '/') {
+                    if ('http' == substr($original, 0, 4) || '/' == substr($original, 0, 1)) {
                         return [
                             'url' => $original,
                         ];

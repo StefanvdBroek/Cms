@@ -5,11 +5,11 @@ namespace Opifer\ContentBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Opifer\Revisions\Mapping\Annotation as Revisions;
 use Opifer\ContentBundle\Model\ContentInterface;
+use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * List Block
+ * List Block.
  *
  * @ORM\Entity
  */
@@ -67,6 +67,7 @@ class ListBlock extends Block
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -92,6 +93,7 @@ class ListBlock extends Block
 
     /**
      * @param $collection
+     *
      * @return $this
      */
     public function setCollection($collection)
@@ -102,7 +104,7 @@ class ListBlock extends Block
     }
 
     /**
-     * Get the collection of actual content items
+     * Get the collection of actual content items.
      *
      * @return ContentInterface[]|ArrayCollection
      */

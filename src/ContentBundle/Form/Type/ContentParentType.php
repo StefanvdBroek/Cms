@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Content Parent Form Type
+ * Content Parent Form Type.
  */
 class ContentParentType extends AbstractType
 {
@@ -22,8 +22,6 @@ class ContentParentType extends AbstractType
 
     /**
      * Constructor.
-     *
-     * @param ContentManagerInterface $contentManager
      */
     public function __construct(ContentManagerInterface $contentManager)
     {
@@ -77,7 +75,6 @@ class ContentParentType extends AbstractType
             //no custom query build tree of all children
             $tree = $this->contentManager->getRepository()->childrenHierarchy();
         }
-
 
         if (is_int($view->vars['data'])) {
             $view->vars['value'] = $view->vars['data'];

@@ -23,8 +23,6 @@ interface BlockInterface
     public function getOwner();
 
     /**
-     * @param ContentInterface $owner
-     *
      * @return BlockInterface
      */
     public function setOwner(ContentInterface $owner);

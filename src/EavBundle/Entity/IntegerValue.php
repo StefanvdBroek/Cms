@@ -5,7 +5,7 @@ namespace Opifer\EavBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Integer Value
+ * Integer Value.
  *
  * @ORM\Entity
  */

@@ -4,9 +4,9 @@ namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 use Opifer\MediaBundle\Model\MediaInterface;
 use Opifer\Revisions\Mapping\Annotation as Revisions;
-use JMS\Serializer\Annotation as JMS;
 
 /**
  * DataViewBlock.
@@ -36,7 +36,7 @@ class DataViewBlock extends CompositeBlock
     protected $medias;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -94,8 +94,6 @@ class DataViewBlock extends CompositeBlock
     }
 
     /**
-     * @param MediaInterface $media
-     *
      * @return DataViewBlock
      */
     public function addMedia(MediaInterface $media)
@@ -106,8 +104,6 @@ class DataViewBlock extends CompositeBlock
     }
 
     /**
-     * @param MediaInterface $media
-     *
      * @return DataViewBlock
      */
     public function removeMedia(MediaInterface $media)

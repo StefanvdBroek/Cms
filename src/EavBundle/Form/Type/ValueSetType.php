@@ -12,7 +12,7 @@ class ValueSetType extends AbstractType
     protected $valueSetClass;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $valueSetClass
      */
@@ -28,20 +28,18 @@ class ValueSetType extends AbstractType
     {
         $builder->add('namedvalues', ValuesType::class, [
             'fields' => $options['fields'],
-            'label' => false
+            'label' => false,
         ]);
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => $this->valueSetClass,
-            'fields' => []
+            'fields' => [],
         ]);
     }
 

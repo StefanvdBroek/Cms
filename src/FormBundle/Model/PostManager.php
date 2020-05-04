@@ -15,8 +15,7 @@ class PostManager
     /**
      * Constructor.
      *
-     * @param EntityManagerInterface $em
-     * @param string                 $class
+     * @param string $class
      *
      * @throws \Exception If $class does not implement PostInterface
      */
@@ -55,8 +54,6 @@ class PostManager
 
     /**
      * Save attribute.
-     *
-     * @param Post $form
      *
      * @return Post
      */

@@ -3,9 +3,6 @@
 namespace Opifer\CmsBundle\Controller\Backend;
 
 use APY\DataGridBundle\Grid\Action\RowAction;
-use APY\DataGridBundle\Grid\Column\NumberColumn;
-use APY\DataGridBundle\Grid\Column\TextColumn;
-use APY\DataGridBundle\Grid\Columns;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Opifer\ContentBundle\Controller\Backend\BlockController as BaseBlockController;
 

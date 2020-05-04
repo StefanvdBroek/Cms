@@ -2,13 +2,13 @@
 
 namespace Opifer\FormBlockBundle\Block\Service;
 
-use Opifer\ContentBundle\Form\Type\BlockPickerType;
-use Opifer\FormBlockBundle\Form\Type\FormFieldValidationType;
 use Opifer\ContentBundle\Block\BlockRenderer;
 use Opifer\ContentBundle\Block\Service\AbstractBlockService;
 use Opifer\ContentBundle\Block\Service\BlockServiceInterface;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
+use Opifer\ContentBundle\Form\Type\BlockPickerType;
 use Opifer\ContentBundle\Model\BlockInterface;
+use Opifer\FormBlockBundle\Form\Type\FormFieldValidationType;
 use Opifer\FormBundle\Model\FormManager;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -27,11 +27,6 @@ abstract class FormFieldBlockService extends AbstractBlockService implements Blo
     /** @var bool */
     protected $esiEnabled = true;
 
-    /**
-     * @param BlockRenderer $blockRenderer
-     * @param FormManager   $formManager
-     * @param array         $config
-     */
     public function __construct(BlockRenderer $blockRenderer, FormManager $formManager, array $config)
     {
         parent::__construct($blockRenderer, $config);

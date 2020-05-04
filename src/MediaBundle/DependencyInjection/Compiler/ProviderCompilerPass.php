@@ -12,8 +12,6 @@ class ProviderCompilerPass implements CompilerPassInterface
      * Process the compiler pass.
      *
      * Adds all tagged provider services to the provider pool
-     *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)
     {

@@ -24,9 +24,6 @@ class OpiferCmsExtension extends Extension implements PrependExtensionInterface
         $loader->load('services.yml');
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     public function prepend(ContainerBuilder $container)
     {
         $configs = $container->getExtensionConfig($this->getAlias());
@@ -42,8 +39,6 @@ class OpiferCmsExtension extends Extension implements PrependExtensionInterface
 
     /**
      * Simplifying parameter syntax.
-     *
-     * @param array $config
      *
      * @return array
      */
@@ -81,9 +76,6 @@ class OpiferCmsExtension extends Extension implements PrependExtensionInterface
 
     /**
      * Remap class parameters.
-     *
-     * @param array            $classes
-     * @param ContainerBuilder $container
      */
     protected function mapClassParameters(array $classes, ContainerBuilder $container)
     {

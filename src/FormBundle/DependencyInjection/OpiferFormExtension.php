@@ -27,8 +27,6 @@ class OpiferFormExtension extends Extension implements PrependExtensionInterface
     /**
      * Prepend our config before other bundles, so we can preset
      * their config with our parameters.
-     *
-     * @param ContainerBuilder $container
      */
     public function prepend(ContainerBuilder $container)
     {
@@ -48,7 +46,7 @@ class OpiferFormExtension extends Extension implements PrependExtensionInterface
         foreach ($container->getExtensions() as $name => $extension) {
             switch ($name) {
                 case 'doctrine':
-                    $container->prependExtensionConfig($name,  [
+                    $container->prependExtensionConfig($name, [
                         'orm' => [
                             'resolve_target_entities' => $resolvableEntities,
                         ],
@@ -60,8 +58,6 @@ class OpiferFormExtension extends Extension implements PrependExtensionInterface
 
     /**
      * Simplifying parameter syntax.
-     *
-     * @param array $config
      *
      * @return array
      */

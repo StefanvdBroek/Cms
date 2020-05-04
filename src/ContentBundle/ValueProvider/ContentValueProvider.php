@@ -27,7 +27,7 @@ class ContentValueProvider extends AbstractValueProvider implements ValueProvide
     {
         return ContentValue::class;
     }
-    
+
     /**
      * {@inheritdoc}
      */

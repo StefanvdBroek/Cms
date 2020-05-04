@@ -7,9 +7,6 @@ use Opifer\ContentBundle\Model\BlockInterface;
 
 class SortVisitor implements VisitorInterface
 {
-    /**
-     * @param BlockInterface $block
-     */
     public function visit(BlockInterface $block)
     {
         if ($block instanceof BlockContainerInterface) {

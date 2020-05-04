@@ -5,7 +5,6 @@ namespace Opifer\CmsBundle\Controller\Backend;
 use APY\DataGridBundle\Grid\Action\RowAction;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Opifer\ContentBundle\Controller\Backend\ContentTypeController as BaseContentTypeController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ContentTypeController extends BaseContentTypeController
 {

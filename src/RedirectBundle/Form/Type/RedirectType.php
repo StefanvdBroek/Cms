@@ -18,29 +18,29 @@ class RedirectType extends AbstractType
     {
         $builder
             ->add('origin', TextType::class, [
-                'label' =>'opifer_redirect.form.origin.label',
+                'label' => 'opifer_redirect.form.origin.label',
                 'attr' => [
                     'help_text' => 'opifer_redirect.form.origin.help_text',
-                ]
+                ],
             ])
             ->add('target', TextType::class, [
-                'label' =>'opifer_redirect.form.target.label',
+                'label' => 'opifer_redirect.form.target.label',
                 'attr' => [
                     'help_text' => 'opifer_redirect.form.target.help_text',
-                ]
+                ],
             ])
             ->add('permanent', CheckboxType::class, [
                 'attr' => [
                     'align_with_widget' => true,
                     'required' => false,
-                ]
+                ],
             ])
             ->add('requirements', CollectionType::class, [
                 'entry_type' => RequirementType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'label' =>'opifer_redirect.form.requirements.label',
+                'label' => 'opifer_redirect.form.requirements.label',
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'opifer_redirect.form.save',

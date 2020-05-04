@@ -20,8 +20,6 @@ class EmptyValueListener
 
     /**
      * Constructor.
-     *
-     * @param EavManager $eavManager
      */
     public function __construct(EavManager $eavManager)
     {
@@ -30,14 +28,12 @@ class EmptyValueListener
 
     /**
      * Create empty values for non-persisted values.
-     *
-     * @param LifeCycleEventArgs $args
      */
     public function postLoad(LifeCycleEventArgs $args)
     {
         $entity = $args->getEntity();
 
-        if ($entity instanceof ValueSetInterface && $entity->getValues() !== null) {
+        if ($entity instanceof ValueSetInterface && null !== $entity->getValues()) {
             $this->eavManager->replaceEmptyValues($entity);
         }
     }
@@ -45,8 +41,6 @@ class EmptyValueListener
     /**
      * Remove empty values after persisting, to avoid null 'Value' values in
      * the database.
-     *
-     * @param LifeCycleEventArgs $args
      */
     public function postPersist(LifeCycleEventArgs $args)
     {

@@ -17,14 +17,12 @@ class Pool
      */
     public function __construct()
     {
-        $this->providers = array();
+        $this->providers = [];
     }
 
     /**
      * Adds all the providers, tagged with 'opifer.media.provider' to the
      * provider pool.
-     *
-     * @param ProviderInterface $provider
      */
     public function addProvider(ProviderInterface $provider, $alias)
     {

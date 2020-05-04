@@ -7,7 +7,7 @@ use Opifer\RedirectBundle\Model\Redirect as BaseRedirect;
 class Redirect extends BaseRedirect
 {
     /**
-     * Added an ID setter for testing purposes
+     * Added an ID setter for testing purposes.
      *
      * @param $id
      */

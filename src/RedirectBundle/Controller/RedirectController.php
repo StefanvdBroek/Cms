@@ -7,12 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class RedirectController extends Controller
 {
     /**
-     * Index
+     * Index.
      *
      * @return Response
      */
@@ -23,14 +22,12 @@ class RedirectController extends Controller
         $redirects = $this->get('opifer.redirect.redirect_manager')->getRepository()->findAll();
 
         return $this->render($this->container->getParameter('opifer_redirect.redirect_index_view'), [
-            'redirects' => $redirects
+            'redirects' => $redirects,
         ]);
     }
 
     /**
-     * Create redirect
-     *
-     * @param Request $request
+     * Create redirect.
      *
      * @return RedirectResponse|Response
      */
@@ -46,11 +43,10 @@ class RedirectController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $manager->save($redirect);
             $this->addFlash('success', $this->get('translator')->trans('opifer_redirect.flash.created'));
 
-            if ($form->get('saveAndAdd')->isClicked()){
+            if ($form->get('saveAndAdd')->isClicked()) {
                 return $this->redirectToRoute('opifer_redirect_redirect_create');
             }
 
@@ -63,10 +59,9 @@ class RedirectController extends Controller
     }
 
     /**
-     * Edit a redirect
+     * Edit a redirect.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return RedirectResponse|Response
      */
@@ -89,13 +84,13 @@ class RedirectController extends Controller
         }
 
         return $this->render($this->container->getParameter('opifer_redirect.redirect_edit_view'), [
-            'form'     => $form->createView(),
-            'redirect' => $redirect
+            'form' => $form->createView(),
+            'redirect' => $redirect,
         ]);
     }
 
     /**
-     * Delete a redirect
+     * Delete a redirect.
      *
      * @param int $id
      *

@@ -37,8 +37,6 @@ class TablePrefixSubscriber implements EventSubscriber
 
     /**
      * Load class meta data event.
-     *
-     * @param LoadClassMetadataEventArgs $args
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $args)
     {
@@ -53,7 +51,7 @@ class TablePrefixSubscriber implements EventSubscriber
             }
 
             foreach ($classMetadata->getAssociationMappings() as $fieldName => $mapping) {
-                if ($mapping['type'] == ClassMetadataInfo::MANY_TO_MANY && $mapping['isOwningSide'] == true) {
+                if (ClassMetadataInfo::MANY_TO_MANY == $mapping['type'] && true == $mapping['isOwningSide']) {
                     $mappedTableName = $classMetadata->associationMappings[$fieldName]['joinTable']['name'];
 
                     // Do not re-apply the prefix when the association is already prefixed

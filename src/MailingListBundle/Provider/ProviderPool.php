@@ -3,7 +3,7 @@
 namespace Opifer\MailingListBundle\Provider;
 
 /**
- * This pool holds the services tagged with 'opifer.mailinglist.provider'
+ * This pool holds the services tagged with 'opifer.mailinglist.provider'.
  */
 class ProviderPool
 {
@@ -11,19 +11,18 @@ class ProviderPool
     protected $providers;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->providers = array();
+        $this->providers = [];
     }
 
     /**
      * Adds all the providers, tagged with 'opifer.mailinglist.provider' to the
-     * provider pool
+     * provider pool.
      *
-     * @param MailingListProviderInterface  $value
-     * @param string                        $alias
+     * @param string $alias
      */
     public function addProvider(MailingListProviderInterface $value, $alias)
     {
@@ -31,7 +30,7 @@ class ProviderPool
     }
 
     /**
-     * Get provider by its alias
+     * Get provider by its alias.
      *
      * @param string $alias
      *
@@ -43,7 +42,7 @@ class ProviderPool
     }
 
     /**
-     * Get all registered providers
+     * Get all registered providers.
      *
      * @return MailingListProviderInterface[]
      */

@@ -2,11 +2,8 @@
 
 namespace Opifer\CmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Opifer\RedirectBundle\Model\Redirect as BaseRedirect;
 
-/**
- */
 class Redirect extends BaseRedirect
 {
     /**

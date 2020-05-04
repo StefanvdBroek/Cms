@@ -16,8 +16,6 @@ class ResponseEvent extends Event
 
     /**
      * Constructor.
-     *
-     * @param Request $request
      */
     public function __construct(Request $request)
     {
@@ -36,8 +34,6 @@ class ResponseEvent extends Event
 
     /**
      * Set the response.
-     *
-     * @param Response $response
      */
     public function setResponse(Response $response)
     {

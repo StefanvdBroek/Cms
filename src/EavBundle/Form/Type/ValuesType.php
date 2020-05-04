@@ -12,9 +12,7 @@ class ValuesType extends AbstractType
     protected $valuesSubscriber;
 
     /**
-     * Constructor
-     *
-     * @param ValuesSubscriber $valuesSubscriber
+     * Constructor.
      */
     public function __construct(ValuesSubscriber $valuesSubscriber)
     {
@@ -31,13 +29,11 @@ class ValuesType extends AbstractType
 
     /**
      * {@inheritdoc}
-     *
-     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'fields' => []
+            'fields' => [],
         ]);
     }
 

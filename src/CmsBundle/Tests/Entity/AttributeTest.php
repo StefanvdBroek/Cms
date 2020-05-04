@@ -10,7 +10,7 @@ class AttributeTest extends TestCase
     public function testParameters()
     {
         $attributes = new Attribute();
-        $parameters = array();
+        $parameters = [];
 
         $expected = $parameters;
         $attributes->setParameters($parameters);

@@ -74,11 +74,11 @@ class Environment
      */
     public function getViewParameters()
     {
-        return array(
+        return [
             'environment' => $this,
             'content' => $this->object,
             'block_mode' => $this->getBlockMode(),
-        );
+        ];
     }
 
     public function getEntityManager()
@@ -132,7 +132,7 @@ class Environment
     }
 
     /**
-     * Get all blocks for the current object
+     * Get all blocks for the current object.
      *
      * @return array
      */
@@ -145,7 +145,7 @@ class Environment
     }
 
     /**
-     * Get all cached blocks
+     * Get all cached blocks.
      *
      * Note; this is a dangerous method and should only be used to retrieve
      * blocks from caches other than the current `object`.
@@ -170,11 +170,11 @@ class Environment
 
         $cacheKey = $this->getCacheKey();
 
-        $blocks = array();
+        $blocks = [];
 
         /** @var BlockInterface $block */
         foreach ($this->blockCache[$cacheKey] as $block) {
-            if ($block->getParent() === null && $block->getOwner() !== null) {
+            if (null === $block->getParent() && null !== $block->getOwner()) {
                 array_push($blocks, $block);
             }
         }
@@ -183,19 +183,17 @@ class Environment
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     public function getBlockChildren(BlockInterface $block)
     {
         $this->load();
 
-        $children = array();
+        $children = [];
         $cacheKey = $this->getCacheKey();
 
         foreach ($this->blockCache[$cacheKey] as $member) {
-            if ($member->getParent() == null) {
+            if (null == $member->getParent()) {
                 continue;
             }
 
@@ -237,9 +235,9 @@ class Environment
         return $this;
     }
 
-    protected function getBlocksRecursive($owner = null, $blocks = array())
+    protected function getBlocksRecursive($owner = null, $blocks = [])
     {
-        $draft = ($this->draft && ($owner === $this->object || $owner === null)) ? true : false;
+        $draft = ($this->draft && ($owner === $this->object || null === $owner)) ? true : false;
 
         $owned = $this->blockManager->findByOwner($owner, $draft);
 
@@ -266,7 +264,7 @@ class Environment
 
             if ($block instanceof PointerBlock && $block->getReference()) {
                 $iterator = new \RecursiveIteratorIterator(
-                    new RecursiveBlockIterator(array($block->getReference())),
+                    new RecursiveBlockIterator([$block->getReference()]),
                     \RecursiveIteratorIterator::SELF_FIRST
                 );
 

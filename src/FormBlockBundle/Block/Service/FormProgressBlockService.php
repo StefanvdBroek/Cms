@@ -3,11 +3,11 @@
 namespace Opifer\FormBlockBundle\Block\Service;
 
 use Opifer\ContentBundle\Block\Service\AbstractBlockService;
-use Opifer\FormBlockBundle\Entity\FormProgressBlock;
 use Opifer\ContentBundle\Block\Service\BlockServiceInterface;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Model\BlockInterface;
+use Opifer\FormBlockBundle\Entity\FormProgressBlock;
 
 /**
  * Form Block Service.

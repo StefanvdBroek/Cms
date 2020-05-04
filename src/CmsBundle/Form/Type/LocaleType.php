@@ -34,7 +34,7 @@ class LocaleType extends AbstractType
             ->add('active', CheckboxType::class, [
                 'label' => 'active',
                 'attr' => [
-                    'help_text' => 'Is this language active'
+                    'help_text' => 'Is this language active',
                 ],
                 'required' => false,
             ])

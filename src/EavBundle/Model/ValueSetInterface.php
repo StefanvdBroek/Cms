@@ -37,7 +37,7 @@ interface ValueSetInterface
     public function get($name);
 
     /**
-     * Get value by attribute name or return null if the attribute is not found
+     * Get value by attribute name or return null if the attribute is not found.
      *
      * @param string $name
      *

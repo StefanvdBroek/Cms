@@ -14,7 +14,7 @@ class SchemaType extends AbstractType
     protected $schemaClass;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $schemaClass
      */
@@ -31,17 +31,17 @@ class SchemaType extends AbstractType
         $builder->add('attributes', CollectionType::class, [
             'allow_add' => true,
             'allow_delete' => true,
-            'entry_type' => AttributeType::class
+            'entry_type' => AttributeType::class,
         ]);
 
-        if ($options['object_class'] !== null && class_exists($options['object_class'])) {
+        if (null !== $options['object_class'] && class_exists($options['object_class'])) {
             $builder->add('object_class', HiddenType::class, [
-                'data' => $options['object_class']
+                'data' => $options['object_class'],
             ]);
         } else {
             $builder->add('object_class', SchemaObjectClassType::class, [
                 'label' => 'schema.object_class',
-                'attr'  => ['help_text' => 'form.object_class.help_text']
+                'attr' => ['help_text' => 'form.object_class.help_text'],
             ]);
         }
     }
@@ -54,7 +54,7 @@ class SchemaType extends AbstractType
         $resolver->setDefaults([
             'data_class' => $this->schemaClass,
             'validation_groups' => false,
-            'object_class' => null
+            'object_class' => null,
         ]);
     }
 

@@ -25,8 +25,6 @@ class LocaleManager extends BaseLocaleManager
      * The entity manager is being passed to this manager by a compiler pass.
      *
      * @see Opifer\CmsBundle\DependencyInjection\Compiler\VendorCompilerPass
-     *
-     * @param EntityManager $em
      */
     public function setEntityManager(EntityManager $em)
     {
@@ -38,7 +36,7 @@ class LocaleManager extends BaseLocaleManager
      */
     public function getLocales()
     {
-        if ($this->locales == null) {
+        if (null == $this->locales) {
             /** @var Locale[] $dynamicLocales */
             $dynamicLocales = $this->em->getRepository(Locale::class)->findAll();
 

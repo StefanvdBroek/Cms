@@ -8,16 +8,15 @@ namespace Opifer\ContentBundle\Block;
  */
 interface BlockAdapterInterface
 {
-
     /**
-     * Return the Doctrine managed entity
+     * Return the Doctrine managed entity.
      *
      * @return object
      */
     public function getEntity();
 
     /**
-     * Set the Doctrine managed entity
+     * Set the Doctrine managed entity.
      *
      * @param object $entity
      *

@@ -5,14 +5,14 @@ namespace Opifer\EavBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * DateValue
+ * DateValue.
  *
  * @ORM\Entity
  */
 class DateValue extends Value
 {
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -23,17 +23,17 @@ class DateValue extends Value
     }
 
     /**
-    * Turn value into string for form field value purposes
-    *
-    * @return string
-    */
+     * Turn value into string for form field value purposes.
+     *
+     * @return string
+     */
     public function __toString()
     {
         return date('d-m-Y', $this->getTimestamp());
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return \DateTime
      */
@@ -45,7 +45,7 @@ class DateValue extends Value
     }
 
     /**
-     * Set value
+     * Set value.
      *
      * @param \DateTime $value
      *
@@ -63,7 +63,7 @@ class DateValue extends Value
     }
 
     /**
-     * Get raw value
+     * Get raw value.
      *
      * @return string
      */

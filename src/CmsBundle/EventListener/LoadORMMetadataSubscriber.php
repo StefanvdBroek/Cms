@@ -14,9 +14,6 @@ class LoadORMMetadataSubscriber implements EventSubscriber
      */
     private $entities;
 
-    /**
-     * @param array $entities
-     */
     public function __construct(array $entities)
     {
         $this->entities = $entities;
@@ -32,9 +29,6 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         /** @var ClassMetadata $metadata */
@@ -55,9 +49,6 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         }
     }
 
-    /**
-     * @param ClassMetadataInfo $metadata
-     */
     private function convertToEntityIfNeeded(ClassMetadataInfo $metadata)
     {
         foreach ($this->entities as $alias => $resourceMetadata) {
@@ -96,7 +87,6 @@ class LoadORMMetadataSubscriber implements EventSubscriber
     }
 
     /**
-     * @param ClassMetadataInfo $metadata
      * @param $configuration
      */
     private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
@@ -120,9 +110,6 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         }
     }
 
-    /**
-     * @param ClassMetadataInfo $metadata
-     */
     private function unsetAssociationMappings(ClassMetadataInfo $metadata)
     {
         foreach ($metadata->getAssociationMappings() as $key => $value) {
@@ -131,6 +118,7 @@ class LoadORMMetadataSubscriber implements EventSubscriber
             }
         }
     }
+
     /**
      * @param $type
      *

@@ -17,5 +17,4 @@ class GoogleAuthType extends AbstractType
             ->add('googleAuthenticatorSecret', HiddenType::class)
         ;
     }
-
 }

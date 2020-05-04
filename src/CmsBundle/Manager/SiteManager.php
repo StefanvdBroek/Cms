@@ -3,10 +3,8 @@
 namespace Opifer\CmsBundle\Manager;
 
 use Doctrine\ORM\EntityManager;
-use Opifer\CmsBundle\Entity\Domain;
-use Opifer\CmsBundle\Entity\Site;
 use Doctrine\ORM\EntityRepository;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Opifer\CmsBundle\Entity\Site;
 
 /**
  * Site Manager.
@@ -33,9 +31,6 @@ class SiteManager
 
     /**
      * SiteManager constructor.
-     *
-     * @param EntityManager $em
-     * @param DomainManager $domainManager
      */
     public function __construct(EntityManager $em, DomainManager $domainManager)
     {
@@ -48,7 +43,7 @@ class SiteManager
      */
     public function getRepository()
     {
-        if ($this->repository === null) {
+        if (null === $this->repository) {
             $this->repository = $this->em->getRepository(Site::class);
         }
 
@@ -57,7 +52,7 @@ class SiteManager
 
     public function getSite()
     {
-        if ($this->site === null) {
+        if (null === $this->site) {
             $domain = $this->domainManager->getDomain();
             if ($domain) {
                 $this->site = $this->getRepository()->find($domain->getSite());

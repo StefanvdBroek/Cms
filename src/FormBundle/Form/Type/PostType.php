@@ -15,8 +15,6 @@ class PostType extends AbstractType
 
     /**
      * Constructor.
-     *
-     * @param RouterInterface $router
      */
     public function __construct(RouterInterface $router)
     {

@@ -12,8 +12,7 @@ class ExceptionController extends Controller
 {
     /**
      * 404 error page.
-     * 
-     * @param Request $request
+     *
      * @return Response
      */
     public function error404Action(Request $request)
@@ -28,7 +27,7 @@ class ExceptionController extends Controller
 
         $content = $contentRepository->findActiveBySlug('404', $host);
 
-        if(!$content) {
+        if (!$content) {
             $content = $contentRepository->findOneBySlug($locale->getLocale().'/404');
         }
 

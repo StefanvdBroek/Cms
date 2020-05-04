@@ -194,8 +194,6 @@ class Option implements OptionInterface
     /**
      * Add value.
      *
-     * @param ValueInterface $value
-     *
      * @return Option
      */
     public function addValue(ValueInterface $value)
@@ -207,8 +205,6 @@ class Option implements OptionInterface
 
     /**
      * Remove value.
-     *
-     * @param ValueInterface $value
      */
     public function removeValue(ValueInterface $value)
     {
@@ -235,6 +231,7 @@ class Option implements OptionInterface
 
     /**
      * @param $description
+     *
      * @return $this
      */
     public function setDescription($description)

@@ -15,9 +15,7 @@ class BlockExclusionStrategy implements ExclusionStrategyInterface
     protected $content;
 
     /**
-     * Constructor
-     *
-     * @param Content $content
+     * Constructor.
      */
     public function __construct(Content $content)
     {
@@ -26,7 +24,7 @@ class BlockExclusionStrategy implements ExclusionStrategyInterface
 
     /**
      * Skip blocks of a content item that are children of a template block and do not match the content id.
-     * The reason for this is that template blocks could have children from different content items
+     * The reason for this is that template blocks could have children from different content items.
      *
      * {@inheritdoc}
      */

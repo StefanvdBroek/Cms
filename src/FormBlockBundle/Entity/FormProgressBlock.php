@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\ContentBundle\Entity\Block;
 
 /**
- * Form progress Block
+ * Form progress Block.
  *
  * @ORM\Entity
  */

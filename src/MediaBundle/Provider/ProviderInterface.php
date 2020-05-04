@@ -30,8 +30,6 @@ interface ProviderInterface
     /**
      * Return the thumbnail of the media item.
      *
-     * @param MediaInterface $media
-     *
      * @return string
      */
     public function getThumb(MediaInterface $media);
@@ -42,9 +40,6 @@ interface ProviderInterface
      * Symfony Form Documentation:
      * http://symfony.com/doc/current/book/forms.html
      * http://symfony.com/doc/current/reference/forms/types.html
-     *
-     * @param FormBuilderInterface $builder
-     * @param array                $options
      */
     public function buildCreateForm(FormBuilderInterface $builder, array $options);
 
@@ -53,9 +48,6 @@ interface ProviderInterface
      *
      * By default, when extending AbstractProvider, this redirects to the
      * newForm() method.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array                $options
      */
     public function buildEditForm(FormBuilderInterface $builder, array $options);
 
@@ -66,50 +58,35 @@ interface ProviderInterface
      */
     public function singleView();
 
-    /**
-     * @param MediaInterface $media
-     */
     public function postLoad(MediaInterface $media);
 
     /**
      * perform any prePersist actions.
-     *
-     * @param MediaInterface $media
      */
     public function prePersist(MediaInterface $media);
 
     /**
      * perform any postPersist actions.
-     *
-     * @param MediaInterface $media
      */
     public function postPersist(MediaInterface $media);
 
     /**
      * perform any preUpdate actions.
-     *
-     * @param MediaInterface $media
      */
     public function preUpdate(MediaInterface $media);
 
     /**
      * perform any postUpdate actions.
-     *
-     * @param MediaInterface $media
      */
     public function postUpdate(MediaInterface $media);
 
     /**
      * perform any preRemove actions.
-     *
-     * @param MediaInterface $media
      */
     public function preRemove(MediaInterface $media);
 
     /**
      * perform any postRemove actions.
-     *
-     * @param MediaInterface $media
      */
     public function postRemove(MediaInterface $media);
 }

@@ -17,9 +17,7 @@ class FilterNameType extends AbstractType
     protected $attributeManager;
 
     /**
-     * Constructor
-     *
-     * @param AttributeManager $attributeManager
+     * Constructor.
      */
     public function __construct(AttributeManager $attributeManager)
     {

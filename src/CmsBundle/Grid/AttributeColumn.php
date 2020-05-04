@@ -3,7 +3,6 @@
 namespace Opifer\CmsBundle\Grid;
 
 use APY\DataGridBundle\Grid\Column\TextColumn;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Comparison;
 use Doctrine\ORM\Query\Expr\Composite;
 use Doctrine\ORM\QueryBuilder;

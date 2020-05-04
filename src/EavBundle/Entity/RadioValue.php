@@ -5,14 +5,14 @@ namespace Opifer\EavBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RadioValue
+ * RadioValue.
  *
  * @ORM\Entity
  */
 class RadioValue extends OptionValue
 {
     /**
-     * Get the selected value
+     * Get the selected value.
      *
      * @return string
      */
@@ -23,7 +23,7 @@ class RadioValue extends OptionValue
         if (count($options)) {
             return $options[0]->getName();
         }
-        
+
         return '';
     }
 
@@ -36,5 +36,4 @@ class RadioValue extends OptionValue
     {
         return (string) $this->getValue();
     }
-
 }

@@ -24,8 +24,6 @@ class PrototypeCollection
     /**
      * Adds a prototype to the collection and increments the count.
      *
-     * @param Prototype $prototype
-     *
      * @throws \Exception If the a prototype with the current key already exists
      */
     public function add(Prototype $prototype)

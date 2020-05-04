@@ -12,14 +12,11 @@ use Opifer\MediaBundle\Provider\ProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class MediaController extends Controller
 {
     /**
      * Index.
-     *
-     * @param Request $request
      *
      * @return Response
      */
@@ -45,8 +42,7 @@ class MediaController extends Controller
     /**
      * Create new media.
      *
-     * @param Request $request
-     * @param string  $provider
+     * @param string $provider
      *
      * @return Response
      */
@@ -99,8 +95,7 @@ class MediaController extends Controller
     /**
      * Edit.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return Response
      */
@@ -144,8 +139,6 @@ class MediaController extends Controller
     /**
      * Update multiple media items.
      *
-     * @param Request $request
-     *
      * @return Response
      */
     public function updateAllAction(Request $request)
@@ -184,8 +177,7 @@ class MediaController extends Controller
     /**
      * Deletes a media item.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */

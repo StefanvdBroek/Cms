@@ -2,13 +2,12 @@
 
 namespace Opifer\CmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Opifer\EavBundle\Model\AttributeInterface;
 use Opifer\EavBundle\Model\Option as BaseOption;
 
 /**
- * Option
+ * Option.
  *
  * @JMS\ExclusionPolicy("all")
  */

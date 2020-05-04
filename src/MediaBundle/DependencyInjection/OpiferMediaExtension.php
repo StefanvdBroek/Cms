@@ -35,8 +35,6 @@ class OpiferMediaExtension extends Extension implements PrependExtensionInterfac
     /**
      * Prepend our mediabundle config before all other bundles, so we can preset
      * their config with our parameters.
-     *
-     * @param ContainerBuilder $container
      */
     public function prepend(ContainerBuilder $container)
     {
@@ -54,7 +52,7 @@ class OpiferMediaExtension extends Extension implements PrependExtensionInterfac
         foreach ($container->getExtensions() as $name => $extension) {
             switch ($name) {
                 case 'doctrine':
-                    $container->prependExtensionConfig($name,  [
+                    $container->prependExtensionConfig($name, [
                         'orm' => [
                             'resolve_target_entities' => [
                                 MediaInterface::class => $config['media']['class'],
@@ -108,7 +106,7 @@ class OpiferMediaExtension extends Extension implements PrependExtensionInterfac
                                 ],
                             ],
                             'full_size' => [
-                                'quality' => 80
+                                'quality' => 80,
                             ],
                         ],
                     ]);
@@ -156,8 +154,6 @@ class OpiferMediaExtension extends Extension implements PrependExtensionInterfac
 
     /**
      * Simplifying parameter syntax.
-     *
-     * @param array $config
      *
      * @return array
      */

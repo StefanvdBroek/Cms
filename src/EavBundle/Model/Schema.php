@@ -8,14 +8,14 @@ use Opifer\EavBundle\Validator\Constraints as OpiferAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Schema
+ * Schema.
  *
  * @ORM\MappedSuperclass
  */
 class Schema implements SchemaInterface
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -50,7 +50,7 @@ class Schema implements SchemaInterface
     protected $allowedInAttributes;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -59,9 +59,9 @@ class Schema implements SchemaInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -69,9 +69,9 @@ class Schema implements SchemaInterface
     }
 
     /**
-     * Set objectClass
+     * Set objectClass.
      *
-     * @param  string $objectClass
+     * @param string $objectClass
      *
      * @return Schema
      */
@@ -82,9 +82,8 @@ class Schema implements SchemaInterface
         return $this;
     }
 
-
     /**
-     * Get objectClass
+     * Get objectClass.
      *
      * @return string
      */
@@ -94,9 +93,7 @@ class Schema implements SchemaInterface
     }
 
     /**
-     * Add attributes
-     *
-     * @param  AttributeInterface $attributes
+     * Add attributes.
      *
      * @return Schema
      */
@@ -107,20 +104,16 @@ class Schema implements SchemaInterface
         return $this;
     }
 
-
     /**
-     * Remove attributes
-     *
-     * @param AttributeInterface $attributes
+     * Remove attributes.
      */
     public function removeAttribute(AttributeInterface $attributes)
     {
         $this->attributes->removeElement($attributes);
     }
 
-
     /**
-     * Get attributes
+     * Get attributes.
      *
      * @return ArrayCollection
      */
@@ -129,9 +122,8 @@ class Schema implements SchemaInterface
         return $this->attributes;
     }
 
-
     /**
-     * Get an attribute by its name
+     * Get an attribute by its name.
      *
      * @param string $name
      *
@@ -149,11 +141,9 @@ class Schema implements SchemaInterface
     }
 
     /**
-     * Add allowed in attribute
+     * Add allowed in attribute.
      *
-     * @param  AttributeInterface $attribute
-     *
-     * @return  SchemaInterface
+     * @return SchemaInterface
      */
     public function addAllowedInAttribute(AttributeInterface $attribute)
     {
@@ -163,9 +153,7 @@ class Schema implements SchemaInterface
     }
 
     /**
-     * Remove allowed schema
-     *
-     * @param AttributeInterface $attribute
+     * Remove allowed schema.
      */
     public function removeAllowedInAttribute(AttributeInterface $attribute)
     {
@@ -173,7 +161,7 @@ class Schema implements SchemaInterface
     }
 
     /**
-     * Get allowed in attributes
+     * Get allowed in attributes.
      *
      * @return ArrayCollection
      */
@@ -183,8 +171,6 @@ class Schema implements SchemaInterface
     }
 
     /**
-     * @param ArrayCollection $allowedInAttributes
-     *
      * @return Schema
      */
     public function setAllowedInAttributes(ArrayCollection $allowedInAttributes)

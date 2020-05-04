@@ -4,7 +4,6 @@ namespace Opifer\ContentBundle\Block\Tool;
 
 class ClipboardTool extends Tool
 {
-
     /**
      * @param string $name
      * @param string $service
@@ -30,6 +29,7 @@ class ClipboardTool extends Tool
 
     /**
      * @param string $group
+     *
      * @return Tool
      */
     public function setGroup($group)

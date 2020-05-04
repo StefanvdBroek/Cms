@@ -152,8 +152,6 @@ class Prototype
     }
 
     /**
-     * @param Choice $constraint
-     *
      * @return Prototype
      */
     public function addConstraint(Choice $constraint)
@@ -204,8 +202,6 @@ class Prototype
     }
 
     /**
-     * @param Choice $choice
-     *
      * @return Prototype
      */
     public function addChoice(Choice $choice)

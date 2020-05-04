@@ -15,7 +15,7 @@ class OptionType extends AbstractType
     protected $optionClass;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $optionClass
      */
@@ -35,7 +35,7 @@ class OptionType extends AbstractType
             ->add('sort', NumberType::class)
             ->add('description', TextareaType::class, [
                 'label' => 'Text',
-                'required' => false
+                'required' => false,
             ]);
     }
 
@@ -46,7 +46,7 @@ class OptionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => $this->optionClass,
-            'compound'   => true,
+            'compound' => true,
         ]);
     }
 

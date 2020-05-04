@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\EavBundle\Model\MediaInterface;
 
 /**
- * MediaValue
+ * MediaValue.
  *
  * @ORM\Entity
  */
@@ -23,7 +23,7 @@ class MediaValue extends Value implements \IteratorAggregate, \Countable
     protected $medias;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -46,7 +46,7 @@ class MediaValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Get the value
+     * Get the value.
      *
      * Overrides the parent getValue method
      *
@@ -68,9 +68,8 @@ class MediaValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Add media
+     * Add media.
      *
-     * @param  MediaInterface $media
      * @return Value
      */
     public function addMedia(MediaInterface $media)
@@ -81,9 +80,7 @@ class MediaValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Remove medias
-     *
-     * @param MediaInterface $media
+     * Remove medias.
      */
     public function removeMedia(MediaInterface $media)
     {
@@ -91,9 +88,7 @@ class MediaValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Set Medias
-     *
-     * @param ArrayCollection $medias
+     * Set Medias.
      *
      * @return MediaValue
      */
@@ -105,7 +100,7 @@ class MediaValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Get medias
+     * Get medias.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -115,7 +110,7 @@ class MediaValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isEmpty()
     {
@@ -123,7 +118,7 @@ class MediaValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Count the amount of mapped media items
+     * Count the amount of mapped media items.
      *
      * @return int
      */

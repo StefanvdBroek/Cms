@@ -20,10 +20,8 @@ class ContentTypeManager
     protected $contentManager;
 
     /**
-     * @param EntityManagerInterface $em
-     * @param SchemaManager          $schemaManager
-     * @param ContentManager         $contentManager
-     * @param string                 $class
+     * @param string $class
+     *
      * @throws \Exception
      */
     public function __construct(EntityManagerInterface $em, SchemaManager $schemaManager, ContentManager $contentManager, $class)
@@ -68,8 +66,6 @@ class ContentTypeManager
 
     /**
      * Save attribute.
-     *
-     * @param ContentType $contentType
      *
      * @return ContentType
      */

@@ -2,10 +2,10 @@
 
 namespace Opifer\MailingListBundle\Entity;
 
+use APY\DataGridBundle\Grid\Mapping as Grid;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use APY\DataGridBundle\Grid\Mapping as Grid;
 
 /**
  * MailingList.
@@ -51,17 +51,17 @@ class MailingList
      *
      * @ORM\OneToMany(targetEntity="Opifer\MailingListBundle\Entity\Subscription", mappedBy="mailingList", cascade={"remove"})
      * @ORM\OrderBy({"createdAt" = "DESC"})
-     * 
+     *
      * @Grid\Column(field="subscriptions.id:count", title="label.subscriptions")
      **/
     protected $subscriptions;
 
-     /**
-      * @var string
-      *
-      * @ORM\Column(name="provider", type="string", length=255, nullable=true)
-      */
-     protected $provider;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="provider", type="string", length=255, nullable=true)
+     */
+    protected $provider;
 
     /**
      * @var string
@@ -270,6 +270,7 @@ class MailingList
     public function setSubscriptions($subscriptions)
     {
         $this->subscriptions = $subscriptions;
+
         return $this;
     }
 
@@ -289,6 +290,7 @@ class MailingList
     public function setRemoteListId($remoteListId)
     {
         $this->remoteListId = $remoteListId;
+
         return $this;
     }
 
@@ -308,8 +310,7 @@ class MailingList
     public function setSyncedAt($syncedAt)
     {
         $this->syncedAt = $syncedAt;
+
         return $this;
     }
-
-    
 }

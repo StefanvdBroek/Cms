@@ -3,23 +3,19 @@
 namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Opifer\Revisions\Mapping\Annotation as Revisions;
-use Opifer\ContentBundle\Entity\Block;
 
 /**
- * AvatarBlock
+ * AvatarBlock.
  *
  * @ORM\Entity
  */
 class AvatarBlock extends Block
 {
-
     /**
      * @var <Content>
      *
      * @ORM\ManyToOne(targetEntity="Opifer\ContentBundle\Model\ContentInterface")
      * @ORM\JoinColumn(name="login_content_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     *
      */
     protected $loginContentItem;
 
@@ -28,13 +24,11 @@ class AvatarBlock extends Block
      *
      * @ORM\ManyToOne(targetEntity="Opifer\ContentBundle\Model\ContentInterface")
      * @ORM\JoinColumn(name="registration_content_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     *
      */
     protected $registrationContentItem;
 
-
-   /**
-     * Set login content
+    /**
+     * Set login content.
      *
      * @param Content $loginContentItem
      */
@@ -46,7 +40,7 @@ class AvatarBlock extends Block
     }
 
     /**
-     * Get login content item
+     * Get login content item.
      *
      * @return Content
      */
@@ -56,7 +50,7 @@ class AvatarBlock extends Block
     }
 
     /**
-     * Set registration content
+     * Set registration content.
      *
      * @param Content $loginContentItem
      */
@@ -68,7 +62,7 @@ class AvatarBlock extends Block
     }
 
     /**
-     * Get registration content item
+     * Get registration content item.
      *
      * @return Content
      */

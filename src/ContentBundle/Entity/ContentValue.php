@@ -6,24 +6,22 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\EavBundle\Entity\Value;
 
 /**
- * ContentValue
+ * ContentValue.
  *
  * @ORM\Entity
  */
 class ContentValue extends Value
 {
-    
     /**
      * @var <Content>
      *
      * @ORM\ManyToOne(targetEntity="Opifer\ContentBundle\Model\ContentInterface")
      * @ORM\JoinColumn(name="content_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     *
      */
     protected $content;
-    
+
     /**
-     * Turn value into string for
+     * Turn value into string for.
      *
      * @return string
      */
@@ -31,9 +29,9 @@ class ContentValue extends Value
     {
         return (string) $this->getValue();
     }
-    
+
     /**
-     * Get the value
+     * Get the value.
      *
      * Overrides the parent getValue method
      *
@@ -43,9 +41,9 @@ class ContentValue extends Value
     {
         return $this->content;
     }
-    
+
     /**
-     * Set content
+     * Set content.
      *
      * @param Content $content
      */
@@ -57,7 +55,7 @@ class ContentValue extends Value
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return Content
      */

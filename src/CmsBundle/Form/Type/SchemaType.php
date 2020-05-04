@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 class SchemaType extends EavSchemaType
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -24,10 +24,10 @@ class SchemaType extends EavSchemaType
 
             $builder->add('postNotify', 'email', [
                 'label' => $this->translator->trans('schema.post_notify'),
-                'attr'  => [
+                'attr' => [
                     'placeholder' => $this->translator->trans('form.post_notify.placeholder'),
                     'help_text' => $this->translator->trans('form.post_notify.help_text'),
-                ]
+                ],
             ])
                 ->add($save->getName(), $save->getType()->getName(), $save->getOptions())
                 ->add($attributes->getName(), $attributes->getType()->getName(), $attributes->getOptions())

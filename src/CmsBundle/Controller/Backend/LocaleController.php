@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class LocaleController extends Controller
 {
@@ -37,9 +36,7 @@ class LocaleController extends Controller
     }
 
     /**
-     * Create a locale
-     *
-     * @param Request $request
+     * Create a locale.
      *
      * @return RedirectResponse|Response
      */
@@ -64,15 +61,15 @@ class LocaleController extends Controller
 
         return $this->render('@OpiferCms/Backend/Locale/create.html.twig', [
             'locale' => $locale,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
     /**
-     * Edit a Locale
+     * Edit a Locale.
      *
-     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function editAction(Request $request, $id = null)
@@ -101,7 +98,7 @@ class LocaleController extends Controller
 
         return $this->render('@OpiferCms/Backend/Locale/edit.html.twig', [
             'locale' => $locale,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }

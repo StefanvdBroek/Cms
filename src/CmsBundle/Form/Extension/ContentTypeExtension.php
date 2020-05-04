@@ -16,10 +16,10 @@ class ContentTypeExtension extends AbstractTypeExtension
     {
         $builder
             ->add('medias', MediaPickerType::class, [
-                'required'      => false,
-                'label'         => 'List image',
-                'attr'          => ['help_text' => 'help.content_medias'],
-                'multiple'      => true,
+                'required' => false,
+                'label' => 'List image',
+                'attr' => ['help_text' => 'help.content_medias'],
+                'multiple' => true,
             ])
         ;
     }

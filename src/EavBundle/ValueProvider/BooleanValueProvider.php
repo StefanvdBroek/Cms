@@ -7,12 +7,12 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Adds value functionality for boolean attributes to the list of available values
+ * Adds value functionality for boolean attributes to the list of available values.
  */
 class BooleanValueProvider extends AbstractValueProvider implements ValueProviderInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,7 +22,7 @@ class BooleanValueProvider extends AbstractValueProvider implements ValueProvide
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getEntity()
     {
@@ -30,7 +30,7 @@ class BooleanValueProvider extends AbstractValueProvider implements ValueProvide
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getLabel()
     {

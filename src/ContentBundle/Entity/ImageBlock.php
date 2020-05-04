@@ -4,11 +4,11 @@ namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
-use Opifer\Revisions\Mapping\Annotation as Revisions;
 use Opifer\MediaBundle\Model\MediaInterface;
+use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * ImageBlock
+ * ImageBlock.
  *
  * @ORM\Entity
  * @JMS\ExclusionPolicy("all")

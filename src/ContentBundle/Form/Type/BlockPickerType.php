@@ -21,8 +21,6 @@ class BlockPickerType extends AbstractType
 
     /**
      * Constructor.
-     *
-     * @param BlockManager $blockManager
      */
     public function __construct(BlockManager $blockManager)
     {

@@ -30,9 +30,6 @@ class AttachmentListener implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param FormSubmitEvent $event
-     */
     public function postFormSubmit(FormSubmitEvent $event)
     {
         $post = $event->getPost();

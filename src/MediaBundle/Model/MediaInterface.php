@@ -20,7 +20,7 @@ interface MediaInterface
     public function getContentType();
 
     /**
-     * Returns a unique cache identifier for this media object
+     * Returns a unique cache identifier for this media object.
      *
      * @return string
      */

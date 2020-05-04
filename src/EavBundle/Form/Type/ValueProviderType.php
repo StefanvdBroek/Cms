@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Value provider type
+ * Value provider type.
  *
  * Gives the option to choose one of the available values
  */
@@ -18,9 +18,7 @@ class ValueProviderType extends AbstractType
     protected $providerPool;
 
     /**
-     * Constructor
-     *
-     * @param Pool $providerPool
+     * Constructor.
      */
     public function __construct(Pool $providerPool)
     {

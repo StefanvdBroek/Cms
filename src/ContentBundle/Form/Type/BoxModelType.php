@@ -18,7 +18,7 @@ class BoxModelType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $prefix = ($options['type'] == self::TYPE_MARGIN) ? 'm' : 'p';
+        $prefix = (self::TYPE_MARGIN == $options['type']) ? 'm' : 'p';
 
         $builder
             ->add('side', ChoiceType::class, [

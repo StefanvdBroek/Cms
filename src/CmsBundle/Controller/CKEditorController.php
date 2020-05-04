@@ -11,8 +11,6 @@ class CKEditorController extends Controller
     /**
      * Content browser for CKEditor.
      *
-     * @param Request $request
-     *
      * @return Response
      */
     public function contentAction(Request $request)
@@ -27,8 +25,6 @@ class CKEditorController extends Controller
     /**
      * Image browser for CKEditor.
      *
-     * @param Request $request
-     *
      * @return Response
      */
     public function mediaAction(Request $request)
@@ -41,8 +37,8 @@ class CKEditorController extends Controller
                 'ckeditor' => [
                     'funcNum' => $request->get('CKEditorFuncNum'),
                     'type' => $request->get('type'),
-                ]
-            ]
+                ],
+            ],
         ]);
     }
 

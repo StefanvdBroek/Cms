@@ -28,7 +28,7 @@ interface ValueInterface
      * the value actually has data attached, so no empty values will get stored
      * in the database.
      *
-     * @return boolean
+     * @return bool
      */
     public function isEmpty();
 }

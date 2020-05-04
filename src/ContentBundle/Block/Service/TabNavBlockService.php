@@ -6,30 +6,23 @@ use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\Block;
 use Opifer\ContentBundle\Entity\TabNavBlock;
-use Opifer\ContentBundle\Entity\TabsBlock;
 use Opifer\ContentBundle\Form\Type\StylesType;
 use Opifer\ContentBundle\Form\Type\TabType;
 use Opifer\ContentBundle\Model\BlockInterface;
-
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Class TabNavBlock
- *
- * @package Opifer\ContentBundle\Block
+ * Class TabNavBlock.
  */
 class TabNavBlockService extends AbstractBlockService implements LayoutBlockServiceInterface, BlockServiceInterface, ToolsetMemberInterface
 {
-    /** @var integer */
+    /** @var int */
     protected $tabCount = 1;
 
     /**
@@ -41,50 +34,50 @@ class TabNavBlockService extends AbstractBlockService implements LayoutBlockServ
 
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            array($this, 'onPreSetData')
+            [$this, 'onPreSetData']
         );
 
         $builder->addEventListener(
             FormEvents::SUBMIT,
-            array($this, 'onSubmit')
+            [$this, 'onSubmit']
         );
 
         $builder->addEventListener(
             FormEvents::POST_SET_DATA,
-            array($this, 'onPostSetData')
+            [$this, 'onPostSetData']
         );
 
         $builder->get('properties')
             ->add('template', ChoiceType::class, [
-                    'label'       => 'label.template',
-                    'attr'        => ['help_text' => 'help.block_template','tag' => 'styles'],
-                    'choices'     => $this->config['templates'],
-                    'required'    => true,
+                    'label' => 'label.template',
+                    'attr' => ['help_text' => 'help.block_template', 'tag' => 'styles'],
+                    'choices' => $this->config['templates'],
+                    'required' => true,
                     'constraints' => [
                         new NotBlank(),
                     ],
                 ])
             ->add('tabs', CollectionType::class, [
-                'label'         => 'label.tabs',
-                'allow_add'     => true,
-                'allow_delete'  => true,
-                'entry_type'    => TabType::class,
-                'sub_widget_col'=> 8,
-                'button_col'    => 4,
-                'attr'          => [
-                    'class'         => 'sortable-tabnav',
-                    'tag'           => 'general',
-                    'help_text'     => 'help.tabs_add_tab'
+                'label' => 'label.tabs',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'entry_type' => TabType::class,
+                'sub_widget_col' => 8,
+                'button_col' => 4,
+                'attr' => [
+                    'class' => 'sortable-tabnav',
+                    'tag' => 'general',
+                    'help_text' => 'help.tabs_add_tab',
                 ],
-                'entry_options'       => ['attr' => ['style' => 'inline']],
+                'entry_options' => ['attr' => ['style' => 'inline']],
             ])
-            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'],'required' => false])
-            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'],'required' => false]);
+            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'], 'required' => false])
+            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'], 'required' => false]);
 
         if ($this->config['styles']) {
             $builder->get('properties')
                 ->add('styles', StylesType::class, [
-                    'choices'  => $this->config['styles'],
+                    'choices' => $this->config['styles'],
                 ]);
         }
     }
@@ -120,7 +113,7 @@ class TabNavBlockService extends AbstractBlockService implements LayoutBlockServ
 
         if (isset($properties['tabs']) && count($properties['tabs'])) {
             if (isset($properties['tabs'][0]) && !is_array($properties['tabs'][0])) {
-                $converted = array();
+                $converted = [];
                 $sort = count($properties['tabs']);
                 foreach ($properties['tabs'] as $key => $value) {
                     $converted[] = ['label' => $value, 'key' => $key, 'sort' => $sort--];
@@ -128,7 +121,6 @@ class TabNavBlockService extends AbstractBlockService implements LayoutBlockServ
 
                 $properties['tabs'] = $converted;
             }
-
 
             $maxKey = 0;
             $maxSort = 0;
@@ -141,13 +133,13 @@ class TabNavBlockService extends AbstractBlockService implements LayoutBlockServ
                 }
             });
 
-            $maxKey++;
-            $maxSort++;
+            ++$maxKey;
+            ++$maxSort;
             foreach ($properties['tabs'] as &$tab) {
-                if (!isset($tab['key']) || $tab['key'] === null || $tab['key'] === "") {
+                if (!isset($tab['key']) || null === $tab['key'] || '' === $tab['key']) {
                     $tab['key'] = $maxKey++;
                 }
-                if (!isset($tab['sort']) || $tab['sort'] === null || $tab['sort'] === "") {
+                if (!isset($tab['sort']) || null === $tab['sort'] || '' === $tab['sort']) {
                     $tab['sort'] = $maxSort++;
                 }
             }
@@ -170,7 +162,7 @@ class TabNavBlockService extends AbstractBlockService implements LayoutBlockServ
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getManageFormTypeName()
     {
@@ -178,7 +170,7 @@ class TabNavBlockService extends AbstractBlockService implements LayoutBlockServ
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
@@ -186,7 +178,7 @@ class TabNavBlockService extends AbstractBlockService implements LayoutBlockServ
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -200,21 +192,22 @@ class TabNavBlockService extends AbstractBlockService implements LayoutBlockServ
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName(BlockInterface $block = null)
     {
         return 'Tabs';
     }
+
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPlaceholders(BlockInterface $block = null)
     {
         $this->normalizeTabs($block);
         $tabs = $block->getTabs();
 
-        $placeholders = array();
+        $placeholders = [];
 
         if ($tabs && count($tabs)) {
             foreach ($tabs as $tab) {
@@ -227,6 +220,7 @@ class TabNavBlockService extends AbstractBlockService implements LayoutBlockServ
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

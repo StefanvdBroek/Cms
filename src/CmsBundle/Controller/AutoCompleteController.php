@@ -30,7 +30,7 @@ class AutoCompleteController extends Controller
 
         $results = $qb->getQuery()->getArrayResult();
 
-        $ids = array();
+        $ids = [];
         foreach ($results as $result) {
             $ids[] = $result['property'];
         }

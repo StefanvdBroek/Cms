@@ -16,9 +16,8 @@ class EavManager
     protected $valueSetClass;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param Pool   $providerPool
      * @param string $valueSetClass
      */
     public function __construct(Pool $providerPool, $valueSetClass)
@@ -29,8 +28,6 @@ class EavManager
 
     /**
      * Initializes an entity from a schema to work properly with this bundle.
-     *
-     * @param SchemaInterface $schema
      *
      * @throws \Exception If the entity is not an instance of EntityInterface
      *
@@ -60,8 +57,6 @@ class EavManager
 
     /**
      * Creates empty entities for non-persisted attributes.
-     *
-     * @param ValueSetInterface $valueSet
      *
      * @return array
      */

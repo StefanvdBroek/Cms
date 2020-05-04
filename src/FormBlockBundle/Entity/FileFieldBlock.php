@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\ContentBundle\Entity\Block;
 
 /**
- * File Field Block
+ * File Field Block.
  *
  * @ORM\Entity
  */

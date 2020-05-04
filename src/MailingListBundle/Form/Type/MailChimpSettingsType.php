@@ -4,17 +4,15 @@ namespace Opifer\MailingListBundle\Form\Type;
 
 use Opifer\CmsBundle\Form\Type\ConfigurationFormTypeInterface;
 use Opifer\MailingListBundle\Provider\MailChimpProvider;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Settings Type
+ * Settings Type.
  */
 class MailChimpSettingsType extends AbstractType implements ConfigurationFormTypeInterface
 {
-
     /**
      * {@inheritdoc}
      */
@@ -33,7 +31,7 @@ class MailChimpSettingsType extends AbstractType implements ConfigurationFormTyp
     public static function getFields()
     {
         return [
-            MailChimpProvider::API_KEY_SETTING
+            MailChimpProvider::API_KEY_SETTING,
         ];
     }
 

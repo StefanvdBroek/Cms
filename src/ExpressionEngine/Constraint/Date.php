@@ -35,11 +35,11 @@ class Date extends Literal implements ConstraintInterface
             throw new \Exception('The value passed to the Date constraint should be an instance of \DateTime');
         }
 
-        return (strtolower($value->format($this->getDateFormat())) == strtolower($this->date));
+        return strtolower($value->format($this->getDateFormat())) == strtolower($this->date);
     }
 
     /**
-     * Get the date format
+     * Get the date format.
      *
      * @return string
      */
@@ -56,6 +56,7 @@ class Date extends Literal implements ConstraintInterface
         // Since this class is final, we can check with instanceof
         return $other instanceof $this;
     }
+
     /**
      * {@inheritdoc}
      */

@@ -3,13 +3,12 @@
 namespace Opifer\ContentBundle\Block\Service;
 
 use Opifer\ContentBundle\Block\BlockRenderer;
-use Opifer\ContentBundle\Entity\BreadcrumbsBlock;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
+use Opifer\ContentBundle\Entity\BreadcrumbsBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Opifer\ContentBundle\Model\Content;
 use Opifer\ContentBundle\Model\ContentManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 /**
  * Breadcrumbs Block Service.
@@ -19,11 +18,6 @@ class BreadcrumbsBlockService extends AbstractBlockService implements BlockServi
     /** @var ContentManagerInterface */
     protected $contentManager;
 
-    /**
-     * @param BlockRenderer $blockRenderer
-     * @param ContentManagerInterface $contentManager
-     * @param array                   $config
-     */
     public function __construct(BlockRenderer $blockRenderer, ContentManagerInterface $contentManager, array $config)
     {
         parent::__construct($blockRenderer, $config);
@@ -31,8 +25,6 @@ class BreadcrumbsBlockService extends AbstractBlockService implements BlockServi
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     public function getViewParameters(BlockInterface $block)
@@ -88,6 +80,7 @@ class BreadcrumbsBlockService extends AbstractBlockService implements BlockServi
 
     /**
      * @param BlockInterface $block
+     *
      * @return mixed
      */
     public function getDescription(BlockInterface $block = null)

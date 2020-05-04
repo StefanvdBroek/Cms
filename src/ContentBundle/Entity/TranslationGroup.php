@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as JMS;
 use Opifer\CmsBundle\Entity\Content;
 
 /**
- * TranslationGroup
+ * TranslationGroup.
  *
  * @JMS\ExclusionPolicy("all")
  *
@@ -41,6 +41,7 @@ class TranslationGroup
 
     /**
      * @param $contents
+     *
      * @return $this
      */
     public function setContents($contents)
@@ -60,6 +61,7 @@ class TranslationGroup
 
     /**
      * @param $locale
+     *
      * @return string
      */
     public function getSlug($locale)
@@ -73,11 +75,11 @@ class TranslationGroup
             }
         }
 
-        if ($localeContent !== null) {
-            return '/' . $localeContent->getSlug();
+        if (null !== $localeContent) {
+            return '/'.$localeContent->getSlug();
         }
 
-        return '/' . $locale;
+        return '/'.$locale;
     }
 
     public function getRouteMapping()
@@ -86,7 +88,7 @@ class TranslationGroup
         foreach ($this->getContents() as $content) {
             if ($content->getLocale() && $locale = $content->getLocale()->getLocale()) {
                 $slug = $content->getSlug();
-                if ($slug === 'index') {
+                if ('index' === $slug) {
                     $slug = '';
                 }
 

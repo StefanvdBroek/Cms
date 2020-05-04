@@ -3,10 +3,9 @@
 namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * HtmlBlock
+ * HtmlBlock.
  *
  * @ORM\Entity
  */

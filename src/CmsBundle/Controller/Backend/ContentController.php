@@ -3,21 +3,21 @@
 namespace Opifer\CmsBundle\Controller\Backend;
 
 use APY\DataGridBundle\Grid\Action\RowAction;
-use Opifer\CmsBundle\Grid\Entity;
 use Opifer\CmsBundle\Grid\AttributeColumn;
+use Opifer\CmsBundle\Grid\Entity;
 use Opifer\ContentBundle\Controller\Backend\ContentController as BaseContentController;
 use Opifer\ContentBundle\Designer\AbstractDesignSuite;
 use Opifer\ContentBundle\Environment\Environment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ContentController extends BaseContentController
 {
     /**
-     * Index view of content by type
+     * Index view of content by type.
      *
      * @param int $type
+     *
      * @return Response
      */
     public function typeAction($type)
@@ -40,8 +40,8 @@ class ContentController extends BaseContentController
         $source->initQueryBuilder($queryBuilder);
         $tableAlias = $source->getTableAlias();
         $source->manipulateQuery(function ($query) use ($tableAlias, $contentType) {
-            $query->andWhere($tableAlias . '.contentType = :contentType')->setParameter('contentType', $contentType);
-            $query->andWhere($tableAlias . '.layout = :layout')->setParameter('layout', false);
+            $query->andWhere($tableAlias.'.contentType = :contentType')->setParameter('contentType', $contentType);
+            $query->andWhere($tableAlias.'.layout = :layout')->setParameter('layout', false);
         });
 
         $designAction = new RowAction('button.design', 'opifer_content_contenteditor_design');
@@ -60,7 +60,7 @@ class ContentController extends BaseContentController
             ->setSource($source)
             ->addRowAction($detailsAction)
             ->addRowAction($designAction);
-            //->addRowAction($deleteAction)
+        //->addRowAction($deleteAction)
 
         foreach ($contentType->getSchema()->getAttributes() as $attribute) {
             $name = $attribute->getName();
@@ -70,7 +70,7 @@ class ContentController extends BaseContentController
                 'title' => $attribute->getDisplayName(),
                 'visible' => false,
                 'attribute' => $name,
-                'source' => true
+                'source' => true,
             ]);
             $column->manipulateRenderCell(
                 function ($value, $row, $router) use ($name) {
@@ -89,9 +89,8 @@ class ContentController extends BaseContentController
     }
 
     /**
-     * @param Request $request
-     * @param int     $owner
-     * @param int     $id
+     * @param int $owner
+     * @param int $id
      *
      * @return Response
      */

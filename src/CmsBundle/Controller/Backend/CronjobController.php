@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class CronjobController extends Controller
 {
@@ -45,15 +44,15 @@ class CronjobController extends Controller
                 case Cron::STATE_RUNNING:
                     $label = 'info';
                     break;
-                case Cron::STATE_FINISHED :
+                case Cron::STATE_FINISHED:
                     $label = 'success';
                     break;
-                case Cron::STATE_TERMINATED :
-                case Cron::STATE_CANCELED :
-                case Cron::STATE_FAILED :
+                case Cron::STATE_TERMINATED:
+                case Cron::STATE_CANCELED:
+                case Cron::STATE_FAILED:
                     $label = 'danger';
                     break;
-                default :
+                default:
                     $label = 'default';
                     break;
             }
@@ -67,8 +66,6 @@ class CronjobController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -94,8 +91,7 @@ class CronjobController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return RedirectResponse|Response
      */

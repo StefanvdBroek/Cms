@@ -2,11 +2,11 @@
 
 namespace Opifer\FormBlockBundle\Block\Service;
 
-use Opifer\FormBlockBundle\Entity\FileFieldBlock;
 use Opifer\ContentBundle\Block\Service\BlockServiceInterface;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Model\BlockInterface;
+use Opifer\FormBlockBundle\Entity\FileFieldBlock;
 
 /**
  * File Field Block Service.

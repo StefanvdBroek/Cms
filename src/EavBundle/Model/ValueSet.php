@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 
 /**
- * ValueSet
+ * ValueSet.
  *
  * @ORM\MappedSuperclass
  * @JMS\ExclusionPolicy("all")
@@ -15,7 +15,7 @@ use JMS\Serializer\Annotation as JMS;
 class ValueSet implements ValueSetInterface
 {
     /**
-     * @var integer
+     * @var int
      *
      * @JMS\Expose
      * @ORM\Id
@@ -53,7 +53,7 @@ class ValueSet implements ValueSetInterface
     protected $values;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -61,9 +61,9 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -83,7 +83,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Get schema
+     * Get schema.
      *
      * @return SchemaInterface
      */
@@ -93,7 +93,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Add values
+     * Add values.
      *
      * @param ValueInterface $values
      *
@@ -107,7 +107,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Remove values
+     * Remove values.
      *
      * @param ValueInterface $values
      */
@@ -117,7 +117,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Get values
+     * Get values.
      *
      * @return ArrayCollection
      */
@@ -127,13 +127,13 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Normalize values
+     * Normalize values.
      *
      * @return ValueSet
      */
     public function normalizeValues()
     {
-        $persistedAttributes = array();
+        $persistedAttributes = [];
         foreach ($this->values as $value) {
             $persistedAttributes[] = $value->getAttribute();
         }
@@ -151,7 +151,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Get Sorted Values
+     * Get Sorted Values.
      *
      * This method wraps all values in an array, sorted by the attribute's sort
      * property.
@@ -159,8 +159,8 @@ class ValueSet implements ValueSetInterface
      * We use this to render a whole set of form types, which should be displayed
      * in some order. When you want to be able to get a form field by it's name
      * and place it on a custom place, use the getNamedValues() method.
-     * 
-     * @param  string $order
+     *
+     * @param string $order
      *
      * @return array
      */
@@ -171,7 +171,7 @@ class ValueSet implements ValueSetInterface
             $left = $a->getAttribute()->getSort();
             $right = $b->getAttribute()->getSort();
 
-            if ($order == 'desc') {
+            if ('desc' == $order) {
                 return ($left < $right) ? 1 : -1;
             }
 
@@ -182,7 +182,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Get Named Values
+     * Get Named Values.
      *
      * When the automatic sort of form ValueSet form fields does not matter,
      * you can use this method to get a associative array where the keys hold
@@ -207,7 +207,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Checks if a certain value exists on the valueset
+     * Checks if a certain value exists on the valueset.
      *
      * Created for cleaner syntax in Twig:
      *
@@ -217,7 +217,7 @@ class ValueSet implements ValueSetInterface
      *
      * @param string|array $value
      *
-     * @return boolean
+     * @return bool
      */
     public function has($value)
     {
@@ -267,7 +267,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Get a value by it's attribute ID
+     * Get a value by it's attribute ID.
      *
      * @param int $attributeId
      *
@@ -285,7 +285,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Get value for a given attribute name
+     * Get value for a given attribute name.
      *
      * @param string $name
      *
@@ -298,7 +298,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Get attributes
+     * Get attributes.
      *
      * @return ArrayCollection
      */
@@ -312,7 +312,7 @@ class ValueSet implements ValueSetInterface
     }
 
     /**
-     * Magic getter to retrieve attribute values
+     * Magic getter to retrieve attribute values.
      *
      * @param string $name
      *
@@ -330,7 +330,7 @@ class ValueSet implements ValueSetInterface
      *
      * @param string $name
      *
-     * @return boolean
+     * @return bool
      */
     public function __isset($name)
     {

@@ -26,7 +26,7 @@ final class OpiferMediaEvents
 
     /**
      * Edit event.
-     * 
+     *
      * Called right after retrieving the to-be-edited media item
      * Receives the Opifer\MediaBundle\Event\MediaResponseEvent
      *
@@ -46,7 +46,7 @@ final class OpiferMediaEvents
 
     /**
      * Delete event.
-     * 
+     *
      * Called right after retrieving the to-be-deleted media item
      * Receives the Opifer\MediaBundle\Event\MediaResponseEvent
      *

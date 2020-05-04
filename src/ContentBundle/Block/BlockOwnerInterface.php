@@ -14,8 +14,5 @@ interface BlockOwnerInterface
      */
     public function getUpdatedAt();
 
-    /**
-     * @param \DateTime $dateTime
-     */
     public function setUpdatedAt(\DateTime $dateTime);
 }

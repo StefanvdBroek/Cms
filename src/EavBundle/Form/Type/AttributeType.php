@@ -31,7 +31,6 @@ class AttributeType extends AbstractType
     /**
      * Constructor.
      *
-     * @param Pool   $providerPool
      * @param string $attributeClass
      * @param string $schemaClass
      */

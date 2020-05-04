@@ -41,7 +41,7 @@ class FileProviderTest extends TestCase
             'label' => '',
         ]);
 
-        $this->provider->buildCreateForm($builder, array());
+        $this->provider->buildCreateForm($builder, []);
     }
 
     public function testPrePersistWithEmptyFile()
@@ -55,15 +55,15 @@ class FileProviderTest extends TestCase
     public function testPrePersistSetsReference()
     {
         $file = m::mock(UploadedFile::class);
-        $file->shouldReceive(array(
+        $file->shouldReceive([
             'guessExtension' => 'jpg',
             'getClientMimeType' => 'image/jpeg',
             'getSize' => 2954043,
             'getClientOriginalExtension' => 'jpg',
             'getClientOriginalName' => 'testimage.png',
-        ));
+        ]);
 
-        $this->media->shouldReceive(array(
+        $this->media->shouldReceive([
             'getFile' => $file,
             'setReference' => $this->media,
             'setContentType' => $this->media,
@@ -71,7 +71,7 @@ class FileProviderTest extends TestCase
             'setMetadata' => $this->media,
             'getStatus' => 1,
             'getName' => 'Testname',
-        ));
+        ]);
 
         $this->filesystem->shouldReceive([
             'listKeys' => ['keys' => [

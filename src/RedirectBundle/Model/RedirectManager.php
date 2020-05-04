@@ -13,9 +13,8 @@ class RedirectManager implements RedirectManagerInterface
     protected $class;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param ObjectManager $om
      * @param string $class
      *
      * @throws \Exception
@@ -23,7 +22,7 @@ class RedirectManager implements RedirectManagerInterface
     public function __construct(ObjectManager $om, $class)
     {
         if (!is_subclass_of($class, 'Opifer\RedirectBundle\Model\Redirect')) {
-            throw new \Exception($class .' must implement Opifer\RedirectBundle\Model\Redirect');
+            throw new \Exception($class.' must implement Opifer\RedirectBundle\Model\Redirect');
         }
 
         $this->class = $class;
@@ -31,7 +30,7 @@ class RedirectManager implements RedirectManagerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getClass()
     {
@@ -39,7 +38,7 @@ class RedirectManager implements RedirectManagerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRepository()
     {
@@ -47,18 +46,18 @@ class RedirectManager implements RedirectManagerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createNew()
     {
-        $class    = $this->getClass();
+        $class = $this->getClass();
         $redirect = new $class();
 
         return $redirect;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function save(Redirect $redirect)
     {
@@ -71,7 +70,7 @@ class RedirectManager implements RedirectManagerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function remove(Redirect $redirect)
     {

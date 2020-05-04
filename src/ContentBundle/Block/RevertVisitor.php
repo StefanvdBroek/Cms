@@ -6,16 +6,14 @@ use Opifer\ContentBundle\Model\BlockInterface;
 
 class RevertVisitor implements VisitorInterface
 {
-    /** @var integer */
+    /** @var int */
     protected $rootVersion;
 
     /** @var BlockManager */
     protected $blockManager;
 
-
     /**
-     * @param BlockManager $blockManager
-     * @param integer      $rootVersion
+     * @param int $rootVersion
      */
     public function __construct(BlockManager $blockManager, $rootVersion)
     {
@@ -23,9 +21,6 @@ class RevertVisitor implements VisitorInterface
         $this->rootVersion = $rootVersion;
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function visit(BlockInterface $block)
     {
         $this->blockManager->revertSingle($block, $this->rootVersion);

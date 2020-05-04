@@ -31,12 +31,12 @@ class ContentSerializerTest extends TestCase
         $columnBlock->setColumnCount(2);
         $columnBlock->setParent($sectionBlock);
 
-        $sectionBlock->setChildren(New ArrayCollection([$columnBlock]));
+        $sectionBlock->setChildren(new ArrayCollection([$columnBlock]));
 
         $content = new Content();
 
         $blocks = [
-            $sectionBlock
+            $sectionBlock,
         ];
 
         $context = SerializationContext::create()->addExclusionStrategy(new BlockExclusionStrategy($content));
@@ -68,11 +68,11 @@ class ContentSerializerTest extends TestCase
                             'sort' => 0,
                             'properties' => [],
                             'active' => true,
-                            'children' => []
-                        ]
-                    ]
-                ]
-            ]
+                            'children' => [],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $this->assertEquals($expected, json_decode($actual, true));

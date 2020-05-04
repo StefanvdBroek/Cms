@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Display logic type
+ * Display logic type.
  *
  * Renders an expression editor to define display logic for blocks
  */
@@ -50,15 +50,13 @@ class DisplayLogicType extends ExpressionEngineType
             'label' => 'label.display_logic',
             'prototypes' => [],
             'attr' => [
-                'help_text' => 'help.display_logic'
-            ]
+                'help_text' => 'help.display_logic',
+            ],
         ]);
     }
 
     /**
-     * Builds the default display condition prototypes
-     *
-     * @param BlockInterface $block
+     * Builds the default display condition prototypes.
      *
      * @return \Opifer\ExpressionEngine\Prototype\Prototype[]
      */
@@ -68,7 +66,7 @@ class DisplayLogicType extends ExpressionEngineType
             new OrXPrototype(),
             new AndXPrototype(),
             new EventPrototype('click_event', 'Click Event', 'event.type.click'),
-            new TextPrototype('dom_node_id', 'DOM Node Id', 'node.id')
+            new TextPrototype('dom_node_id', 'DOM Node Id', 'node.id'),
         ]);
 
         $owner = $block->getOwner();

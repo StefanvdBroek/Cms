@@ -8,7 +8,7 @@ use Opifer\ContentBundle\Model\ContentInterface;
 use Opifer\EavBundle\Entity\Value;
 
 /**
- * Multiple Content Value
+ * Multiple Content Value.
  *
  * @ORM\Entity
  */
@@ -26,7 +26,7 @@ class ContentListValue extends Value implements \IteratorAggregate, \Countable
     private $content;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -36,7 +36,7 @@ class ContentListValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Get the value
+     * Get the value.
      *
      * Overrides the parent getValue method
      *
@@ -58,9 +58,8 @@ class ContentListValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Add content
+     * Add content.
      *
-     * @param  ContentInterface $content
      * @return Value
      */
     public function addContent(ContentInterface $content)
@@ -71,9 +70,7 @@ class ContentListValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Remove content
-     *
-     * @param ContentInterface $content
+     * Remove content.
      */
     public function removeContent(ContentInterface $content)
     {
@@ -81,9 +78,7 @@ class ContentListValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Set Contents
-     *
-     * @param ArrayCollection $content
+     * Set Contents.
      */
     public function setContent(ArrayCollection $content)
     {
@@ -93,7 +88,7 @@ class ContentListValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return ArrayCollection
      */
@@ -103,7 +98,7 @@ class ContentListValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isEmpty()
     {
@@ -111,7 +106,7 @@ class ContentListValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Count the amount of mapped content items
+     * Count the amount of mapped content items.
      *
      * @return int
      */
@@ -121,7 +116,7 @@ class ContentListValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Get an array of content ids
+     * Get an array of content ids.
      *
      * @return array
      */
@@ -137,7 +132,7 @@ class ContentListValue extends Value implements \IteratorAggregate, \Countable
     }
 
     /**
-     * Get content items ordered by the sort property
+     * Get content items ordered by the sort property.
      *
      * @return array
      */

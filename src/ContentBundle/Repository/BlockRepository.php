@@ -7,9 +7,7 @@ use Opifer\ContentBundle\Entity\Template;
 use Opifer\ContentBundle\Model\ContentInterface;
 
 /**
- * Class BlockRepository
- *
- * @package Opifer\ContentBundle\Model
+ * Class BlockRepository.
  */
 class BlockRepository extends EntityRepository
 {
@@ -23,7 +21,6 @@ class BlockRepository extends EntityRepository
             ->setResultCacheLifetime(86400)
             ->getOneOrNullResult();
     }
-
 
     public function findByOwner(ContentInterface $content)
     {

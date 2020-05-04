@@ -53,7 +53,7 @@ class ContentRouterTest extends TestCase
         $result = $contentRouter->match('/about');
     }
 
-    public function tearDown():void
+    public function tearDown(): void
     {
         m::close();
     }

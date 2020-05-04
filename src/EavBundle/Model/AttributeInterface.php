@@ -5,28 +5,28 @@ namespace Opifer\EavBundle\Model;
 interface AttributeInterface
 {
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
     public function getName();
 
     /**
-     * Get the display name
+     * Get the display name.
      *
      * @return string
      */
     public function getDisplayName();
 
     /**
-     * Get valueType
+     * Get valueType.
      *
      * @return string
      */
     public function getValueType();
 
     /**
-     * Get parameters
+     * Get parameters.
      *
      * @return array
      */

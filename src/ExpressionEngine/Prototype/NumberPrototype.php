@@ -3,11 +3,11 @@
 namespace Opifer\ExpressionEngine\Prototype;
 
 use Webmozart\Expression\Constraint\Equals;
-use Webmozart\Expression\Constraint\NotEquals;
 use Webmozart\Expression\Constraint\GreaterThan;
 use Webmozart\Expression\Constraint\GreaterThanEqual;
 use Webmozart\Expression\Constraint\LessThan;
 use Webmozart\Expression\Constraint\LessThanEqual;
+use Webmozart\Expression\Constraint\NotEquals;
 
 class NumberPrototype extends Prototype
 {

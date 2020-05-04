@@ -2,20 +2,19 @@
 
 namespace Opifer\ContentBundle\Block\Service;
 
-use Opifer\ContentBundle\Entity\VideoBlock;
+use Opifer\CmsBundle\Form\Type\CKEditorType;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
+use Opifer\ContentBundle\Entity\VideoBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Opifer\MediaBundle\Form\Type\MediaPickerType;
-use Opifer\CmsBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Video Block Service
+ * Video Block Service.
  */
 class VideoBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -36,28 +35,28 @@ class VideoBlockService extends AbstractBlockService implements BlockServiceInte
                 'required' => false,
             ])
             ->add('media', MediaPickerType::class, [
-                'required'  => false,
+                'required' => false,
                 'multiple' => false,
-                'attr' => array('label_col' => 12, 'widget_col' => 12),
+                'attr' => ['label_col' => 12, 'widget_col' => 12],
             ])
         ;
 
         $builder->get('properties')
             ->add('width', TextType::class, [
                 'label' => 'label.width',
-                'required' => false
+                'required' => false,
             ])
             ->add('height', TextType::class, [
                 'label' => 'label.height',
-                'required' => false
+                'required' => false,
             ])
             ->add('autoplay', ChoiceType::class, [
                 'choices' => [
-                    false =>'No',
+                    false => 'No',
                     true => 'Yes',
                 ],
                 'attr' => [
-                    'help_text' => 'help.autoplay'
+                    'help_text' => 'help.autoplay',
                 ],
                 'required' => true,
                 'constraints' => [
@@ -66,11 +65,11 @@ class VideoBlockService extends AbstractBlockService implements BlockServiceInte
             ])
             ->add('loop', ChoiceType::class, [
                 'choices' => [
-                    false =>'No',
+                    false => 'No',
                     true => 'Yes',
                 ],
                 'attr' => [
-                    'help_text' => 'help.loop'
+                    'help_text' => 'help.loop',
                 ],
                 'required' => true,
                 'constraints' => [
@@ -81,15 +80,15 @@ class VideoBlockService extends AbstractBlockService implements BlockServiceInte
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
-        return new VideoBlock;
+        return new VideoBlock();
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -103,6 +102,7 @@ class VideoBlockService extends AbstractBlockService implements BlockServiceInte
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

@@ -12,7 +12,6 @@ use Opifer\ContentBundle\Model\ContentManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Nav Link Block Service.
@@ -27,11 +26,6 @@ class NavLinkBlockService extends AbstractBlockService implements BlockServiceIn
 
     /**
      * Constructor.
-     *
-     * @param BlockRenderer $blockRenderer
-     * @param RouterInterface $router
-     * @param ContentManagerInterface $contentManager
-     * @param array $config
      */
     public function __construct(BlockRenderer $blockRenderer, RouterInterface $router, ContentManagerInterface $contentManager, array $config)
     {
@@ -52,9 +46,9 @@ class NavLinkBlockService extends AbstractBlockService implements BlockServiceIn
             ->add('value', NavLinkType::class, [
                 'label' => 'Link',
                 'attr' => [
-                    'help_text' => 'Either select a content item or define your own custom URL'
+                    'help_text' => 'Either select a content item or define your own custom URL',
                 ],
-                'required' => false
+                'required' => false,
             ])
         ;
 
@@ -82,7 +76,7 @@ class NavLinkBlockService extends AbstractBlockService implements BlockServiceIn
         $parameters['is_sub_nav'] = ($block->getParent() instanceof NavLinkBlock) ? true : false;
 
         //check if display name is set else use the short title of the content item
-        if (!$block->getDisplayName()){
+        if (!$block->getDisplayName()) {
             $this->setDisplayNameByShortTitle($block);
         }
 
@@ -90,13 +84,11 @@ class NavLinkBlockService extends AbstractBlockService implements BlockServiceIn
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return string
      */
     protected function getUrl(BlockInterface $block)
     {
-        if (substr($block->getValue(), 0, 4) == 'http') {
+        if ('http' == substr($block->getValue(), 0, 4)) {
             return $block->getValue();
         }
 
@@ -104,7 +96,6 @@ class NavLinkBlockService extends AbstractBlockService implements BlockServiceIn
     }
 
     /**
-     * @param BlockInterface $block
      * @return mixed
      */
     protected function setDisplayNameByShortTitle(BlockInterface $block)
@@ -116,8 +107,6 @@ class NavLinkBlockService extends AbstractBlockService implements BlockServiceIn
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return string
      */
     protected function generateUrl(BlockInterface $block)
@@ -149,6 +138,7 @@ class NavLinkBlockService extends AbstractBlockService implements BlockServiceIn
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

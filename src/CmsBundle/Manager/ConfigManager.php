@@ -24,8 +24,7 @@ class ConfigManager
     protected $configs;
 
     /**
-     * @param EntityManager $em
-     * @param string        $class
+     * @param string $class
      */
     public function __construct(EntityManager $em, $class)
     {

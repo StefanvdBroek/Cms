@@ -12,7 +12,7 @@ class BoxModelDataTransformer implements DataTransformerInterface
     protected $prefix;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $prefix defines the difference between padding and margin
      */
@@ -22,9 +22,10 @@ class BoxModelDataTransformer implements DataTransformerInterface
     }
 
     /**
-     * Splits the string into the side- and size values
+     * Splits the string into the side- and size values.
      *
      * @param string|null $original
+     *
      * @return array|mixed
      */
     public function transform($original)
@@ -43,9 +44,10 @@ class BoxModelDataTransformer implements DataTransformerInterface
     }
 
     /**
-     * Combines the side- and size values into a class name
+     * Combines the side- and size values into a class name.
      *
      * @param array $submitted
+     *
      * @return string
      */
     public function reverseTransform($submitted)

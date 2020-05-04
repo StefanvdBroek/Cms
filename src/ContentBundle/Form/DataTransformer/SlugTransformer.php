@@ -2,16 +2,15 @@
 
 namespace Opifer\ContentBundle\Form\DataTransformer;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class SlugTransformer implements DataTransformerInterface
 {
     /**
      * Removes the directory path from the slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return string
      */
     public function transform($slug)
@@ -22,7 +21,7 @@ class SlugTransformer implements DataTransformerInterface
 
         // If the slug ends with a slash, return just a slash
         // so the item is used as the index page of that directory
-        if (substr($slug, -1) == '/') {
+        if ('/' == substr($slug, -1)) {
             return '/';
         }
 
@@ -36,7 +35,7 @@ class SlugTransformer implements DataTransformerInterface
      * Just return the slug. The directory path will be added by
      * the doctrine sluggable listener.
      *
-     * @param  string $slug
+     * @param string $slug
      *
      * @return string|null
      */

@@ -11,9 +11,7 @@ class TemplateBlockProvider implements BlockProviderInterface
     protected $em;
 
     /**
-     * Constructor
-     *
-     * @param EntityManagerInterface $em
+     * Constructor.
      */
     public function __construct(EntityManagerInterface $em)
     {
@@ -21,7 +19,7 @@ class TemplateBlockProvider implements BlockProviderInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getBlockOwner($id)
     {

@@ -19,9 +19,7 @@ class MailingListsType extends AbstractType
     protected $mailingListManager;
 
     /**
-     * Constructor
-     *
-     * @param MailingListManager $mailingListManager
+     * Constructor.
      */
     public function __construct(MailingListManager $mailingListManager)
     {
@@ -37,7 +35,7 @@ class MailingListsType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -54,7 +52,7 @@ class MailingListsType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getParent()
     {

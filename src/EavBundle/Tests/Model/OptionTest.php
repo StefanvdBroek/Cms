@@ -2,7 +2,6 @@
 
 namespace Opifer\EavBundle\Tests\Model;
 
-use Mockery as m;
 use Opifer\EavBundle\Model\Attribute;
 use Opifer\EavBundle\Model\Option;
 use PHPUnit\Framework\TestCase;

@@ -16,9 +16,6 @@ class BlockEventSubscriber implements EventSubscriberInterface
 
     /**
      * BlockEventSubscriber constructor.
-     *
-     * @param BlockManager $blockManager
-     * @param Environment  $environment
      */
     public function __construct(BlockManager $blockManager, Environment $environment)
     {
@@ -36,9 +33,6 @@ class BlockEventSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param PreSerializeEvent $event
-     */
     public function preSerialize(PreSerializeEvent $event)
     {
         $block = $event->getObject();
@@ -57,9 +51,7 @@ class BlockEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Maps the block children from the environment to the block
-     *
-     * @param Block $block
+     * Maps the block children from the environment to the block.
      */
     protected function setChildren(Block $block)
     {

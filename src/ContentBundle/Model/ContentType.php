@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Opifer\EavBundle\Model\SchemaInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\MappedSuperclass()
@@ -111,9 +110,6 @@ class ContentType implements ContentTypeInterface
         return $this->schema;
     }
 
-    /**
-     * @param SchemaInterface $schema
-     */
     public function setSchema(SchemaInterface $schema)
     {
         $this->schema = $schema;
@@ -130,8 +126,6 @@ class ContentType implements ContentTypeInterface
     }
 
     /**
-     * @param ContentInterface $content
-     *
      * @return $this
      */
     public function addPost(ContentInterface $content)
@@ -142,8 +136,6 @@ class ContentType implements ContentTypeInterface
     }
 
     /**
-     * @param ContentInterface $content
-     *
      * @return $this
      */
     public function removePost(ContentInterface $content)

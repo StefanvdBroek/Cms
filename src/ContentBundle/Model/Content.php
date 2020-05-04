@@ -10,8 +10,8 @@ use Opifer\CmsBundle\Entity\Site;
 use Opifer\ContentBundle\Block\BlockOwnerInterface;
 use Opifer\ContentBundle\Entity\Template;
 use Opifer\ContentBundle\Entity\TranslationGroup;
-use Opifer\EavBundle\Entity\Value;
 use Opifer\EavBundle\Entity\MediaValue;
+use Opifer\EavBundle\Entity\Value;
 use Opifer\EavBundle\Model\EntityInterface;
 use Opifer\EavBundle\Model\MediaInterface;
 use Opifer\EavBundle\Model\SchemaInterface;
@@ -427,7 +427,7 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
     {
         $slug = $this->slug;
 
-        if (substr($slug, -6) == '/index') {
+        if ('/index' == substr($slug, -6)) {
             $slug = rtrim($slug, 'index');
         }
 
@@ -515,8 +515,6 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
     }
 
     /**
-     * @param ContentTypeInterface $contentType
-     *
      * @return Content
      */
     public function setContentType(ContentTypeInterface $contentType)
@@ -527,7 +525,7 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
     }
 
     /**
-     * Set indexable
+     * Set indexable.
      *
      * @param bool $indexable
      *
@@ -803,8 +801,6 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
     /**
      * Set created at.
      *
-     * @param \DateTime $date
-     *
      * @return $this
      */
     public function setCreatedAt(\DateTime $date)
@@ -836,8 +832,6 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
 
     /**
      * Set updated at.
-     *
-     * @param \DateTime $updatedAt
      *
      * @return $this
      */
@@ -895,8 +889,6 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
     /**
      * Add block.
      *
-     * @param BlockInterface $block
-     *
      * @return BlockInterface
      */
     public function addBlock(BlockInterface $block)
@@ -908,8 +900,6 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
 
     /**
      * Remove block.
-     *
-     * @param BlockInterface $block
      */
     public function removeBlock(BlockInterface $block)
     {
@@ -953,8 +943,6 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
     /**
      * Add attributeValues.
      *
-     * @param Value $attributeValue
-     *
      * @return $this
      */
     public function addAttributeValue(Value $attributeValue)
@@ -966,8 +954,6 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
 
     /**
      * Remove attributeValues.
-     *
-     * @param Value $attributeValue
      */
     public function removeAttributeValue(Value $attributeValue)
     {
@@ -1019,7 +1005,7 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
     {
         $array = [];
 
-        if ($this->getValueSet() === null) {
+        if (null === $this->getValueSet()) {
             return $array;
         }
 
@@ -1072,7 +1058,7 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
     }
 
     /**
-     * Get all parents of the current content item
+     * Get all parents of the current content item.
      *
      * @param bool $includeSelf
      *
@@ -1101,9 +1087,6 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
         return $this->template;
     }
 
-    /**
-     * @param Template $template
-     */
     public function setTemplate(Template $template)
     {
         $this->template = $template;
@@ -1144,7 +1127,7 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
      */
     public function getCoverImage()
     {
-        if ($this->getValueSet() !== null) {
+        if (null !== $this->getValueSet()) {
             foreach ($this->getValueSet()->getValues() as $value) {
                 if (!$value instanceof MediaValue || false == $media = $value->getMedias()->first()) {
                     continue;
@@ -1186,8 +1169,6 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
     }
 
     /**
-     * @param MediaInterface $preview
-     *
      * @return Layout
      */
     public function setPreview(MediaInterface $preview)
@@ -1240,6 +1221,7 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
 
     /**
      * @param \DateTime $publishAt
+     *
      * @return $this
      */
     public function setPublishAt($publishAt)
@@ -1258,7 +1240,6 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
     }
 
     /**
-     * @param TranslationGroup $translationGroup
      * @return $this
      */
     public function setTranslationGroup(TranslationGroup $translationGroup)
@@ -1267,6 +1248,7 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
 
         return $this;
     }
+
     /**
      * @return $this
      */
@@ -1287,6 +1269,7 @@ class Content implements ContentInterface, EntityInterface, TemplatedInterface, 
 
     /**
      * @param $contentTranslations
+     *
      * @return $this
      */
     public function setContentTranslations($contentTranslations)

@@ -2,6 +2,7 @@
 
 namespace Opifer\ContentBundle\Model;
 
-interface TemplatedInterface {
+interface TemplatedInterface
+{
     public function getTemplate();
 }

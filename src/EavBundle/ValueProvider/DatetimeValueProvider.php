@@ -17,7 +17,7 @@ class DatetimeValueProvider extends AbstractValueProvider implements ValueProvid
     {
         $builder->add('value', DateTimePickerType::class, [
             'required' => ($options['attribute']->getRequired()) ? true : false,
-            'label'    => false
+            'label' => false,
         ]);
     }
 

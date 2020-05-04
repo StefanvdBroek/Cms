@@ -6,11 +6,11 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\GroupInterface;
 use FOS\UserBundle\Model\User as FOSUser;
+use Opifer\CmsBundle\Validator\Constraints as CmsAssert;
 use Opifer\MediaBundle\Model\MediaInterface;
 use Scheb\TwoFactorBundle\Model\Google\TwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Opifer\CmsBundle\Validator\Constraints as CmsAssert;
 
 /**
  * @UniqueEntity("username")
@@ -101,14 +101,14 @@ class User extends FOSUser implements TwoFactorInterface
     protected $deletedAt;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @GRID\Column(type="boolean")
      */
     protected $enabled;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @GRID\Column(type="boolean")
      */
@@ -117,7 +117,7 @@ class User extends FOSUser implements TwoFactorInterface
     private $googleAuthenticatorSecret;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -128,9 +128,9 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -138,7 +138,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Set first name
+     * Set first name.
      *
      * @param string $firstName
      *
@@ -152,7 +152,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Get first name
+     * Get first name.
      *
      * @return string
      */
@@ -162,7 +162,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Set last name
+     * Set last name.
      *
      * @param string $lastName
      *
@@ -176,7 +176,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Get last name
+     * Get last name.
      *
      * @return string
      */
@@ -186,7 +186,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Get the full name
+     * Get the full name.
      *
      * @return string
      */
@@ -204,7 +204,6 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * @param MediaInterface $avatar
      * @return User
      */
     public function setAvatar(MediaInterface $avatar)
@@ -224,11 +223,13 @@ class User extends FOSUser implements TwoFactorInterface
 
     /**
      * @param string $company
+     *
      * @return User
      */
     public function setCompany($company)
     {
         $this->company = $company;
+
         return $this;
     }
 
@@ -242,16 +243,18 @@ class User extends FOSUser implements TwoFactorInterface
 
     /**
      * @param string $jobPosition
+     *
      * @return User
      */
     public function setJobPosition($jobPosition)
     {
         $this->jobPosition = $jobPosition;
+
         return $this;
     }
 
     /**
-     * Get expires at
+     * Get expires at.
      *
      * @return \DateTime
      */
@@ -261,7 +264,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Get credentials expire at
+     * Get credentials expire at.
      *
      * @return \DateTime
      */
@@ -271,7 +274,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Add groups
+     * Add groups.
      *
      * @param \Opifer\CmsBundle\Entity\Group $groups
      *
@@ -285,9 +288,10 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Remove groups
+     * Remove groups.
      *
      * @param \Opifer\CmsBundle\Entity\Group $groups
+     *
      * @return $this
      */
     public function removeGroup(GroupInterface $groups)
@@ -298,7 +302,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Get groups
+     * Get groups.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -308,7 +312,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Returns all related content items
+     * Returns all related content items.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -318,7 +322,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Get created at
+     * Get created at.
      *
      * @return \DateTime
      */
@@ -328,7 +332,7 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Get updated at
+     * Get updated at.
      *
      * @return \DateTime
      */
@@ -338,9 +342,10 @@ class User extends FOSUser implements TwoFactorInterface
     }
 
     /**
-     * Set deletedAt
+     * Set deletedAt.
      *
-     * @param  \DateTime $deletedAt
+     * @param \DateTime $deletedAt
+     *
      * @return $this
      */
     public function setDeletedAt($deletedAt)
@@ -350,9 +355,6 @@ class User extends FOSUser implements TwoFactorInterface
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isTwoFactorEnabled(): bool
     {
         return $this->twoFactorEnabled;
@@ -364,11 +366,12 @@ class User extends FOSUser implements TwoFactorInterface
     public function setTwoFactorEnabled($twoFactorEnabled)
     {
         $this->twoFactorEnabled = $twoFactorEnabled;
+
         return $this;
     }
 
     /**
-     * Get deletedAt
+     * Get deletedAt.
      *
      * @return \DateTime
      */
@@ -389,7 +392,7 @@ class User extends FOSUser implements TwoFactorInterface
 
     public function getGoogleAuthenticatorSecret(): string
     {
-        return $this->googleAuthenticatorSecret ? $this->googleAuthenticatorSecret : "";
+        return $this->googleAuthenticatorSecret ? $this->googleAuthenticatorSecret : '';
     }
 
     public function setGoogleAuthenticatorSecret($googleAuthenticatorSecret)

@@ -31,9 +31,6 @@ class FormSubmitListener implements EventSubscriberInterface
 
     /**
      * Constructor.
-     *
-     * @param MailingListManager $mailingListManager
-     * @param SubscriptionManager $subscriptionManager
      */
     public function __construct(MailingListManager $mailingListManager, SubscriptionManager $subscriptionManager)
     {
@@ -53,8 +50,6 @@ class FormSubmitListener implements EventSubscriberInterface
 
     /**
      * This method is called right after the post is stored in the database during the Form submit.
-     *
-     * @param FormSubmitEvent $event
      */
     public function postFormSubmit(FormSubmitEvent $event)
     {
@@ -62,12 +57,11 @@ class FormSubmitListener implements EventSubscriberInterface
 
         $mailinglists = $email = null;
         foreach ($post->getValueSet()->getValues() as $value) {
-            if ($value instanceof MailingListSubscribeValue && $value->getValue() == true) {
+            if ($value instanceof MailingListSubscribeValue && true == $value->getValue()) {
                 $parameters = $value->getAttribute()->getParameters();
                 if (isset($parameters['mailingLists'])) {
                     $mailinglists = $this->mailingListManager->getRepository()->findByIds($parameters['mailingLists']);
                 }
-
             } elseif ($value instanceof EmailValue) {
                 $email = $value->getValue();
             }

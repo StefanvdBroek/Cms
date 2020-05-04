@@ -14,8 +14,6 @@ class MediaExtension extends \Twig_Extension
 
     /**
      * Constructor.
-     *
-     * @param Pool $pool
      */
     public function __construct(Pool $pool)
     {
@@ -23,17 +21,17 @@ class MediaExtension extends \Twig_Extension
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('media_source_url', [$this, 'sourceUrl'])
+            new \Twig_SimpleFilter('media_source_url', [$this, 'sourceUrl']),
         ];
     }
 
     /**
-     * Gets the source url of a media item
+     * Gets the source url of a media item.
      *
      * @param Media $media
      *
@@ -48,7 +46,7 @@ class MediaExtension extends \Twig_Extension
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {

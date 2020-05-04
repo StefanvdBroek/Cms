@@ -9,15 +9,12 @@ use Opifer\ContentBundle\Entity\ImageBlock;
 use Opifer\ContentBundle\Form\Type\StylesType;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Opifer\MediaBundle\Form\Type\MediaPickerType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ImageBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
     /**
-     * All available filtersets with its configuration
+     * All available filtersets with its configuration.
      *
      * @var array
      */
@@ -25,10 +22,6 @@ class ImageBlockService extends AbstractBlockService implements BlockServiceInte
 
     /**
      * Constructor.
-     *
-     * @param BlockRenderer $blockRenderer
-     * @param array           $filterSets
-     * @param array           $config
      */
     public function __construct(BlockRenderer $blockRenderer, array $filterSets, array $config)
     {
@@ -47,19 +40,19 @@ class ImageBlockService extends AbstractBlockService implements BlockServiceInte
         // Default panel
         $builder->get('default')
             ->add('media', MediaPickerType::class, [
-                'required'  => false,
+                'required' => false,
                 'multiple' => false,
-                'attr' => array('label_col' => 12, 'widget_col' => 12),
+                'attr' => ['label_col' => 12, 'widget_col' => 12],
             ]);
 
         $builder->get('properties')
             ->add('styles', StylesType::class, [
-                'choices'  => $this->config['styles'],
+                'choices' => $this->config['styles'],
             ]);
     }
 
     /**
-     * Formats the available filters
+     * Formats the available filters.
      *
      * @return array
      */
@@ -78,7 +71,7 @@ class ImageBlockService extends AbstractBlockService implements BlockServiceInte
             foreach ($set['filters'] as $filter => $properties) {
                 switch ($filter) {
                     case 'thumbnail':
-                        $explanation[] = $properties['size'][0].' X '. $properties['size'][1];
+                        $explanation[] = $properties['size'][0].' X '.$properties['size'][1];
                         break;
                     case 'relative_resize':
                         $heighten = (isset($properties['heighten'])) ? $properties['heighten'] : '~';
@@ -87,7 +80,7 @@ class ImageBlockService extends AbstractBlockService implements BlockServiceInte
                         break;
                 }
             }
-            $filters[$key . ' ('.implode(', ', $explanation).')'] = $key;
+            $filters[$key.' ('.implode(', ', $explanation).')'] = $key;
         }
 
         return $filters;
@@ -98,7 +91,7 @@ class ImageBlockService extends AbstractBlockService implements BlockServiceInte
      */
     public function createBlock()
     {
-        return new ImageBlock;
+        return new ImageBlock();
     }
 
     /**
@@ -116,6 +109,7 @@ class ImageBlockService extends AbstractBlockService implements BlockServiceInte
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

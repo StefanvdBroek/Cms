@@ -34,39 +34,25 @@ interface BlockServiceInterface
     public function getDescription(BlockInterface $block = null);
 
     /**
-     * @param BlockInterface $block
-     * @param Response|null  $response
-     * @param array          $parameters
-     *
      * @return Response
      */
     public function execute(BlockInterface $block, Response $response = null, array $parameters = []);
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildManageForm(FormBuilderInterface $builder, array $options);
 
     /**
      * Executed before the form handles the request and officially submits the form.
-     *
-     * @param BlockInterface $block
      */
     public function preFormSubmit(BlockInterface $block);
 
     /**
      * Executed after the form is defined valid and before the block is actually persisted.
-     *
-     * @param FormInterface  $form
-     * @param BlockInterface $block
      */
     public function postFormSubmit(FormInterface $form, BlockInterface $block);
 
     /**
-     * Loads additional data onto the block
+     * Loads additional data onto the block.
      *
-     * @param BlockInterface $block
      * @return void
      */
     public function load(BlockInterface $block);

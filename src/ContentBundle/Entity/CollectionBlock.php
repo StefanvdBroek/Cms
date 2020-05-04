@@ -5,11 +5,11 @@ namespace Opifer\ContentBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
-use Opifer\Revisions\Mapping\Annotation as Revisions;
 use Opifer\ContentBundle\Model\ContentInterface;
+use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * Collection Block
+ * Collection Block.
  *
  * @ORM\Entity
  */
@@ -60,6 +60,7 @@ class CollectionBlock extends Block
 
     /**
      * @param $collection
+     *
      * @return $this
      */
     public function setCollection($collection)
@@ -70,7 +71,7 @@ class CollectionBlock extends Block
     }
 
     /**
-     * Get the collection of actual content items
+     * Get the collection of actual content items.
      *
      * @return ContentInterface[]|ArrayCollection
      */

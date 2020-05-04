@@ -3,19 +3,16 @@
 namespace Opifer\FormBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Opifer\CmsBundle\Entity\AttachmentValue;
 use Opifer\FormBundle\Event\Events;
 use Opifer\FormBundle\Event\FormSubmitEvent;
 use Opifer\FormBundle\Form\Type\FormType;
 use Opifer\FormBundle\Form\Type\PostType;
 use Opifer\FormBundle\Model\Form;
-use Opifer\MediaBundle\Model\MediaInterface;
 use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class FormController extends Controller
 {
@@ -41,8 +38,6 @@ class FormController extends Controller
 
     /**
      * Create a form.
-     *
-     * @param Request $request
      *
      * @return RedirectResponse|Response
      */
@@ -82,8 +77,7 @@ class FormController extends Controller
     /**
      * Edit a form.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return RedirectResponse|Response
      */
@@ -168,8 +162,7 @@ class FormController extends Controller
      * In case you would like to perform actions after the post is stored in the database,
      * you could create an EventListener that listens to the `Events::POST_FORM_SUBMIT` event.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return Response
      */
@@ -206,7 +199,7 @@ class FormController extends Controller
 
             $event = new FormSubmitEvent($post);
             $this->get('event_dispatcher')->dispatch(Events::POST_FORM_SUBMIT, $event);
-            
+
             if ($form->getRedirectUrl()) {
                 return $this->redirect($form->getRedirectUrl());
             }

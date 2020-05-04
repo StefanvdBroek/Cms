@@ -1,6 +1,9 @@
 # Editor configuration
 .idea
 
+# Cache files
+.php_cs.cache
+
 # Dependencies
 /vendor/
 /node_modules/

@@ -15,7 +15,7 @@ class TextValueProvider extends AbstractValueProvider implements ValueProviderIn
     {
         $builder->add('value', TextareaType::class, [
             'required' => ($options['attribute']->getRequired()) ? true : false,
-            'label'    => false
+            'label' => false,
         ]);
     }
 

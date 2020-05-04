@@ -7,7 +7,6 @@ use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\ContentItemBlock;
 use Opifer\ContentBundle\Form\Type\ContentPickerType;
 use Opifer\ContentBundle\Model\BlockInterface;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -24,7 +23,7 @@ class ContentItemBlockService extends AbstractBlockService implements BlockServi
 
         // Default panel
         $builder->get('default')
-            ->add('value',  ContentPickerType::class, [
+            ->add('value', ContentPickerType::class, [
                 'as_object' => false,
                 'required' => false,
                 'label' => 'label.content',
@@ -54,6 +53,7 @@ class ContentItemBlockService extends AbstractBlockService implements BlockServi
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

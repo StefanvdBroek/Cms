@@ -4,11 +4,11 @@ namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Opifer\Revisions\Mapping\Annotation as Revisions;
 use Opifer\MediaBundle\Model\MediaInterface;
+use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * Gallery Block
+ * Gallery Block.
  *
  * @ORM\Entity
  */
@@ -56,6 +56,7 @@ class GalleryBlock extends Block
 
     /**
      * @param $gallery
+     *
      * @return $this
      */
     public function setGallery($gallery)
@@ -66,7 +67,7 @@ class GalleryBlock extends Block
     }
 
     /**
-     * Get the gallery of actual media items
+     * Get the gallery of actual media items.
      *
      * @return MediaInterface[]|ArrayCollection
      */

@@ -27,11 +27,7 @@ class ConfigType extends AbstractType
     private $serializer;
 
     /**
-     * Constructor
-     *
-     * @param ConfigurationFormRegistry $registry
-     * @param ConfigManager $configManager
-     * @param SerializerInterface $serializer
+     * Constructor.
      */
     public function __construct(ConfigurationFormRegistry $registry, ConfigManager $configManager, SerializerInterface $serializer)
     {
@@ -53,7 +49,7 @@ class ConfigType extends AbstractType
                 $builder
                     ->create($name, get_class($form), [
                         'label' => $form->getLabel(),
-                        'data' => $this->configManager->keyValues($form)
+                        'data' => $this->configManager->keyValues($form),
                     ])
                     ->addModelTransformer(new CallbackTransformer(
                         function ($original) {

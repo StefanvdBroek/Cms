@@ -13,7 +13,7 @@ class MediaValueProvider extends AbstractValueProvider implements ValueProviderI
     protected $mediaClass;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $mediaClass
      *
@@ -21,11 +21,11 @@ class MediaValueProvider extends AbstractValueProvider implements ValueProviderI
      */
     public function __construct($mediaClass)
     {
-        if ($mediaClass != '' && !is_subclass_of($mediaClass, MediaInterface::class)) {
+        if ('' != $mediaClass && !is_subclass_of($mediaClass, MediaInterface::class)) {
             throw new \Exception($mediaClass.' must implement '.MediaInterface::class);
         }
 
-        if ($mediaClass == '') {
+        if ('' == $mediaClass) {
             $this->enabled = false;
         }
 

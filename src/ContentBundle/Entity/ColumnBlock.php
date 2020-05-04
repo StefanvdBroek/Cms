@@ -6,14 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\ContentBundle\Block\BlockContainerInterface;
 
 /**
- * ColumnBlock
+ * ColumnBlock.
  *
  * @ORM\Entity
  */
 class ColumnBlock extends CompositeBlock implements BlockContainerInterface
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer", name="column_count", nullable=true)
      */
@@ -24,7 +24,7 @@ class ColumnBlock extends CompositeBlock implements BlockContainerInterface
      */
     public function __toString()
     {
-        return sprintf("Block %d: %d columns", $this->id, $this->columnCount);
+        return sprintf('Block %d: %d columns', $this->id, $this->columnCount);
     }
 
     /**

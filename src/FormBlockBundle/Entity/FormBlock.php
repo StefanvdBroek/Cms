@@ -8,7 +8,7 @@ use Opifer\ContentBundle\Entity\CompositeBlock;
 use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * FormBlock
+ * FormBlock.
  *
  * @ORM\Entity
  */
@@ -40,7 +40,7 @@ class FormBlock extends CompositeBlock
     }
 
     /**
-     * Set form
+     * Set form.
      *
      * @param \Opifer\CmsBundle\Entity\Form $form
      *
@@ -54,7 +54,7 @@ class FormBlock extends CompositeBlock
     }
 
     /**
-     * Get form
+     * Get form.
      *
      * @return \Opifer\CmsBundle\Entity\Form
      */

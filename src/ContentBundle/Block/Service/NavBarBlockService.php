@@ -2,21 +2,15 @@
 
 namespace Opifer\ContentBundle\Block\Service;
 
-use Opifer\ContentBundle\Block\BlockRenderer;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Entity\NavBarBlock;
-use Opifer\ContentBundle\Form\Type\ContentListPickerType;
 use Opifer\ContentBundle\Model\BlockInterface;
-use Opifer\ContentBundle\Model\ContentManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * NavBar Block Service
+ * NavBar Block Service.
  */
 class NavBarBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -34,7 +28,7 @@ class NavBarBlockService extends AbstractBlockService implements BlockServiceInt
                 'attr' => [
                     'help_text' => 'help.block_template',
                     'widget_col' => 9,
-                    'tag' => 'styles'
+                    'tag' => 'styles',
                 ],
                 'choices' => $this->config['templates'],
                 'required' => false,
@@ -43,15 +37,15 @@ class NavBarBlockService extends AbstractBlockService implements BlockServiceInt
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
-        return new NavBarBlock;
+        return new NavBarBlock();
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -66,6 +60,7 @@ class NavBarBlockService extends AbstractBlockService implements BlockServiceInt
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

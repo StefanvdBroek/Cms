@@ -11,7 +11,7 @@ use Opifer\EavBundle\Model\ValueInterface;
 use Opifer\EavBundle\Model\ValueSetInterface;
 
 /**
- * Value
+ * Value.
  *
  * @ORM\Table(name="value")
  * @ORM\Entity(repositoryClass="Opifer\EavBundle\Repository\ValueRepository")
@@ -21,6 +21,7 @@ use Opifer\EavBundle\Model\ValueSetInterface;
  * The discriminatorMap is handled dynamically by the DiscriminatorListener. It
  * retrieves the mapped classes from the ValueProvider Pool and adds them to the
  * map.
+ *
  * @see  Opifer\EavBundle\EventListener\DiscriminatorListener
  *
  * @JMS\ExclusionPolicy("all")
@@ -28,7 +29,7 @@ use Opifer\EavBundle\Model\ValueSetInterface;
 class Value implements ValueInterface
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -61,7 +62,7 @@ class Value implements ValueInterface
     protected $value;
 
     /**
-     * @var  ArrayCollection
+     * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Opifer\EavBundle\Model\OptionInterface", inversedBy="values", cascade={"detach"})
      * @ORM\JoinTable(name="value_options",
@@ -78,7 +79,7 @@ class Value implements ValueInterface
     protected $sort;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -86,9 +87,9 @@ class Value implements ValueInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -96,7 +97,7 @@ class Value implements ValueInterface
     }
 
     /**
-     * Set value
+     * Set value.
      *
      * @param string $value
      *
@@ -110,7 +111,7 @@ class Value implements ValueInterface
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * Override this method in child schemas to return the desired format
      *
@@ -122,7 +123,7 @@ class Value implements ValueInterface
     }
 
     /**
-     * Set attribute
+     * Set attribute.
      *
      * @param AttributeInterface $attribute
      *
@@ -136,7 +137,7 @@ class Value implements ValueInterface
     }
 
     /**
-     * Get attribute
+     * Get attribute.
      *
      * @return AttributeInterface
      */
@@ -146,7 +147,7 @@ class Value implements ValueInterface
     }
 
     /**
-     * Set valueSet
+     * Set valueSet.
      *
      * @param ValueSetInterface $valueSet
      *
@@ -160,7 +161,7 @@ class Value implements ValueInterface
     }
 
     /**
-     * Get valueSet
+     * Get valueSet.
      *
      * @return ValueSetInterface
      */
@@ -170,9 +171,8 @@ class Value implements ValueInterface
     }
 
     /**
-     * Add option
+     * Add option.
      *
-     * @param  OptionInterface $option
      * @return Value
      */
     public function addOption(OptionInterface $option)
@@ -183,7 +183,7 @@ class Value implements ValueInterface
     }
 
     /**
-     * Remove option
+     * Remove option.
      *
      * @param OptionInterface $options
      */
@@ -195,7 +195,7 @@ class Value implements ValueInterface
     }
 
     /**
-     * Set options
+     * Set options.
      *
      * @param OptionInterface|OptionInterface[] $options
      *
@@ -219,7 +219,7 @@ class Value implements ValueInterface
     }
 
     /**
-     * Get options
+     * Get options.
      *
      * @return ArrayCollection
      */
@@ -229,9 +229,9 @@ class Value implements ValueInterface
     }
 
     /**
-     * Check whether this value is actually just a value without any content
+     * Check whether this value is actually just a value without any content.
      *
-     * @return boolean
+     * @return bool
      */
     public function isEmpty()
     {
@@ -239,7 +239,7 @@ class Value implements ValueInterface
     }
 
     /**
-     * Get the sorting in case the value has multiple values
+     * Get the sorting in case the value has multiple values.
      *
      * @return string
      */
@@ -249,9 +249,10 @@ class Value implements ValueInterface
     }
 
     /**
-     * Set the sort
+     * Set the sort.
      *
      * @param string $sort
+     *
      * @return $this
      */
     public function setSort($sort)

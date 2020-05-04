@@ -4,9 +4,6 @@ namespace Opifer\ContentBundle\Form\Type;
 
 use Opifer\CmsBundle\Form\Type\MultipleChoiceType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StylesType extends AbstractType

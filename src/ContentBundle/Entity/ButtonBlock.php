@@ -6,13 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * ButtonBlock
+ * ButtonBlock.
  *
  * @ORM\Entity
  */
 class ButtonBlock extends Block
 {
-
     /**
      * @var string
      *
@@ -72,6 +71,4 @@ class ButtonBlock extends Block
     {
         $this->content = $content;
     }
-
-
 }

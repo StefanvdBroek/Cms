@@ -19,9 +19,7 @@ class UrlGenerator
     protected $localDirectory;
 
     /**
-     * @param FileSystem   $filesystem
-     * @param RequestStack $requestStack
-     * @param string       $localDirectory
+     * @param string $localDirectory
      */
     public function __construct(FileSystem $filesystem, RequestStack $requestStack, $localDirectory)
     {
@@ -70,7 +68,7 @@ class UrlGenerator
     }
 
     /**
-     * @return null|\Symfony\Component\HttpFoundation\Request
+     * @return \Symfony\Component\HttpFoundation\Request|null
      */
     protected function getRequest()
     {

@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class TemplateController extends Controller
 {
@@ -46,8 +45,6 @@ class TemplateController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -74,8 +71,7 @@ class TemplateController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return RedirectResponse|Response
      */

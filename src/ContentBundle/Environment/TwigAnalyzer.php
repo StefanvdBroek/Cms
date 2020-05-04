@@ -2,22 +2,20 @@
 
 namespace Opifer\ContentBundle\Environment;
 
-use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Bridge\Twig\TwigEngine;
 
 class TwigAnalyzer extends TwigEngine
 {
-
     public function findPlaceholders($name)
     {
         $functions = $this->findFunctionNodes($name);
 
-        $placeholders = array();
+        $placeholders = [];
         $key = -1;
 
         /** @var \Twig_Node_Expression_Function $function */
         foreach ($functions as $function) {
-            if ($function->getAttribute('name') != 'render_placeholder') {
+            if ('render_placeholder' != $function->getAttribute('name')) {
                 continue;
             }
 
@@ -25,9 +23,9 @@ class TwigAnalyzer extends TwigEngine
                 $arguments = $function->getNode('arguments');
 
                 if ($arguments->getNode('0')->hasAttribute('value')) {
-                    $key = (int)$arguments->getNode('0')->getAttribute('value');
+                    $key = (int) $arguments->getNode('0')->getAttribute('value');
                 } else {
-                    $key++;
+                    ++$key;
                 }
 
                 if ($arguments->getNode('1')->hasAttribute('value')) {
@@ -36,7 +34,7 @@ class TwigAnalyzer extends TwigEngine
                     $label = $key;
                 }
             } else {
-                $key++;
+                ++$key;
                 $label = $key;
             }
 
@@ -53,7 +51,7 @@ class TwigAnalyzer extends TwigEngine
         $source = $this->environment->getLoader()->getSourceContext($name);
         $tree = $this->environment->parse($this->environment->tokenize($source));
 
-        $list = array();
+        $list = [];
         $findFunctions = function ($node, array &$list) use (&$findFunctions) {
             if ($node instanceof \Twig_Node_Expression_Function) {
                 $list[] = $node;
@@ -69,5 +67,4 @@ class TwigAnalyzer extends TwigEngine
 
         return $list;
     }
-
 }

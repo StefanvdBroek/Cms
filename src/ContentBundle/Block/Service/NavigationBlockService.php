@@ -9,14 +9,12 @@ use Opifer\ContentBundle\Entity\NavigationBlock;
 use Opifer\ContentBundle\Form\Type\ContentListPickerType;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Opifer\ContentBundle\Model\ContentManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Navigation Block Service
+ * Navigation Block Service.
  */
 class NavigationBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -26,11 +24,7 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
     protected $collection;
 
     /**
-     * Constructor
-     *
-     * @param BlockRenderer         $blockRenderer
-     * @param ContentManagerInterface $contentManager
-     * @param array                   $config
+     * Constructor.
      */
     public function __construct(BlockRenderer $blockRenderer, ContentManagerInterface $contentManager, array $config)
     {
@@ -47,7 +41,7 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
         parent::buildManageForm($builder, $options);
 
         $showContentPicker = false;
-        if ($options['data'] && $options['data']->getValue() == NavigationBlock::CHOICE_CUSTOM) {
+        if ($options['data'] && NavigationBlock::CHOICE_CUSTOM == $options['data']->getValue()) {
             $showContentPicker = true;
         }
 
@@ -58,7 +52,7 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
                 'label' => 'label.navigation_block_value',
                 'choices' => [
                     'Top level pages' => NavigationBlock::CHOICE_TOP_LEVEL,
-                    'Custom selection' => NavigationBlock::CHOICE_CUSTOM
+                    'Custom selection' => NavigationBlock::CHOICE_CUSTOM,
                 ],
                 'attr' => ['class' => 'toggle-content-picker'],
                 'required' => true,
@@ -74,11 +68,11 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
                 'attr' => [
                     'widget_col' => 9,
                     'form_group' => [
-                        'styles' => ($showContentPicker === false) ? 'display:none;' : ''
+                        'styles' => (false === $showContentPicker) ? 'display:none;' : '',
                     ],
                     'required' => false,
                     'tag' => 'general',
-                ]
+                ],
             ])
             //->add('tree', ContentTreePickerType::class, [
             //    'label' => 'label.custom',
@@ -109,7 +103,7 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
                 'attr' => [
                     'help_text' => 'help.block_template',
                     'widget_col' => 9,
-                    'tag' => 'styles'
+                    'tag' => 'styles',
                 ],
                 'choices' => $this->config['templates'],
                 'required' => true,
@@ -120,25 +114,22 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
         ;
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function load(BlockInterface $block)
     {
         $levels = (isset($block->getProperties()['levels'])) ? $block->getProperties()['levels'] : 1;
 
         /** @var NavigationBlock $block */
-        if ($block->getValue() == NavigationBlock::CHOICE_CUSTOM && isset($block->getProperties()['content'])) {
+        if (NavigationBlock::CHOICE_CUSTOM == $block->getValue() && isset($block->getProperties()['content'])) {
             $ids = json_decode($block->getProperties()['content'], true);
 
             $collection = $this->contentManager->getRepository()->findByLevels($levels, $ids);
 
             usort($collection, function ($a, $b) use ($ids) {
-                return (array_search($a->getId(), $ids) > array_search($b->getId(), $ids));
+                return array_search($a->getId(), $ids) > array_search($b->getId(), $ids);
             });
 
             $block->setTree($collection);
-        } elseif ($block->getValue() == NavigationBlock::CHOICE_TOP_LEVEL) {
+        } elseif (NavigationBlock::CHOICE_TOP_LEVEL == $block->getValue()) {
             $collection = $this->contentManager->getRepository()->findByLevels($levels);
 
             $block->setTree($collection);
@@ -146,11 +137,11 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
     }
 
     /**
-    * @param array $collection
-    * @param array $sort
-    *
-    * @return array
-    */
+     * @param array $collection
+     * @param array $sort
+     *
+     * @return array
+     */
     public function getOrdered($collection, $sort = null)
     {
         if (!$sort) {
@@ -173,13 +164,11 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
     }
 
     /**
-     * Gather all ids, so we can retrieve all content in a single query
+     * Gather all ids, so we can retrieve all content in a single query.
      *
-     * @param array $array
-     * @param array $ids
      * @return array
      */
-    protected function gatherIdsFromTree(array $array, array $ids = array())
+    protected function gatherIdsFromTree(array $array, array $ids = [])
     {
         foreach ($array as $item) {
             $ids[] = $item['id'];
@@ -192,7 +181,7 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
     }
 
     /**
-     * Keep collection as key-value
+     * Keep collection as key-value.
      *
      * @param $collection
      */
@@ -207,10 +196,10 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
     }
 
     /**
-     * Build the tree from the simpletree and the collection
+     * Build the tree from the simpletree and the collection.
      *
-     * @param array $simpleTree
      * @param array $tree
+     *
      * @return array
      */
     protected function buildCustomTree(array $simpleTree, $tree = [])
@@ -259,6 +248,7 @@ class NavigationBlockService extends AbstractBlockService implements BlockServic
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

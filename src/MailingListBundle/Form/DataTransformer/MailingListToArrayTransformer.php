@@ -2,8 +2,8 @@
 
 namespace Opifer\MailingListBundle\Form\DataTransformer;
 
-use Opifer\MailingListBundle\Entity\MailingList;
 use Doctrine\Common\Persistence\ObjectManager;
+use Opifer\MailingListBundle\Entity\MailingList;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -40,10 +40,7 @@ class MailingListToArrayTransformer implements DataTransformerInterface
             // causes a validation error
             // this message is not shown to the user
             // see the invalid_message option
-            throw new TransformationFailedException(sprintf(
-                'Mailinglists %s could not be fetched from database',
-                implode(', ', $mailingListIds)
-            ));
+            throw new TransformationFailedException(sprintf('Mailinglists %s could not be fetched from database', implode(', ', $mailingListIds)));
         }
 
         return $mailingLists;
@@ -56,7 +53,7 @@ class MailingListToArrayTransformer implements DataTransformerInterface
      *
      * @return array|null
      *
-     * @throws TransformationFailedException if object (mailinglist) is not found.
+     * @throws TransformationFailedException if object (mailinglist) is not found
      */
     public function reverseTransform($mailingLists)
     {
@@ -68,7 +65,7 @@ class MailingListToArrayTransformer implements DataTransformerInterface
 
         foreach ($mailingLists as $mailingList) {
             $mailingListIds[] = $mailingList->getId();
-        };
+        }
 
         return $mailingListIds;
     }

@@ -3,11 +3,8 @@
 namespace Opifer\ContentBundle\Block;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Events;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\PersistentCollection;
-use Gedmo\SoftDeleteable\SoftDeleteableListener;
-use Gedmo\Timestampable\TimestampableListener;
 use Opifer\ContentBundle\Block\Service\AbstractBlockService;
 use Opifer\ContentBundle\Block\Service\BlockServiceInterface;
 use Opifer\ContentBundle\Block\Tool\Toolset;
@@ -16,13 +13,12 @@ use Opifer\ContentBundle\Entity\Block;
 use Opifer\ContentBundle\Entity\CompositeBlock;
 use Opifer\ContentBundle\Entity\PointerBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
-use Opifer\ContentBundle\Repository\BlockLogEntryRepository;
 use Opifer\Revisions\EventListener\RevisionListener;
 use Opifer\Revisions\Exception\DeletedException;
 use Opifer\Revisions\RevisionManager;
 
 /**
- * Block Manager
+ * Block Manager.
  *
  * This class provides methods mainly for managing blocks inside of the editor at a specific
  * version. It takes care of applying the changeset from BlockLogEntry to create a real-time
@@ -43,9 +39,7 @@ class BlockManager
     protected $revisionListener = null;
 
     /**
-     * Constructor
-     *
-     * @param EntityManagerInterface $em
+     * Constructor.
      */
     public function __construct(EntityManagerInterface $em, RevisionManager $revisionManager)
     {
@@ -54,7 +48,7 @@ class BlockManager
     }
 
     /**
-     * Get repository
+     * Get repository.
      *
      * @return \Doctrine\ORM\EntityRepository
      */
@@ -64,10 +58,9 @@ class BlockManager
     }
 
     /**
-     * Adds all the block services, tagged with 'opifer.content.block_manager'
+     * Adds all the block services, tagged with 'opifer.content.block_manager'.
      *
-     * @param BlockServiceInterface $service
-     * @param string                $alias
+     * @param string $alias
      */
     public function addService(BlockServiceInterface $service, $alias)
     {
@@ -75,7 +68,7 @@ class BlockManager
     }
 
     /**
-     * Get all registered services
+     * Get all registered services.
      *
      * @return array
      */
@@ -89,7 +82,7 @@ class BlockManager
      */
     public function getToolset()
     {
-        $toolbelt = new Toolset;
+        $toolbelt = new Toolset();
 
         foreach ($this->services as $service) {
             if ($service instanceof ToolsetMemberInterface) {
@@ -106,9 +99,9 @@ class BlockManager
     }
 
     /**
-     * Returns the block service by the block's id
+     * Returns the block service by the block's id.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return BlockServiceInterface
      */
@@ -120,9 +113,9 @@ class BlockManager
     }
 
     /**
-     * Returns the block service
+     * Returns the block service.
      *
-     * @param string|BlockInterface  $block
+     * @param string|BlockInterface $block
      *
      * @return BlockServiceInterface
      *
@@ -132,7 +125,7 @@ class BlockManager
     {
         $blockType = ($block instanceof BlockInterface) ? $block->getBlockType() : $block;
         if (!isset($this->services[$blockType])) {
-            throw new \Exception(sprintf("No BlockService available by the alias %s, available: %s", $blockType, implode(', ', array_keys($this->services))));
+            throw new \Exception(sprintf('No BlockService available by the alias %s, available: %s', $blockType, implode(', ', array_keys($this->services))));
         }
 
         return $this->services[$blockType];
@@ -141,15 +134,15 @@ class BlockManager
     /**
      * Find a Block in the repository with optional specified version.
      *
-     * @param integer      $id
-     * @param bool         $draft
+     * @param int  $id
+     * @param bool $draft
      *
      * @return BlockInterface
      */
     public function find($id, $draft = false)
     {
         if ($draft) {
-            $this->setDraftVersionFilter(! $draft);
+            $this->setDraftVersionFilter(!$draft);
         }
 
         $block = $this->getRepository()->find($id);
@@ -164,17 +157,17 @@ class BlockManager
     }
 
     /**
-     * Find a Block in the repository in optional draft
+     * Find a Block in the repository in optional draft.
      *
-     * @param integer  $id
-     * @param bool     $draft
+     * @param int  $id
+     * @param bool $draft
      *
      * @return BlockInterface
      */
     public function findById($id, $draft = true)
     {
         if ($draft) {
-            $this->setDraftVersionFilter(! $draft);
+            $this->setDraftVersionFilter(!$draft);
         }
 
         $blocks = $this->getRepository()->findById($id);
@@ -190,10 +183,9 @@ class BlockManager
         return $blocks;
     }
 
-
     public function findByOwner(BlockOwnerInterface $owner, $draft = true)
     {
-        $this->setDraftVersionFilter(! $draft);
+        $this->setDraftVersionFilter(!$draft);
 
         $blocks = $this->getRepository()->findByOwner($owner);
 
@@ -207,16 +199,17 @@ class BlockManager
     }
 
     /**
-     * Finds the block and all its children recursively
+     * Finds the block and all its children recursively.
      *
      * @param BlockInterface $parent
-     * @param bool $draft
+     * @param bool           $draft
+     *
      * @return BlockInterface[]
      */
     public function findDescendants($parent, $draft = true)
     {
-        $this->setDraftVersionFilter(! $draft);
-        
+        $this->setDraftVersionFilter(!$draft);
+
         $iterator = new \RecursiveIteratorIterator(
             new RecursiveBlockIterator([$parent]),
             \RecursiveIteratorIterator::SELF_FIRST
@@ -236,16 +229,16 @@ class BlockManager
 
     public function revertToDraft($blocks)
     {
-        $single = ! is_array($blocks) && $blocks instanceof BlockInterface;
+        $single = !is_array($blocks) && $blocks instanceof BlockInterface;
 
         if ($single) {
-            $blocks = array($blocks);
+            $blocks = [$blocks];
         }
 
         foreach ($blocks as $key => $block) {
             $currentRevision = $this->revisionManager->getCurrentRevision($block);
             $latestRevision = $this->revisionManager->getLatestRevision($block);
-            if ($latestRevision !== false && $currentRevision < $latestRevision) {
+            if (false !== $latestRevision && $currentRevision < $latestRevision) {
                 try {
                     $this->revisionManager->revert($block, $latestRevision);
                     $block->setDraft(true);
@@ -272,7 +265,7 @@ class BlockManager
     }
 
     /**
-     * Publishes a block
+     * Publishes a block.
      *
      * TODO: cleanup created and deleted blocks in revision that were never published.
      *
@@ -289,7 +282,7 @@ class BlockManager
             return;
         }
 
-        if (! is_array($blocks)) {
+        if (!is_array($blocks)) {
             $blocks = [$blocks];
         }
 
@@ -310,7 +303,7 @@ class BlockManager
 
         $this->em->flush();
 
-        // Cycle through all deleted blocks to perform cascades manually 
+        // Cycle through all deleted blocks to perform cascades manually
         foreach ($deletes as $block) {
             if ($block instanceof CompositeBlock) {
                 $descendants = $this->findDescendants($block, false);
@@ -319,7 +312,7 @@ class BlockManager
             }
 
             foreach ($descendants as $descendant) {
-                $descendant->setDeletedAt(new \DateTime);
+                $descendant->setDeletedAt(new \DateTime());
                 $this->em->flush($descendant);
             }
         }
@@ -331,13 +324,11 @@ class BlockManager
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return BlockManager
      */
     public function save(BlockInterface $block, $draft = true)
     {
-        $this->setDraftVersionFilter(! $draft);
+        $this->setDraftVersionFilter(!$draft);
         $block->setDraft($draft);
 
         $this->em->persist($block);
@@ -346,10 +337,6 @@ class BlockManager
         return $this;
     }
 
-
-    /**
-     * @param BlockInterface $block
-     */
     public function remove(BlockInterface $block, $draft = true)
     {
         $block->setDraft($draft);
@@ -359,7 +346,7 @@ class BlockManager
     }
 
     /**
-     * Clones blocks and persists to database
+     * Clones blocks and persists to database.
      *
      * @param BlockInterface      $block
      * @param BlockOwnerInterface $owner
@@ -369,7 +356,7 @@ class BlockManager
     public function duplicate($blocks, $owner = null)
     {
         if ($blocks instanceof BlockInterface) {
-            $blocks = array($blocks);
+            $blocks = [$blocks];
         }
 
         $iterator = new \RecursiveIteratorIterator(
@@ -377,10 +364,10 @@ class BlockManager
             \RecursiveIteratorIterator::SELF_FIRST
         );
 
-        $originalIdMap = array();
-        $originalParentMap = array();
+        $originalIdMap = [];
+        $originalParentMap = [];
 
-        $clones = array();
+        $clones = [];
 
         // iterate over all owned blocks and disconnect parents keeping ids
         /** @var Block $block */
@@ -437,7 +424,7 @@ class BlockManager
     }
 
     /**
-     * @param integer $ownerId
+     * @param int $ownerId
      */
     public function discardAll($ownerId)
     {
@@ -458,19 +445,19 @@ class BlockManager
     }
 
     /**
-     * Kills the DraftVersionFilter
+     * Kills the DraftVersionFilter.
      */
     public function setDraftVersionFilter($enabled = true)
     {
-        if ($this->em->getFilters()->isEnabled('draft') && ! $enabled) {
+        if ($this->em->getFilters()->isEnabled('draft') && !$enabled) {
             $this->em->getFilters()->disable('draft');
-        } else if (! $this->em->getFilters()->isEnabled('draft') && $enabled) {
+        } elseif (!$this->em->getFilters()->isEnabled('draft') && $enabled) {
             $this->em->getFilters()->enable('draft');
         }
     }
 
     /**
-     * Removes the RevisionListener from the EventManager
+     * Removes the RevisionListener from the EventManager.
      */
     public function disableRevisionListener()
     {
@@ -489,11 +476,11 @@ class BlockManager
     }
 
     /**
-     * Adds the RevisionListener back to the EventManager
+     * Adds the RevisionListener back to the EventManager.
      */
     public function enableRevisionListener()
     {
-        if (! $this->revisionListener) {
+        if (!$this->revisionListener) {
             throw new \Exception('Could not enable revision listener: instance not found');
         }
 
@@ -503,10 +490,10 @@ class BlockManager
     /**
      * @param BlockOwnerInterface $owner
      * @param string              $type
-     * @param integer             $parentId
-     * @param integer             $placeholder
+     * @param int                 $parentId
+     * @param int                 $placeholder
      * @param array               $sort
-     * @param null|array          $data
+     * @param array|null          $data
      *
      * @throws \Exception
      *
@@ -520,7 +507,7 @@ class BlockManager
 
         // This should replaced with a more hardened function
         if (is_null($data)) {
-            $data = array();
+            $data = [];
         }
         $data['owner'] = $owner;
 
@@ -546,7 +533,7 @@ class BlockManager
             $id = $block->getId();
             $sort = array_map(
                 function ($v) use ($id) {
-                    return $v == "" || $v == "0" ? $id : $v;
+                    return '' == $v || '0' == $v ? $id : $v;
                 },
                 $sort
             );
@@ -562,7 +549,7 @@ class BlockManager
                     // save the changes. We don't want to save sort changes made to
                     // nodes belonging to inherited trees.
                     if ($node->getParent() === $block->getParent() &&
-                        (($node->getOwner() === null && $block->getOwner() === null) ||
+                        ((null === $node->getOwner() && null === $block->getOwner()) ||
                         ($node->getOwner()->getId() == $block->getOwner()->getId()))) {
                         $this->save($node, $draft);
                     }
@@ -574,14 +561,14 @@ class BlockManager
     }
 
     /**
-     * Move a block to a new parent in a specific placeholder and order (sort)
+     * Move a block to a new parent in a specific placeholder and order (sort).
      *
      * This method performs the change and persists/flushes to the database.
      *
-     * @param integer $id
-     * @param integer $parentId
-     * @param integer $placeholder
-     * @param array   $sort
+     * @param int   $id
+     * @param int   $parentId
+     * @param int   $placeholder
+     * @param array $sort
      */
     public function moveBlock($id, $parentId, $placeholder, $sort, $draft = true)
     {
@@ -614,11 +601,11 @@ class BlockManager
     }
 
     /**
-     * Makes a block shared and creates a pointer block in it's place
+     * Makes a block shared and creates a pointer block in it's place.
      *
      * This method performs the change and persists/flushes to the database.
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return BlockPointer
      */
@@ -671,8 +658,7 @@ class BlockManager
      * parent. However the changesets in BlockLogEntry probably store changed parents and
      * so they must be applied on the entire tree first before we can tell.
      *
-     * @param BlockInterface $block
-     * @param integer|bool   $version
+     * @param int|bool $version
      *
      * @return false|ArrayCollection
      */
@@ -681,7 +667,7 @@ class BlockManager
         $owner = $block->getOwner();
         $family = $this->findByOwner($owner, $version);
 
-        $siblings = array();
+        $siblings = [];
 
         foreach ($family as $member) {
             if ($member->getParent() && $member->getParent()->getId() == $block->getParent()->getId()) {
@@ -701,7 +687,7 @@ class BlockManager
     public function setSortsByDirective($blocks, $sort)
     {
         $sort = array_values($sort); // we're using keys as positions
-        $levels = array();
+        $levels = [];
 
         // Split arrays into levels by owner (child - parent)
         foreach ($blocks as $block) {
@@ -725,9 +711,9 @@ class BlockManager
                 // See if we need to position it below an inherited block
                 $pos = array_search($block->getId(), $levels[$block->getOwner()->getId()], false);
                 $prevBlockId = (isset($levels[$superId]) && isset($levels[$superId][$pos - 1])) ? $levels[$superId][$pos - 1] : null;
-                if ($prevBlockId !== null) {
+                if (null !== $prevBlockId) {
                     $prevBlockPos = array_search($prevBlockId, array_values($levels[$superId]));
-                    $block->setSortParent(($prevBlockPos !== false) ? $prevBlockPos : -1);
+                    $block->setSortParent((false !== $prevBlockPos) ? $prevBlockPos : -1);
                 } else {
                     $block->setSortParent(-1);
                 }
@@ -743,70 +729,69 @@ class BlockManager
      * Sorts an array of Blocks using their $sort property taking into account inherited
      * owners.
      *
-     * @param array $blocks
-     *
      * @return array
      */
     public function sortBlocks(array $blocks)
     {
         // Perform a simple sort first
-        usort($blocks, function ($a, $b)  {
+        usort($blocks, function ($a, $b) {
             if ($a->getSort() == $b->getSort()) {
                 return 0;
             }
+
             return ($a->getSort() < $b->getSort()) ? -1 : 1;
         });
 
         // Determine hierarchy of ownership first
-        $ownerIds = array();
+        $ownerIds = [];
         foreach ($blocks as $block) {
             $superKey = ($block->getOwner()->getSuper()) ? array_search($block->getOwner()->getSuper()->getId(), $ownerIds) : false;
-            if ($superKey === false) {
+            if (false === $superKey) {
                 array_unshift($ownerIds, $block->getOwner()->getId());
             } else {
-                $ownerIds = array_merge(array_slice($ownerIds, 0, $superKey+1), array($block->getOwner()->getId()), array_slice($ownerIds, $superKey+1));
+                $ownerIds = array_merge(array_slice($ownerIds, 0, $superKey + 1), [$block->getOwner()->getId()], array_slice($ownerIds, $superKey + 1));
             }
         }
         $ownerIds = array_flip($ownerIds); // Flip it for easier lookup by parentId as key.
         asort($ownerIds);
 
-        $sorted = array();
+        $sorted = [];
         $parentOwnerId = null;
         $parentSize = null;
         foreach ($ownerIds as $ownerId => $ownerPos) {
             // Get blocks in level/segment
             $segment = array_values(array_filter($blocks, function ($block) use ($ownerId) {
-                return ($block->getOwner() && $block->getOwner()->getId() == $ownerId);
+                return $block->getOwner() && $block->getOwner()->getId() == $ownerId;
             }));
 
-            if (! count($segment)) {
+            if (!count($segment)) {
                 $parentOwnerId = $ownerId;
                 continue; // nothing to do for this owner
             }
 
             // now inject at correct positions
-            if (count($segment) && $parentOwnerId === null) {
+            if (count($segment) && null === $parentOwnerId) {
                 $sorted = $segment;
-            } else if (count($segment)) {
+            } elseif (count($segment)) {
                 $positioned = array_filter($segment, function ($block) {
-                   return ($block->getSortParent() !== null && $block->getSortParent() >= 0);
+                    return null !== $block->getSortParent() && $block->getSortParent() >= 0;
                 });
 
                 // if nothing is positioned throw them on top
-                if (! count($positioned)) {
+                if (!count($positioned)) {
                     $sorted = array_merge($segment, $sorted);
                 } else {
                     // first part
                     $keys = array_keys($positioned);
                     if ($keys[0] > 0) {
                         $sorted = array_merge(array_slice($segment, 0, array_shift($keys)), $sorted);
-                    } elseif ($keys[0] == 0) {
+                    } elseif (0 == $keys[0]) {
                         unset($keys[0]);
                     }
 
                     foreach ($positioned as $key => $block) {
                         $endIdx = (count($keys)) ? array_shift($keys) : null;
-                        $insert = array_slice($segment, $key, ($endIdx) ? ($endIdx-$key) : null);
+                        $insert = array_slice($segment, $key, ($endIdx) ? ($endIdx - $key) : null);
 
                         foreach ($sorted as $insertIdx => $item) {
                             // Check if we inherit from this block
@@ -816,7 +801,7 @@ class BlockManager
                                 break;
                             }
                         }
-                        $sorted = array_merge(array_slice($sorted, 0, $insertIdx+1), $insert, array_slice($sorted, $insertIdx+1));
+                        $sorted = array_merge(array_slice($sorted, 0, $insertIdx + 1), $insert, array_slice($sorted, $insertIdx + 1));
                     }
                 }
             }

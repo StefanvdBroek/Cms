@@ -2,20 +2,15 @@
 
 namespace Opifer\ContentBundle\Form\Type;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\PersistentCollection;
 use Opifer\ContentBundle\Model\ContentManager;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
- * Multi Content Picker Form Type
+ * Multi Content Picker Form Type.
  */
 class ContentListPickerType extends AbstractType
 {
@@ -23,9 +18,7 @@ class ContentListPickerType extends AbstractType
     protected $contentManager;
 
     /**
-     * Constructor
-     *
-     * @param ContentManager $contentManager
+     * Constructor.
      */
     public function __construct(ContentManager $contentManager)
     {
@@ -93,9 +86,8 @@ class ContentListPickerType extends AbstractType
         ]);
     }
 
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getParent()
     {
@@ -103,7 +95,7 @@ class ContentListPickerType extends AbstractType
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getBlockPrefix()
     {

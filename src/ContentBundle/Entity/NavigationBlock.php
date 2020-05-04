@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * Navigation Block
+ * Navigation Block.
  *
  * @ORM\Entity
  */

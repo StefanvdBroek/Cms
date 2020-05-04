@@ -17,7 +17,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 class FormController extends Controller
 {
     /**
-     * Get a definition of the given form
+     * Get a definition of the given form.
      *
      * @param $id
      *
@@ -46,17 +46,16 @@ class FormController extends Controller
         $fields = $definition['properties']['valueset']['properties']['namedvalues']['properties'];
         $fields['_token'] = [
             'widget' => 'hidden',
-            'value' => $token->getValue()
+            'value' => $token->getValue(),
         ];
 
         return new JsonResponse($fields);
     }
 
     /**
-     * Handle the creation of a form post
+     * Handle the creation of a form post.
      *
-     * @param Request $request
-     * @param         $id
+     * @param $id
      *
      * @return JsonResponse
      */
@@ -104,7 +103,7 @@ class FormController extends Controller
         }
 
         return new JsonResponse([
-            'errors' => (string) $postForm->getErrors()
+            'errors' => (string) $postForm->getErrors(),
         ], 400);
     }
 }

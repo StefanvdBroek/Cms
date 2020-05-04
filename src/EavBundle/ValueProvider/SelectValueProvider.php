@@ -14,7 +14,7 @@ class SelectValueProvider extends AbstractValueProvider implements ValueProvider
     protected $optionClass;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $optionClass
      */
@@ -24,7 +24,7 @@ class SelectValueProvider extends AbstractValueProvider implements ValueProvider
     }
 
     /**
-     * Select form
+     * Select form.
      *
      * Generates a select input that holds all attribute options
      *
@@ -38,19 +38,19 @@ class SelectValueProvider extends AbstractValueProvider implements ValueProvider
 
         $builder->add(
             $builder->create('options', EntityType::class, [
-                'required'      => ($options['attribute']->getRequired()) ? true : false,
-                'label'         => $options['attribute']->getDisplayName(),
-                'placeholder'   => 'Select…',
-                'multiple'      => false,
-                'choice_label'  => 'displayName',
-                'class'         => $this->optionClass,
+                'required' => ($options['attribute']->getRequired()) ? true : false,
+                'label' => $options['attribute']->getDisplayName(),
+                'placeholder' => 'Select…',
+                'multiple' => false,
+                'choice_label' => 'displayName',
+                'class' => $this->optionClass,
                 'query_builder' => function (EntityRepository $optionRepository) use ($attributeId) {
                     return $optionRepository->createQueryBuilder('o')
                         ->add('orderBy', 'o.sort ASC')
                         ->innerJoin('o.attribute', 'a')
                         ->where('a.id = :attributeId')
                         ->setParameter('attributeId', $attributeId);
-                }
+                },
             ])->addModelTransformer($transformer)
         );
     }

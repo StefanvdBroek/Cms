@@ -2,9 +2,9 @@
 
 namespace Opifer\ExpressionEngine\Constraint;
 
+use Opifer\ExpressionEngine\ConstraintInterface;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
-use Opifer\ExpressionEngine\ConstraintInterface;
 
 class DayOfWeek extends Literal implements ConstraintInterface
 {
@@ -26,18 +26,18 @@ class DayOfWeek extends Literal implements ConstraintInterface
     /**
      * Returns the compared value.
      *
-     * @return mixed The compared value.
+     * @return mixed the compared value
      */
     public function getComparedValue()
     {
-        switch($this->day) {
-            case 'monday'; return 2;
-            case 'tuesday'; return 3;
-            case 'wednesday'; return 4;
-            case 'thursday'; return 5;
-            case 'friday'; return 6;
-            case 'saturday'; return 7;
-            case 'sunday'; return 1;
+        switch ($this->day) {
+            case 'monday': return 2;
+            case 'tuesday': return 3;
+            case 'wednesday': return 4;
+            case 'thursday': return 5;
+            case 'friday': return 6;
+            case 'saturday': return 7;
+            case 'sunday': return 1;
             default: return 0;
         }
     }
@@ -51,7 +51,7 @@ class DayOfWeek extends Literal implements ConstraintInterface
             throw new \Exception('The value passed to the DayOfWeek constraint should be an instance of \DateTime');
         }
 
-        return (strtolower($value->format($this->getDateFormat())) == strtolower($this->day));
+        return strtolower($value->format($this->getDateFormat())) == strtolower($this->day);
     }
 
     /**
@@ -75,6 +75,7 @@ class DayOfWeek extends Literal implements ConstraintInterface
         // Since this class is final, we can check with instanceof
         return $other instanceof $this;
     }
+
     /**
      * {@inheritdoc}
      */
@@ -85,6 +86,6 @@ class DayOfWeek extends Literal implements ConstraintInterface
 
     public function getLeft($key)
     {
-        return sprintf("DAYOFWEEK(%s)", $key);
+        return sprintf('DAYOFWEEK(%s)', $key);
     }
 }

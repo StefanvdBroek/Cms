@@ -6,5 +6,4 @@ use Opifer\ContentBundle\Model\Content as BaseContent;
 
 class Content extends BaseContent
 {
-
 }

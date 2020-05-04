@@ -3,21 +3,21 @@
 namespace Opifer\EavBundle\Form\EventListener;
 
 use Opifer\EavBundle\Entity\Value;
+use Opifer\EavBundle\Form\Type\ValueType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Opifer\EavBundle\Form\Type\ValueType;
 
 /**
- * Values Subscriber
+ * Values Subscriber.
  *
  * Maps the eav values to the right form fields
  */
 class ValuesSubscriber implements EventSubscriberInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
@@ -28,8 +28,6 @@ class ValuesSubscriber implements EventSubscriberInterface
 
     /**
      * Listens to the PRE_SET_DATA event and adds form fields dynamically.
-     *
-     * @param FormEvent $event
      *
      * @return void
      */
@@ -73,7 +71,7 @@ class ValuesSubscriber implements EventSubscriberInterface
                 'attribute' => $value->getAttribute(),
                 'entity' => get_class($value),
                 'value' => $value,
-                'attr' => ['help_text' => $value->getAttribute()->getDescription()]
+                'attr' => ['help_text' => $value->getAttribute()->getDescription()],
             ]);
         }
     }

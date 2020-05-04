@@ -2,14 +2,11 @@
 
 namespace Opifer\ContentBundle\Designer;
 
-
 use Doctrine\ORM\EntityManagerInterface;
-use Opifer\ContentBundle\Model\TemplateManager;
 use Symfony\Component\Routing\RouterInterface;
 
 class TemplateSuite extends AbstractDesignSuite
 {
-
     /**
      * @var EntityManager
      */
@@ -22,22 +19,22 @@ class TemplateSuite extends AbstractDesignSuite
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load($id = 0, $version = 1)
     {
         $this->subject = $this->em->getRepository('OpiferContentBundle:Template')->find($id);
         $this->version = $version;
 
-        if ( ! $this->subject) {
-            throw $this->createNotFoundException('No template found for id ' . $id);
+        if (!$this->subject) {
+            throw $this->createNotFoundException('No template found for id '.$id);
         }
 
         return $this;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTitle()
     {
@@ -45,7 +42,7 @@ class TemplateSuite extends AbstractDesignSuite
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getCaption()
     {
@@ -53,7 +50,7 @@ class TemplateSuite extends AbstractDesignSuite
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPropertiesUrl()
     {
@@ -61,7 +58,7 @@ class TemplateSuite extends AbstractDesignSuite
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getCancelUrl()
     {
@@ -69,13 +66,12 @@ class TemplateSuite extends AbstractDesignSuite
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getCanvasUrl()
     {
         return $this->router->generate('opifer_content_contenteditor_view', ['owner' => 'template', 'ownerId' => $this->subject->getId()]);
     }
-
 
     public function saveSubject()
     {

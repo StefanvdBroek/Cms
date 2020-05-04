@@ -65,7 +65,7 @@ class Configuration implements ConfigurationInterface
 
                 ->arrayNode('default_content_access')
                     ->scalarPrototype()->end()
-                    ->defaultValue(['ROLE_SUPER_ADMIN','ROLE_ADMIN'])
+                    ->defaultValue(['ROLE_SUPER_ADMIN', 'ROLE_ADMIN'])
                 ->end()
 
                 ->arrayNode('permissions')
@@ -160,7 +160,7 @@ class Configuration implements ConfigurationInterface
                             'USER_EDIT',
                             'USER_PROFILE',
                             'USER_CREATE',
-                        ]
+                        ],
                     ])
                 ->end()
 

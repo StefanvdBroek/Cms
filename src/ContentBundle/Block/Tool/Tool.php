@@ -23,7 +23,7 @@ class Tool
     protected $icon;
 
     /** @var array */
-    protected $data = array();
+    protected $data = [];
 
     /** @var int */
     protected $sort = 0;
@@ -34,89 +34,89 @@ class Tool
         $this->service = $service;
     }
 
-    public function getDataJson() : string
+    public function getDataJson(): string
     {
         return json_encode($this->getData());
     }
 
-    public function getGroup() : string
+    public function getGroup(): string
     {
         return $this->group;
     }
 
-    public function setGroup(string $group) : Tool
+    public function setGroup(string $group): Tool
     {
         $this->group = $group;
 
         return $this;
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(string $name) : Tool
+    public function setName(string $name): Tool
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getService() : string
+    public function getService(): string
     {
         return $this->service;
     }
 
-    public function setService(string $service) : Tool
+    public function setService(string $service): Tool
     {
         $this->service = $service;
 
         return $this;
     }
 
-    public function getDescription() : ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(?string $description) : Tool
+    public function setDescription(?string $description): Tool
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getIcon() : ?string
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
 
-    public function setIcon(?string $icon) : Tool
+    public function setIcon(?string $icon): Tool
     {
         $this->icon = $icon;
 
         return $this;
     }
 
-    public function getData() : array
+    public function getData(): array
     {
         return $this->data;
     }
 
-    public function setData(array $data) : Tool
+    public function setData(array $data): Tool
     {
         $this->data = $data;
 
         return $this;
     }
 
-    public function getSort() : int
+    public function getSort(): int
     {
         return $this->sort;
     }
 
-    public function setSort(int $sort) : Tool
+    public function setSort(int $sort): Tool
     {
         $this->sort = $sort;
 

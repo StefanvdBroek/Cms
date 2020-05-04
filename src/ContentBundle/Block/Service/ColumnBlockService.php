@@ -12,12 +12,10 @@ use Opifer\ContentBundle\Form\Type\SpanCollectionType;
 use Opifer\ContentBundle\Form\Type\StylesType;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class ColumnBlockService.
@@ -34,10 +32,6 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
 
     /**
      * ColumnBlockService constructor.
-     *
-     * @param BlockRenderer $blockRenderer
-     * @param array         $config
-     * @param EntityManager $entityManager
      */
     public function __construct(BlockRenderer $blockRenderer, array $config, EntityManager $entityManager)
     {
@@ -49,11 +43,11 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
     {
         $parameters = parent::getViewParameters($block);
 
-        $classes = array(
+        $classes = [
             'column_classes' => $this->getColumnClasses($block),
             'offset_classes' => $this->getOffsetClasses($block),
             'gutter_classes' => $this->getGutterClasses($block),
-        );
+        ];
 
         return array_merge($parameters, $classes);
     }
@@ -66,8 +60,8 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
         parent::buildManageForm($builder, $options);
 
         $builder->get('properties')
-            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'],'required' => false])
-            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'],'required' => false])
+            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'], 'required' => false])
+            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'], 'required' => false])
         ;
 
         $builder->get('default')
@@ -85,7 +79,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
                 'attr' => [
                     'help_text' => 'help.column_count',
                     'buttongroup' => true,
-                    'tag' => 'styles'
+                    'tag' => 'styles',
                 ],
             ]);
 
@@ -121,7 +115,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
                     'choices' => $this->config['styles'],
                     'attr' => [
                         'help_text' => 'help.list_display_size',
-                        'tag' => 'styles'
+                        'tag' => 'styles',
                     ],
                 ])
                 ->add('spans', SpanCollectionType::class, [
@@ -129,7 +123,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
                     'label' => 'label.spans',
                     'attr' => [
                         'help_text' => 'help.column_spans',
-                        'tag' => 'styles'
+                        'tag' => 'styles',
                     ],
                     'required' => false,
                 ])
@@ -138,7 +132,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
                     'label' => 'label.offsets',
                     'attr' => [
                         'help_text' => 'help.column_offsets',
-                        'tag' => 'styles'
+                        'tag' => 'styles',
                     ],
                     'required' => false,
                 ])
@@ -147,7 +141,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
                     'label' => 'label.gutters',
                     'attr' => [
                         'help_text' => 'help.column_gutters',
-                        'tag' => 'styles'
+                        'tag' => 'styles',
                     ],
                     'required' => false,
                 ])
@@ -166,8 +160,8 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
         foreach ($children as $child) {
             $child->getPosition();
 
-            if ($child->getPosition() > ($block->getColumnCount() -1)) {
-                $child->setPosition(($block->getColumnCount() -1));
+            if ($child->getPosition() > ($block->getColumnCount() - 1)) {
+                $child->setPosition(($block->getColumnCount() - 1));
                 $this->em->persist($child);
             }
         }
@@ -204,7 +198,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
      */
     public function getTool(BlockInterface $block = null)
     {
-        $tool = new Tool($block !== null ? sprintf('%d columns', $block->getColumnCount()) : 'label.columnblock', 'column');
+        $tool = new Tool(null !== $block ? sprintf('%d columns', $block->getColumnCount()) : 'label.columnblock', 'column');
 
         $tool->setIcon('view_column')
             ->setGroup(Tool::GROUP_LAYOUT)
@@ -218,7 +212,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
      */
     public function getName(BlockInterface $block = null)
     {
-        return sprintf('%d columns', $block !== null ? $block->getColumnCount() : $this->getColumnCount());
+        return sprintf('%d columns', null !== $block ? $block->getColumnCount() : $this->getColumnCount());
     }
 
     /**
@@ -238,13 +232,11 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     public function getColumnClasses(BlockInterface $block)
     {
-        $spanStyles = array();
+        $spanStyles = [];
 
         if ($block->getColumnCount()) {
             $properties = $block->getProperties();
@@ -270,13 +262,11 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     public function getOffsetClasses(BlockInterface $block)
     {
-        $classes = array();
+        $classes = [];
 
         if ($block->getColumnCount()) {
             $properties = $block->getProperties();
@@ -299,13 +289,11 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return array
      */
     public function getGutterClasses(BlockInterface $block)
     {
-        $gutterStyles = array();
+        $gutterStyles = [];
 
         if ($block->getColumnCount()) {
             $properties = $block->getProperties();
@@ -315,7 +303,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
                         continue;
                     }
                     foreach ($cols as $col => $span) {
-                        if ($span === null) {
+                        if (null === $span) {
                             continue;
                         }
                         $gutterStyles[$col][] = "px-$screen-$span";
@@ -331,7 +319,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
     {
         $placeholders = [];
 
-        for ($i = 0;$i < $block->getColumnCount();++$i) {
+        for ($i = 0; $i < $block->getColumnCount(); ++$i) {
             $placeholders[$i] = sprintf('Column %d', $i + 1);
         }
 
@@ -340,6 +328,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

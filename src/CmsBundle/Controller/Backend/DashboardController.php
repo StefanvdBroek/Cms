@@ -6,7 +6,6 @@ use Opifer\CmsBundle\Entity\Cron;
 use Opifer\CmsBundle\Manager\ContentManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DashboardController extends Controller
 {
@@ -31,7 +30,7 @@ class DashboardController extends Controller
         return $this->render('@OpiferCms/Backend/Dashboard/dashboard.html.twig', [
             'latest_content' => $latestContent,
             'new_content' => $newContent,
-            'crons' => $crons
+            'crons' => $crons,
         ]);
     }
 }

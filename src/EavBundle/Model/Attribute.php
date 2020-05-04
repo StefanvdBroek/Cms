@@ -262,8 +262,6 @@ class Attribute implements AttributeInterface
     /**
      * Add values.
      *
-     * @param ValueInterface $values
-     *
      * @return Attribute
      */
     public function addValue(ValueInterface $values)
@@ -275,8 +273,6 @@ class Attribute implements AttributeInterface
 
     /**
      * Remove values.
-     *
-     * @param ValueInterface $values
      */
     public function removeValue(ValueInterface $values)
     {
@@ -298,7 +294,7 @@ class Attribute implements AttributeInterface
      */
     public function hasOptions()
     {
-        return (count($this->getOptions()) > 0);
+        return count($this->getOptions()) > 0;
     }
 
     /**
@@ -314,8 +310,6 @@ class Attribute implements AttributeInterface
     /**
      * Add options.
      *
-     * @param OptionInterface $options
-     *
      * @return Attribute
      */
     public function addOption(OptionInterface $options)
@@ -327,8 +321,6 @@ class Attribute implements AttributeInterface
 
     /**
      * Remove options.
-     *
-     * @param OptionInterface $options
      */
     public function removeOption(OptionInterface $options)
     {
@@ -392,8 +384,6 @@ class Attribute implements AttributeInterface
     /**
      * Add allowed schema.
      *
-     * @param SchemaInterface $schema
-     *
      * @return AttributeInterface
      */
     public function addAllowedSchema(SchemaInterface $schema)
@@ -414,8 +404,6 @@ class Attribute implements AttributeInterface
 
     /**
      * Remove allowed schema.
-     *
-     * @param SchemaInterface $schema
      */
     public function removeAllowedSchema(SchemaInterface $schema)
     {
@@ -431,8 +419,6 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     * @param ArrayCollection $allowedSchemas
-     *
      * @return Attribute
      */
     public function setAllowedSchemas(ArrayCollection $allowedSchemas)

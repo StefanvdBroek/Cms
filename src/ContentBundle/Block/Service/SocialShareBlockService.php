@@ -33,7 +33,7 @@ class SocialShareBlockService extends AbstractBlockService implements BlockServi
                 'label' => 'label.social_title',
                 'attr' => [
                     'help_text' => 'help.block_social_title',
-                    'tag' => 'general'
+                    'tag' => 'general',
                 ],
                 'required' => false,
             ])
@@ -43,7 +43,7 @@ class SocialShareBlockService extends AbstractBlockService implements BlockServi
                     'help_text' => 'help.block_social_text',
                     'label_col' => 12,
                     'widget_col' => 12,
-                    'tag' => 'general'
+                    'tag' => 'general',
                 ],
                 'required' => false,
             ]
@@ -128,6 +128,7 @@ class SocialShareBlockService extends AbstractBlockService implements BlockServi
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

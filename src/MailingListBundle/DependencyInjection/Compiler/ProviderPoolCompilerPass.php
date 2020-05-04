@@ -8,9 +8,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class ProviderPoolCompilerPass implements CompilerPassInterface
 {
-    /**
-     * @param ContainerBuilder $container
-     */
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('opifer.mailinglist.provider_pool')) {
@@ -24,7 +21,7 @@ class ProviderPoolCompilerPass implements CompilerPassInterface
             foreach ($tagAttributes as $attributes) {
                 $definition->addMethodCall(
                     'addProvider',
-                    array(new Reference($id), $attributes['alias'])
+                    [new Reference($id), $attributes['alias']]
                 );
             }
         }

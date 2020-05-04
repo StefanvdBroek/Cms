@@ -2,21 +2,16 @@
 
 namespace Opifer\ContentBundle\Block\Service;
 
-use Opifer\ContentBundle\Entity\AvatarBlock;
-use Opifer\ContentBundle\Block\Service\AbstractBlockService;
-use Opifer\ContentBundle\Block\Service\BlockServiceInterface;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
-use Opifer\ContentBundle\Model\BlockInterface;
-use Symfony\Component\Form\FormBuilderInterface;
-use Opifer\ContentBundle\Model\ContentManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Opifer\ContentBundle\Entity\AvatarBlock;
 use Opifer\ContentBundle\Form\Type\ContentPickerType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Avatar Block Service
+ * Avatar Block Service.
  */
 class AvatarBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -54,22 +49,22 @@ class AvatarBlockService extends AbstractBlockService implements BlockServiceInt
     {
         $parameters = [
             'block_service' => $this,
-            'block'         => $block,
+            'block' => $block,
         ];
-        
+
         return $parameters;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
-        return new AvatarBlock;
+        return new AvatarBlock();
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -83,6 +78,7 @@ class AvatarBlockService extends AbstractBlockService implements BlockServiceInt
 
     /**
      * @param BlockInterface $block
+     *
      * @return mixed
      */
     public function getDescription(BlockInterface $block = null)

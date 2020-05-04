@@ -3,9 +3,9 @@
 namespace Opifer\ContentBundle\Tests\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Opifer\CmsBundle\Entity\Content;
 use Opifer\CmsBundle\Entity\Locale;
 use Opifer\ContentBundle\Entity\TranslationGroup;
-use Opifer\CmsBundle\Entity\Content;
 use PHPUnit\Framework\TestCase;
 
 class TranslationGroupTest extends TestCase
@@ -41,7 +41,7 @@ class TranslationGroupTest extends TestCase
         $this->assertEquals($actual, [
             'en' => '/',
             'nl' => '/nl',
-            'fr' => '/fr/custom-page'
+            'fr' => '/fr/custom-page',
         ]);
     }
 }

@@ -13,9 +13,8 @@ use Opifer\EavBundle\Manager\EavManager;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Backend Content Controller.
@@ -69,7 +68,7 @@ class ContentController extends Controller
         return $this->render($this->getParameter('opifer_content.content_select_type'), [
             'content_types' => $contentTypes,
             'site_id' => $siteId,
-            'layouts' => $layouts
+            'layouts' => $layouts,
         ]);
     }
 
@@ -78,17 +77,17 @@ class ContentController extends Controller
         $sites = $this->getDoctrine()->getRepository(Site::class)->findAll();
 
         //if no site go on
-        if (count($sites) == 0) {
+        if (0 == count($sites)) {
             return $this->redirectToRoute('opifer_content_content_select_type');
         }
 
         //if just one site select this one
-        if (count($sites) == 1) {
+        if (1 == count($sites)) {
             return $this->redirectToRoute('opifer_content_content_select_type', ['siteId' => $sites[0]->getId()]);
         }
 
         return $this->render($this->getParameter('opifer_content.content_select_site'), [
-            'sites' => $sites
+            'sites' => $sites,
         ]);
     }
 
@@ -111,8 +110,7 @@ class ContentController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return RedirectResponse|Response
      */
@@ -157,8 +155,7 @@ class ContentController extends Controller
     /**
      * Create a new content item.
      *
-     * @param Request $request
-     * @param int     $type
+     * @param int $type
      *
      * @return Response
      */
@@ -203,13 +200,13 @@ class ContentController extends Controller
             if (null === $content->getPublishAt()) {
                 $content->setPublishAt(new \DateTime());
             }
-            
+
             $manager->save($content);
 
             return $this->redirectToRoute('opifer_content_contenteditor_design', [
                 'owner' => 'content',
                 'ownerId' => $content->getId(),
-                'site_id' => $siteId
+                'site_id' => $siteId,
             ]);
         }
 
@@ -221,6 +218,7 @@ class ContentController extends Controller
     /**
      * @param $id
      * @param $content
+     *
      * @return mixed
      */
     public function duplicateAction($id, $content)
@@ -267,8 +265,7 @@ class ContentController extends Controller
     /**
      * Edit the details of Content.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return Response
      */
@@ -284,8 +281,8 @@ class ContentController extends Controller
         $content = $manager->createMissingValueSet($content);
 
         // Load the contentTranslations for the content group
-        if ($content->getTranslationGroup() !== null) {
-            $contentTranslations = $content->getTranslationGroup()->getContents()->filter(function($contentTranslation) use ($content) {
+        if (null !== $content->getTranslationGroup()) {
+            $contentTranslations = $content->getTranslationGroup()->getContents()->filter(function ($contentTranslation) use ($content) {
                 return $contentTranslation->getId() !== $content->getId();
             });
 
@@ -309,8 +306,8 @@ class ContentController extends Controller
             // Make sure all the contentTranslations have the same group as content
             $contentTranslationIds = [$content->getId()];
             foreach ($content->getContentTranslations() as $contentTranslation) {
-                if ($contentTranslation->getTranslationGroup() === null) {
-                    if ($content->getTranslationGroup() === null) {
+                if (null === $contentTranslation->getTranslationGroup()) {
+                    if (null === $content->getTranslationGroup()) {
                         // Init new group
                         $translationGroup = new TranslationGroup();
                         $content->setTranslationGroup($translationGroup);
@@ -334,7 +331,7 @@ class ContentController extends Controller
                     ->execute();
             }
 
-            if (count($content->getContentTranslations()) < 2 && $content->getTranslationGroup() !== null) {
+            if (count($content->getContentTranslations()) < 2 && null !== $content->getTranslationGroup()) {
                 $translationGroup = $content->getTranslationGroup();
                 $content->unsetTranslationGroup();
 
@@ -355,8 +352,7 @@ class ContentController extends Controller
     /**
      * Details action for an inline form in the Content Design.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -372,8 +368,8 @@ class ContentController extends Controller
         $em = $manager->getEntityManager();
 
         // Load the contentTranslations for the content group
-        if ($content->getTranslationGroup() !== null) {
-            $contentTranslations = $content->getTranslationGroup()->getContents()->filter(function($contentTranslation) use ($content) {
+        if (null !== $content->getTranslationGroup()) {
+            $contentTranslations = $content->getTranslationGroup()->getContents()->filter(function ($contentTranslation) use ($content) {
                 return $contentTranslation->getId() !== $content->getId();
             });
 
@@ -398,7 +394,7 @@ class ContentController extends Controller
                 $content->setPublishAt($content->getCreatedAt());
             }
 
-            if ($content->getTranslationGroup() === null) {
+            if (null === $content->getTranslationGroup()) {
                 // Init new group
                 $translationGroup = new TranslationGroup();
                 $content->setTranslationGroup($translationGroup);
@@ -406,8 +402,8 @@ class ContentController extends Controller
 
             // Make sure all the contentTranslations have the same group as content
             $contentTranslationIds = [$content->getId()];
-            foreach($content->getContentTranslations() as $contentTranslation) {
-                if ($contentTranslation->getTranslationGroup() === null) {
+            foreach ($content->getContentTranslations() as $contentTranslation) {
+                if (null === $contentTranslation->getTranslationGroup()) {
                     $contentTranslation->setTranslationGroup($content->getTranslationGroup());
                     $em->persist($contentTranslation);
                 }
@@ -437,6 +433,6 @@ class ContentController extends Controller
 
     public function historyAction(Request $request, $owner, $ownerId)
     {
-        return $this->render($this->getParameter('opifer_content.content_history_view'), array());
+        return $this->render($this->getParameter('opifer_content.content_history_view'), []);
     }
 }

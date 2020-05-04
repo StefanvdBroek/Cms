@@ -5,7 +5,7 @@ namespace Opifer\ContentBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Related Collection Block
+ * Related Collection Block.
  *
  * @ORM\Entity
  */

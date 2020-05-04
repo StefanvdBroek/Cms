@@ -13,20 +13,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Content Controller
+ * Content Controller.
  */
 class ContentController extends Controller
 {
     /**
-     * View a single content page
+     * View a single content page.
      *
      * This Controller action is being routed to from either our custom ContentRouter,
      * or the ExceptionController.
+     *
      * @see \Opifer\ContentBundle\Router\ContentRouter
      *
-     * @param Request          $request
-     * @param ContentInterface $content
-     * @param int              $statusCode
+     * @param int $statusCode
      *
      * @return Response
      *
@@ -96,7 +95,6 @@ class ContentController extends Controller
     /**
      * Render the home page.
      *
-     * @param Request $request
      * @return Response
      */
     public function homeAction(Request $request)
@@ -106,7 +104,7 @@ class ContentController extends Controller
         }
 
         /** @var BlockManager $manager */
-        $manager  = $this->get('opifer.content.content_manager');
+        $manager = $this->get('opifer.content.content_manager');
         $host = $request->getHost();
         $em = $this->getDoctrine()->getManager();
 
@@ -128,7 +126,7 @@ class ContentController extends Controller
         $content = $manager->getRepository()->findActiveBySlug('index', $host);
 
         return $this->forward('OpiferContentBundle:Frontend/Content:view', [
-            'content' => $content
+            'content' => $content,
         ]);
     }
 }

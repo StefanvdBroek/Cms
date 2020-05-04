@@ -3,7 +3,6 @@
 namespace Opifer\CmsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Opifer\EavBundle\Model\Attribute as BaseAttribute;
 use Symfony\Component\Validator\Constraints as Assert;

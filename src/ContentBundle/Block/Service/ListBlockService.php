@@ -2,7 +2,6 @@
 
 namespace Opifer\ContentBundle\Block\Service;
 
-use Doctrine\ORM\EntityManager;
 use Opifer\ContentBundle\Block\BlockRenderer;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
@@ -12,7 +11,6 @@ use Opifer\ContentBundle\Form\Type\StylesType;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Opifer\ContentBundle\Model\ContentManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,18 +24,14 @@ class ListBlockService extends AbstractBlockService implements BlockServiceInter
     protected $contentManager;
 
     /**
-     * Enables ESI so lists are updated correctly when child content changes
+     * Enables ESI so lists are updated correctly when child content changes.
      *
      * @var bool
      */
     protected $esiEnabled = true;
 
     /**
-     * Constructor
-     *
-     * @param BlockRenderer           $blockRenderer
-     * @param ContentManagerInterface $contentManager
-     * @param array                   $config
+     * Constructor.
      */
     public function __construct(BlockRenderer $blockRenderer, ContentManagerInterface $contentManager, array $config)
     {
@@ -55,32 +49,32 @@ class ListBlockService extends AbstractBlockService implements BlockServiceInter
 
         // Default panel
         $builder->get('default')
-            ->add('title',  TextType::class, [
+            ->add('title', TextType::class, [
                 'label' => 'label.display_name',
                 'attr' => [
                     'help_text' => 'help.block_display_name',
-                    'tag' => 'settings'
+                    'tag' => 'settings',
                 ],
-                'required' => false
+                'required' => false,
             ])
-            ->add('value',  ContentListPickerType::class, [
+            ->add('value', ContentListPickerType::class, [
                 'label' => 'label.content',
                 'required' => false,
                 'attr' => [
                     'help_text' => 'help.list_content_picker',
-                ]
+                ],
             ]);
 
         $builder->get('properties')
-            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'],'required' => false])
-            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'],'required' => false]);
+            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'], 'required' => false])
+            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'], 'required' => false]);
 
         if ($this->config['templates'] && count($this->config['templates'])) {
             $builder->get('properties')
                 ->add('template', ChoiceType::class, [
                     'label' => 'label.template',
                     'placeholder' => 'placeholder.choice_optional',
-                    'attr' => ['help_text' => 'help.template','tag' => 'styles'],
+                    'attr' => ['help_text' => 'help.template', 'tag' => 'styles'],
                     'choices' => $this->config['templates'],
                     'required' => false,
             ]);
@@ -133,6 +127,7 @@ class ListBlockService extends AbstractBlockService implements BlockServiceInter
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

@@ -25,15 +25,9 @@ class FileProvider extends AbstractProvider
     /** @var RouterInterface */
     protected $router;
 
-    /** @var UrlGenerator  */
+    /** @var UrlGenerator */
     protected $urlGenerator;
 
-    /**
-     * @param FileSystem          $filesystem
-     * @param TranslatorInterface $translator
-     * @param RouterInterface     $router
-     * @param UrlGenerator        $urlGenerator
-     */
     public function __construct(FileSystem $filesystem, TranslatorInterface $translator, RouterInterface $router, UrlGenerator $urlGenerator)
     {
         $this->filesystem = $filesystem;
@@ -49,9 +43,6 @@ class FileProvider extends AbstractProvider
 
     /**
      * Build the add file form.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array                $options
      */
     public function buildCreateForm(FormBuilderInterface $builder, array $options)
     {
@@ -90,7 +81,7 @@ class FileProvider extends AbstractProvider
      */
     public function prePersist(MediaInterface $media)
     {
-        if ($media->getFile() === null) {
+        if (null === $media->getFile()) {
             return;
         }
 
@@ -137,8 +128,6 @@ class FileProvider extends AbstractProvider
 
     /**
      * Upload a file.
-     *
-     * @param MediaInterface $media
      */
     public function upload(MediaInterface $media)
     {
@@ -180,7 +169,7 @@ class FileProvider extends AbstractProvider
      */
     public function handleError($error)
     {
-        switch($error) {
+        switch ($error) {
             case UPLOAD_ERR_INI_SIZE:
                 throw new FileException('The uploaded file exceeds the upload_max_filesize directive in php.ini');
             case UPLOAD_ERR_FORM_SIZE:
@@ -200,8 +189,6 @@ class FileProvider extends AbstractProvider
 
     /**
      * Get the full url to the original file.
-     *
-     * @param MediaInterface $media
      *
      * @return string
      */

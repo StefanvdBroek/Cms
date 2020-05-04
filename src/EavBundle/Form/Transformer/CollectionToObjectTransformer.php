@@ -13,7 +13,7 @@ class CollectionToObjectTransformer implements DataTransformerInterface
      *
      * @param \Doctrine\ORM\PersistentCollection $values
      *
-     * @return Object
+     * @return object
      */
     public function transform($values)
     {
@@ -25,9 +25,9 @@ class CollectionToObjectTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms a single Object to an ArrayCollection
+     * Transforms a single Object to an ArrayCollection.
      *
-     * @param Object $value
+     * @param object $value
      *
      * @return ArrayCollection
      */
@@ -38,7 +38,7 @@ class CollectionToObjectTransformer implements DataTransformerInterface
         }
 
         $collection = new ArrayCollection();
-        if(null !== $value) {
+        if (null !== $value) {
             $collection->add($value);
         }
 

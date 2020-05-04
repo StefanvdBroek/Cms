@@ -9,11 +9,9 @@ use Symfony\Component\DependencyInjection\Reference;
 class ValueCompilerPass implements CompilerPassInterface
 {
     /**
-     * Process the compiler pass
+     * Process the compiler pass.
      *
      * Adds all tagged provider services to the provider pool
-     *
-     * @param ContainerBuilder $container
      *
      * @return void
      */
@@ -30,7 +28,7 @@ class ValueCompilerPass implements CompilerPassInterface
             foreach ($tagAttributes as $attributes) {
                 $definition->addMethodCall(
                     'addValue',
-                    array(new Reference($id), $attributes['alias'])
+                    [new Reference($id), $attributes['alias']]
                 );
             }
         }

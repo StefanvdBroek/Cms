@@ -14,10 +14,6 @@ class PropertyToEntityTransformer implements DataTransformerInterface
     /** @var array */
     protected $config;
 
-    /**
-     * @param EntityManager $em
-     * @param array         $config
-     */
     public function __construct(EntityManager $em, array $config)
     {
         $this->em = $em;

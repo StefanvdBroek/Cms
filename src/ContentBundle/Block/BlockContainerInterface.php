@@ -20,16 +20,12 @@ interface BlockContainerInterface extends BlockInterface
     /**
      * Add Block.
      *
-     * @param BlockInterface $child
-     *
      * @return BlockInterface
      */
     public function addChild(BlockInterface $child);
 
     /**
      * Remove Block.
-     *
-     * @param BlockInterface $child
      *
      * @return BlockInterface
      */

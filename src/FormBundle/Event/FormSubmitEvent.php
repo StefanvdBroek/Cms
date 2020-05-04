@@ -17,8 +17,6 @@ class FormSubmitEvent extends Event
 
     /**
      * Constructor.
-     *
-     * @param PostInterface $post
      */
     public function __construct(PostInterface $post)
     {

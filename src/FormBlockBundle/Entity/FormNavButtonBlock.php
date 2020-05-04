@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\ContentBundle\Entity\Block;
 
 /**
- * Form nav button Block
+ * Form nav button Block.
  *
  * @ORM\Entity
  */

@@ -4,11 +4,11 @@ namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Opifer\Revisions\Mapping\Annotation as Revisions;
 use Opifer\MediaBundle\Model\MediaInterface;
+use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * DownloadsBlock
+ * DownloadsBlock.
  *
  * @ORM\Entity
  */
@@ -56,6 +56,7 @@ class DownloadsBlock extends Block
 
     /**
      * @param $items
+     *
      * @return $this
      */
     public function setItems($items)
@@ -66,7 +67,7 @@ class DownloadsBlock extends Block
     }
 
     /**
-     * Get the items of actual media items
+     * Get the items of actual media items.
      *
      * @return MediaInterface[]|ArrayCollection
      */

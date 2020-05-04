@@ -8,11 +8,11 @@ use Opifer\MediaBundle\Model\Media;
 use Opifer\MediaBundle\Model\MediaManager;
 use Opifer\MediaBundle\Provider\Pool;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,9 +35,6 @@ class MediaPickerType extends AbstractType
 
     /**
      * Constructor.
-     *
-     * @param Pool   $providerPool
-     * @param MediaManager $mediaManager
      */
     public function __construct(Pool $providerPool, MediaManager $mediaManager)
     {
@@ -56,7 +53,7 @@ class MediaPickerType extends AbstractType
 
                         if (is_array($items)) {
                             uasort($items, function ($a, $b) use ($ids) {
-                                return (array_search($a->getId(), $ids) > array_search($b->getId(), $ids));
+                                return array_search($a->getId(), $ids) > array_search($b->getId(), $ids);
                             });
                         }
 
@@ -101,7 +98,6 @@ class MediaPickerType extends AbstractType
                     }
                 ));
             }
-
         }
 
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
@@ -117,7 +113,7 @@ class MediaPickerType extends AbstractType
             if (is_array($this->sortedIds) && count($this->sortedIds) && is_array($data) && count($data)) {
                 $ids = $this->sortedIds;
                 uasort($data, function ($a, $b) use ($ids) {
-                    return (array_search($a->getId(), $ids) > array_search($b->getId(), $ids));
+                    return array_search($a->getId(), $ids) > array_search($b->getId(), $ids);
                 });
 
                 $event->setData(array_values($data));
@@ -136,7 +132,7 @@ class MediaPickerType extends AbstractType
             'class' => $this->mediaManager->getClass(),
             'query_builder' => function (EntityRepository $mediaRepository) {
                 return $mediaRepository->createQueryBuilder('m')->add('orderBy', 'm.name ASC');
-            }
+            },
         ]);
     }
 
@@ -150,8 +146,8 @@ class MediaPickerType extends AbstractType
             'props' => [
                 'multiple' => $view->vars['multiple'],
                 'name' => $view->vars['full_name'],
-                'value' => $view->vars['value']
-            ]
+                'value' => $view->vars['value'],
+            ],
         ]);
     }
 

@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class LayoutController extends Controller
 {
@@ -30,7 +29,7 @@ class LayoutController extends Controller
         $source->initQueryBuilder($queryBuilder);
         $tableAlias = $source->getTableAlias();
         $source->manipulateQuery(function ($query) use ($tableAlias) {
-            $query->andWhere($tableAlias . '.layout = :layout')->setParameter('layout', true);
+            $query->andWhere($tableAlias.'.layout = :layout')->setParameter('layout', true);
         });
 
         $editAction = new RowAction('button.edit', 'opifer_cms_layout_edit');
@@ -52,14 +51,11 @@ class LayoutController extends Controller
             ->addRowAction($deleteAction)
             ->addRowAction($designAction)
             ->setVisibleColumns(['id', 'title', 'updatedAt']);
-        ;
 
         return $grid->getGridResponse('@OpiferCms/Backend/Layout/index.html.twig');
     }
 
     /**
-     * @param Request $request
-     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request, $type = 0)
@@ -99,8 +95,7 @@ class LayoutController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return RedirectResponse|Response
      */
@@ -131,8 +126,7 @@ class LayoutController extends Controller
     /**
      * Details action for an inline form in the Content Design.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

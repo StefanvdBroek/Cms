@@ -15,8 +15,7 @@ class MediaManager implements MediaManagerInterface
     /**
      * Constructor.
      *
-     * @param EntityManager $em
-     * @param string        $class
+     * @param string $class
      */
     public function __construct(EntityManager $em, $class)
     {
@@ -55,8 +54,6 @@ class MediaManager implements MediaManagerInterface
 
     /**
      * Get paginated media items by request.
-     *
-     * @param Request $request
      *
      * @return Pagerfanta
      */

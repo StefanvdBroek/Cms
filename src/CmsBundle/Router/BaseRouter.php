@@ -46,9 +46,9 @@ abstract class BaseRouter
      * @param array  $parameters The route parameters
      * @param bool   $absolute   Absolute url or not
      *
-     * @return null|string
+     * @return string|null
      */
-    public function generate($name, $parameters = array(), $absolute = false)
+    public function generate($name, $parameters = [], $absolute = false)
     {
         $this->urlGenerator = new UrlGenerator($this->routeCollection, $this->context);
 

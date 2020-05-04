@@ -6,5 +6,4 @@ use Opifer\EavBundle\Model\Schema as BaseTemplate;
 
 class Schema extends BaseTemplate
 {
-
 }

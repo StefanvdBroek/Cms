@@ -83,8 +83,6 @@ class ExpressionEngine
     /**
      * Transform the expression to Webmozarts' Expression.
      *
-     * @param Expression $expression
-     *
      * @return \Webmozart\Expression\Expression
      */
     protected function transform(Expression $expression)

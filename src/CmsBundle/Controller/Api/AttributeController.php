@@ -13,8 +13,6 @@ class AttributeController extends FOSRestController
      * @ParamConverter()
      * @ApiDoc()
      *
-     * @param Attribute $attribute
-     *
      * @return Attribute
      */
     public function getAttributeAction(Attribute $attribute)
@@ -26,7 +24,6 @@ class AttributeController extends FOSRestController
      * @ApiDoc()
      * @ParamConverter("attribute", options={"mapping": {"attribute": "name"}})
      *
-     * @param Attribute $attribute
      * @return array
      */
     public function getAttributesOptionsAction(Attribute $attribute)

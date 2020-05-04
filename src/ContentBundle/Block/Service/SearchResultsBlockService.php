@@ -3,20 +3,17 @@
 namespace Opifer\ContentBundle\Block\Service;
 
 use Opifer\ContentBundle\Block\BlockRenderer;
-use Opifer\ContentBundle\Model\Content;
-use Opifer\ContentBundle\Model\ContentManagerInterface;
-use Opifer\ContentBundle\Entity\SearchResultsBlock;
-use Opifer\ContentBundle\Block\Service\AbstractBlockService;
-use Opifer\ContentBundle\Block\Service\BlockServiceInterface;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Opifer\ContentBundle\Entity\SearchResultsBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
+use Opifer\ContentBundle\Model\Content;
+use Opifer\ContentBundle\Model\ContentManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * SearchResults Block Service
+ * SearchResults Block Service.
  */
 class SearchResultsBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -26,11 +23,6 @@ class SearchResultsBlockService extends AbstractBlockService implements BlockSer
     /** @var ContentManagerInterface */
     protected $contentManager;
 
-    /**
-     * @param BlockRenderer $blockRenderer
-     * @param ContentManagerInterface $contentManager
-     * @param array $config
-     */
     public function __construct(BlockRenderer $blockRenderer, ContentManagerInterface $contentManager, array $config)
     {
         parent::__construct($blockRenderer, $config);
@@ -39,29 +31,29 @@ class SearchResultsBlockService extends AbstractBlockService implements BlockSer
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
-        return new SearchResultsBlock;
+        return new SearchResultsBlock();
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getViewParameters(BlockInterface $block)
     {
         $parameters = [
             'block_service' => $this,
-            'block'         => $block,
-            'searchResults' => $this->getSearchResults()
+            'block' => $block,
+            'searchResults' => $this->getSearchResults(),
         ];
-           
+
         return $parameters;
     }
 
     /**
-     * Get the search results
+     * Get the search results.
      *
      * @return Content[]
      */
@@ -81,7 +73,7 @@ class SearchResultsBlockService extends AbstractBlockService implements BlockSer
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -93,16 +85,13 @@ class SearchResultsBlockService extends AbstractBlockService implements BlockSer
         return $tool;
     }
 
-    /**
-     * @param RequestStack $requestStack
-     */
     public function setRequest(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
     }
 
     /**
-     * @return null|Request
+     * @return Request|null
      */
     public function getRequest()
     {
@@ -111,6 +100,7 @@ class SearchResultsBlockService extends AbstractBlockService implements BlockSer
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

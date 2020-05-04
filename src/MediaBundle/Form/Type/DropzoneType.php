@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * The dropzone form type.
@@ -20,9 +19,6 @@ class DropzoneType extends AbstractType
     /** @var MediaManagerInterface */
     protected $mediaManager;
 
-    /**
-     * @param MediaManagerInterface $mm
-     */
     public function __construct(MediaManagerInterface $mm)
     {
         $this->mediaManager = $mm;

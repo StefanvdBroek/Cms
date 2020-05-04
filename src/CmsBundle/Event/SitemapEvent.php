@@ -10,10 +10,9 @@ class SitemapEvent extends Event
     protected $urls = [];
 
     /**
-     * @param string    $loc
-     * @param \DateTime $lastmod
-     * @param string    $changefreq
-     * @param int       $priority
+     * @param string $loc
+     * @param string $changefreq
+     * @param int    $priority
      */
     public function addUrl($loc, \DateTime $lastmod, $changefreq = 'daily', $priority = 1)
     {
@@ -33,9 +32,6 @@ class SitemapEvent extends Event
         return $this->urls;
     }
 
-    /**
-     * @param array $urls
-     */
     public function setUrls(array $urls)
     {
         $this->urls = $urls;

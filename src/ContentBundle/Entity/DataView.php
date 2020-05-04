@@ -3,11 +3,10 @@
 namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * DataView
+ * DataView.
  *
  * @ORM\Table(name="data_view")
  * @ORM\Entity(repositoryClass="Opifer\ContentBundle\Repository\DataViewRepository")
@@ -102,7 +101,7 @@ class DataView
     private $active = false;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -112,7 +111,7 @@ class DataView
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -126,7 +125,7 @@ class DataView
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -136,7 +135,7 @@ class DataView
     }
 
     /**
-     * Set displayName
+     * Set displayName.
      *
      * @param string $displayName
      *
@@ -150,7 +149,7 @@ class DataView
     }
 
     /**
-     * Get displayName
+     * Get displayName.
      *
      * @return string
      */
@@ -160,7 +159,7 @@ class DataView
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
      *
@@ -174,7 +173,7 @@ class DataView
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -216,7 +215,7 @@ class DataView
     }
 
     /**
-     * Set viewCode
+     * Set viewCode.
      *
      * @param string $viewCode
      *
@@ -230,7 +229,7 @@ class DataView
     }
 
     /**
-     * Get viewCode
+     * Get viewCode.
      *
      * @return string
      */
@@ -240,9 +239,9 @@ class DataView
     }
 
     /**
-     * Set viewReference
+     * Set viewReference.
      *
-     * @param boolean $viewReference
+     * @param bool $viewReference
      *
      * @return DataView
      */
@@ -254,7 +253,7 @@ class DataView
     }
 
     /**
-     * Get viewReference
+     * Get viewReference.
      *
      * @return string
      */
@@ -264,7 +263,7 @@ class DataView
     }
 
     /**
-     * Set dataSources
+     * Set dataSources.
      *
      * @param \stdClass $dataSources
      *
@@ -278,7 +277,7 @@ class DataView
     }
 
     /**
-     * Get dataSources
+     * Get dataSources.
      *
      * @return \stdClass
      */
@@ -288,7 +287,7 @@ class DataView
     }
 
     /**
-     * Set iconType
+     * Set iconType.
      *
      * @param string $iconType
      *
@@ -302,7 +301,7 @@ class DataView
     }
 
     /**
-     * Get iconType
+     * Get iconType.
      *
      * @return string
      */
@@ -312,9 +311,9 @@ class DataView
     }
 
     /**
-     * Set active
+     * Set active.
      *
-     * @param boolean $active
+     * @param bool $active
      *
      * @return DataView
      */
@@ -326,7 +325,7 @@ class DataView
     }
 
     /**
-     * Get active
+     * Get active.
      *
      * @return bool
      */
@@ -335,4 +334,3 @@ class DataView
         return $this->active;
     }
 }
-

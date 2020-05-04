@@ -10,20 +10,14 @@ use Opifer\ContentBundle\Form\Type\PageManagerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
- * Class TemplateController
- *
- * @package Opifer\ContentBundle\Controller\Backend
+ * Class TemplateController.
  */
 class TemplateController extends Controller
 {
-
     /**
-     * Index
-     *
-     * @param Request $request
+     * Index.
      *
      * @return Response
      */
@@ -38,12 +32,12 @@ class TemplateController extends Controller
         $rowAction->setRouteParameters(['id']);
         $editorAction = new RowAction('link.editor', 'opifer_content_template_editor');
         $editorAction->setRouteParameters(['id']);
-        $deleteAction = new RowAction('link.delete', 'opifer.crud.delete', true, '_self', array('class' => 'grid_delete_action text-danger'));
+        $deleteAction = new RowAction('link.delete', 'opifer.crud.delete', true, '_self', ['class' => 'grid_delete_action text-danger']);
         $deleteAction->setRouteParameters(['slug' => 'templates', 'id'])
             ->setRouteParametersMapping(['id' => 'id'])
             ->manipulateRender(
                 function ($action, $row) {
-                    $action->setConfirmMessage('Delete template' . $row->getField('name') . '?');
+                    $action->setConfirmMessage('Delete template'.$row->getField('name').'?');
 
                     return $action;
                 }
@@ -65,12 +59,8 @@ class TemplateController extends Controller
         return $grid->getGridResponse('OpiferContentBundle:Template:index.html.twig', ['title' => 'title.templates']);
     }
 
-
     /**
-     * Graphical Template editor
-     *
-     * @param Request  $request
-     * @param Template $template
+     * Graphical Template editor.
      *
      * @return Response
      */
@@ -90,14 +80,12 @@ class TemplateController extends Controller
             'subject_type' => 'template',
             'subject_id' => $template->getId(),
             'view_url' => $this->generateUrl('opifer_content_template_editor_view', ['id' => $template->getId()]),
-            'form' => $form->createView()];
+            'form' => $form->createView(), ];
 
         return $this->render('OpiferContentBundle:PageManager:editor.html.twig', $parameters);
     }
 
     /**
-     * @param Template $template
-     *
      * @return Response
      */
     public function editorViewAction(Request $request, Template $template)
@@ -105,7 +93,7 @@ class TemplateController extends Controller
         $this->denyAccessUnlessGranted('TEMPLATE_EDIT');
 
         $request->request->set('blockMode', 'manage');
+
         return $this->render($template->getView(), ['block' => $template]);
     }
-
 }

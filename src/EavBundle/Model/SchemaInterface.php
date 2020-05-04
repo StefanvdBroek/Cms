@@ -4,6 +4,7 @@ namespace Opifer\EavBundle\Model;
 
 interface SchemaInterface
 {
-    function getId();
-    function getAttributes();
+    public function getId();
+
+    public function getAttributes();
 }

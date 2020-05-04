@@ -10,9 +10,6 @@ use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Opifer\ReviewBundle\Manager\ReviewManager;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -26,10 +23,6 @@ class ReviewBlockService extends AbstractBlockService implements BlockServiceInt
 
     /**
      * Constructor.
-     *
-     * @param BlockRenderer $blockRenderer
-     * @param array           $config
-     * @param ReviewManager   $reviewManager
      */
     public function __construct(BlockRenderer $blockRenderer, array $config, ReviewManager $reviewManager)
     {
@@ -44,7 +37,6 @@ class ReviewBlockService extends AbstractBlockService implements BlockServiceInt
     public function buildManageForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildManageForm($builder, $options);
-
 
         $builder->get('properties')
             ->add('limit', IntegerType::class, ['label' => 'label.limit', 'attr' => ['help_text' => 'help.limit']])
@@ -90,8 +82,6 @@ class ReviewBlockService extends AbstractBlockService implements BlockServiceInt
     }
 
     /**
-     * @param BlockInterface $block
-     *
      * @return string
      */
     public function getView(BlockInterface $block)

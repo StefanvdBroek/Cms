@@ -15,7 +15,7 @@ class StringValueProvider extends AbstractValueProvider implements ValueProvider
     {
         $builder->add('value', TextType::class, [
             'required' => ($options['attribute']->getRequired()) ? true : false,
-            'label' => false
+            'label' => false,
         ]);
     }
 

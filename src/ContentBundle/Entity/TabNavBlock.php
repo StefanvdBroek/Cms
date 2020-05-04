@@ -6,18 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\ContentBundle\Block\BlockContainerInterface;
 
 /**
- * TabNavBlock
+ * TabNavBlock.
  *
  * @ORM\Entity
  */
 class TabNavBlock extends CompositeBlock implements BlockContainerInterface
 {
-
     public function __construct()
     {
         parent::__construct();
 
-        $this->properties = ['tabs' => array()];
+        $this->properties = ['tabs' => []];
     }
 
     /**
@@ -25,7 +24,7 @@ class TabNavBlock extends CompositeBlock implements BlockContainerInterface
      */
     public function __toString()
     {
-        return sprintf("Block %d: TabNav", $this->id);
+        return sprintf('Block %d: TabNav', $this->id);
     }
 
     public function getTabs()

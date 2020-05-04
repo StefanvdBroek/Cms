@@ -2,9 +2,6 @@
 
 namespace Opifer\ReviewBundle\Model;
 
-use APY\DataGridBundle\Grid\Mapping as GRID;
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Review.
  */
@@ -36,7 +33,7 @@ class Review implements ReviewInterface
     protected $createdAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {

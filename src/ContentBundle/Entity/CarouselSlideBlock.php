@@ -3,11 +3,11 @@
 namespace Opifer\ContentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Opifer\Revisions\Mapping\Annotation as Revisions;
 use Opifer\MediaBundle\Model\MediaInterface;
+use Opifer\Revisions\Mapping\Annotation as Revisions;
 
 /**
- * Carousel Slide Block
+ * Carousel Slide Block.
  *
  * @ORM\Entity
  */
@@ -59,8 +59,6 @@ class CarouselSlideBlock extends Block
     }
 
     /**
-     * @param MediaInterface $media
-     *
      * @return $this
      */
     public function setMedia(MediaInterface $media)

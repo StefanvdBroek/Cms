@@ -18,8 +18,6 @@ class ContentPickerType extends AbstractType
 
     /**
      * Constructor.
-     *
-     * @param ContentManagerInterface $contentManager
      */
     public function __construct(ContentManagerInterface $contentManager)
     {

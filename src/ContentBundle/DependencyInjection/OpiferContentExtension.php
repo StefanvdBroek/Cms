@@ -29,8 +29,6 @@ class OpiferContentExtension extends Extension implements PrependExtensionInterf
     /**
      * Prepend our config before other bundles, so we can preset
      * their config with our parameters.
-     *
-     * @param ContainerBuilder $container
      */
     public function prepend(ContainerBuilder $container)
     {
@@ -50,8 +48,6 @@ class OpiferContentExtension extends Extension implements PrependExtensionInterf
 
     /**
      * Simplifying parameter syntax.
-     *
-     * @param array $config
      *
      * @return array
      */
@@ -85,10 +81,6 @@ class OpiferContentExtension extends Extension implements PrependExtensionInterf
         return $params;
     }
 
-    /**
-     * @param ContainerBuilder $container
-     * @param array            $config
-     */
     private function prependExtensionConfig(ContainerBuilder $container, array $config)
     {
         foreach ($container->getExtensions() as $name => $extension) {

@@ -18,8 +18,6 @@ class MediaController extends Controller
     /**
      * Index.
      *
-     * @param Request $request
-     *
      * @return JsonResponse
      */
     public function indexAction(Request $request)
@@ -49,7 +47,7 @@ class MediaController extends Controller
         $items = $serializer->serialize(iterator_to_array($media->getCurrentPageResults()), 'json', SerializationContext::create()->setGroups(['Default', 'list']));
 
         $maxUploadSize = (ini_get('post_max_size') < ini_get('upload_max_filesize')) ? ini_get('post_max_size') : ini_get('upload_max_filesize');
-        
+
         return new JsonResponse([
             'directories' => json_decode($serializer->serialize($directories, 'json', SerializationContext::create()->enableMaxDepthChecks()), true),
             'results' => json_decode($items, true),
@@ -60,7 +58,7 @@ class MediaController extends Controller
     }
 
     /**
-     * Get a single media item
+     * Get a single media item.
      *
      * @return JsonResponse
      */
@@ -74,9 +72,8 @@ class MediaController extends Controller
     }
 
     /**
-     * Update a media item
+     * Update a media item.
      *
-     * @param Request $request
      * @return JsonResponse
      */
     public function updateAction(Request $request, $id)
@@ -88,8 +85,12 @@ class MediaController extends Controller
         /** @var MediaInterface $media */
         $media = $this->get('opifer.media.media_manager')->getRepository()->find($id);
 
-        if (isset($content['name'])) $media->setName($content['name']);
-        if (isset($content['alt'])) $media->setAlt($content['alt']);
+        if (isset($content['name'])) {
+            $media->setName($content['name']);
+        }
+        if (isset($content['alt'])) {
+            $media->setAlt($content['alt']);
+        }
 
         if (isset($content['directory'])) {
             $directory = $this->get('opifer.media.media_directory_manager')->getRepository()->find($content['directory']);
@@ -134,7 +135,7 @@ class MediaController extends Controller
                     $media->setDirectory($directory);
                 }
 
-                if (strpos($file->getClientMimeType(), 'image') !== false) {
+                if (false !== strpos($file->getClientMimeType(), 'image')) {
                     $media->setProvider('image');
                 } else {
                     $media->setProvider('file');
@@ -154,8 +155,7 @@ class MediaController extends Controller
     /**
      * Delete.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return JsonResponse
      */

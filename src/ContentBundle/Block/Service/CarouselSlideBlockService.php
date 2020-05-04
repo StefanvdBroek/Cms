@@ -11,11 +11,10 @@ use Opifer\ContentBundle\Model\BlockInterface;
 use Opifer\MediaBundle\Form\Type\MediaPickerType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Carousel Slide Block Service
+ * Carousel Slide Block Service.
  */
 class CarouselSlideBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -28,24 +27,22 @@ class CarouselSlideBlockService extends AbstractBlockService implements BlockSer
 
         $builder->get('properties')
             ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'], 'required' => false])
-            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'],'required' => false]);
-
+            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'], 'required' => false]);
 
         if ($this->config['styles']) {
             $builder->get('properties')
                 ->add('styles', StylesType::class, [
-                    'choices'  => array_combine($this->config['styles'], $this->config['styles']),
+                    'choices' => array_combine($this->config['styles'], $this->config['styles']),
                 ]);
         }
 
-
         $builder->get('default', FormType::class, ['inherit_data' => true])
             ->add('media', MediaPickerType::class, [
-                'required'  => false,
+                'required' => false,
                 'multiple' => false,
                 'attr' => [
                         'help_text' => 'help.carouselslide_media',
-                    ]
+                    ],
                 ])
             ->add('value', CKEditorType::class, [
                 'label' => 'label.rich_text',
@@ -54,12 +51,12 @@ class CarouselSlideBlockService extends AbstractBlockService implements BlockSer
                     'widget_col' => 12,
                     'help_text' => 'help.carouselslide_rich_text',
                 ],
-                'required' => false
+                'required' => false,
             ]);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
@@ -83,7 +80,7 @@ class CarouselSlideBlockService extends AbstractBlockService implements BlockSer
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -97,6 +94,7 @@ class CarouselSlideBlockService extends AbstractBlockService implements BlockSer
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

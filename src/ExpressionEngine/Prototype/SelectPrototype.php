@@ -10,8 +10,8 @@ class SelectPrototype extends Prototype
     /**
      * SelectPrototype constructor.
      *
-     * @param null|string $name
-     * @param null|string $selector
+     * @param string|null $name
+     * @param string|null $selector
      * @param Choice[]    $choices
      */
     public function __construct($key, $name, $selector, $choices = [])

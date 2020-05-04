@@ -5,15 +5,14 @@ namespace Opifer\EavBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Select Value
+ * Select Value.
  *
  * @ORM\Entity
  */
 class SelectValue extends OptionValue
 {
-
     /**
-     * Get the selected value
+     * Get the selected value.
      *
      * @return string
      */
@@ -22,18 +21,17 @@ class SelectValue extends OptionValue
         $options = parent::getValue();
 
         if (count($options)) {
-            if (empty( $options[0] )) {
+            if (empty($options[0])) {
                 $collection = $options->getValues();
+
                 return $collection[0]->getName();
             }
 
             return $options[0]->getName();
-
         }
 
         return '';
     }
-
 
     /**
      * Change the selected value into a string.

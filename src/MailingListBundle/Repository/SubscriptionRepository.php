@@ -3,7 +3,6 @@
 namespace Opifer\MailingListBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Guzzle\Tests\Service\Mock\Command\Sub\Sub;
 use Opifer\MailingListBundle\Entity\MailingList;
 use Opifer\MailingListBundle\Entity\Subscription;
 
@@ -33,8 +32,6 @@ class SubscriptionRepository extends EntityRepository
     /**
      * Finds all subscriptions pending synchronisation for a specific mailinglist.
      *
-     * @param MailingList $mailingList
-     *
      * @return Subscription[]
      */
     public function findPendingSynchronisationList(MailingList $mailingList)
@@ -53,10 +50,9 @@ class SubscriptionRepository extends EntityRepository
     }
 
     /**
-     * @param MailingList $list
-     * @param             $email
+     * @param $email
      *
-     * @return null|Subscription
+     * @return Subscription|null
      */
     public function findInListByEmail(MailingList $list, $email)
     {
@@ -65,16 +61,15 @@ class SubscriptionRepository extends EntityRepository
             ->andWhere('m.id = :list_id')
             ->andWhere('s.email = :email')
             ->setParameters([
-                'list_id'   => $list->getId(),
-                'email'     => $email,
+                'list_id' => $list->getId(),
+                'email' => $email,
             ])
             ->getQuery()
             ->getOneOrNullResult();
     }
 
     /**
-     * @param MailingList $list
-     * @param \DateTime   $since
+     * @param \DateTime $since
      *
      * @return array
      */
@@ -85,7 +80,7 @@ class SubscriptionRepository extends EntityRepository
             ->andWhere('m.id = :list_id')
             ->andWhere('s.updatedAt > s.syncedAt OR s.syncedAt IS NULL')
             ->setParameters([
-                'list_id'   => $list->getId(),
+                'list_id' => $list->getId(),
             ])
             ->getQuery()
             ->getResult();

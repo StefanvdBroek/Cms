@@ -10,5 +10,4 @@ use Opifer\EavBundle\Model\ValueInterface;
  */
 class MailingListSubscribeValue extends BooleanValue implements ValueInterface
 {
-
 }

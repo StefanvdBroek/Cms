@@ -33,9 +33,6 @@ class VimeoProvider extends AbstractProvider
 
     /**
      * Constructor.
-     *
-     * @param MediaManagerInterface $mm
-     * @param TranslatorInterface   $tr
      */
     public function __construct(MediaManagerInterface $mm, TranslatorInterface $tr)
     {
@@ -58,7 +55,6 @@ class VimeoProvider extends AbstractProvider
     {
         $builder
             ->add('reference', TextType::class, [
-
                 'label' => $this->translator->trans('vimeo.reference.label'),
                 'constraints' => [
                     new NotBlank(),
@@ -66,12 +62,12 @@ class VimeoProvider extends AbstractProvider
                     new VimeoUrl(),
                 ],
             ])
-            ->add('name', TextType::class,[
+            ->add('name', TextType::class, [
                 'label' => $this->translator->trans('vimeo.name'),
                 'required' => false,
                 'attr' => [
                     'help_text' => $this->translator->trans('vimeo.helper'),
-                ]
+                ],
             ])
             ->add('thumb', MediaPickerType::class, [
                 'multiple' => false,
@@ -107,8 +103,6 @@ class VimeoProvider extends AbstractProvider
 
     /**
      * pre saving handler.
-     *
-     * @param MediaInterface $media
      */
     public function preSave(MediaInterface $media)
     {
@@ -116,7 +110,7 @@ class VimeoProvider extends AbstractProvider
 
         $media->setReference($vimeoData->video_id);
 
-        if(!$media->getName()) {
+        if (!$media->getName()) {
             $media->setName($vimeoData->title);
         }
 
@@ -174,8 +168,6 @@ class VimeoProvider extends AbstractProvider
     /**
      * Get the full url to the original video.
      *
-     * @param MediaInterface $media
-     *
      * @return string
      */
     public function getUrl(MediaInterface $media)
@@ -186,7 +178,6 @@ class VimeoProvider extends AbstractProvider
     /**
      * @throws \RuntimeException
      *
-     * @param MediaInterface $media
      * @return \SimpleXMLElement
      */
     public function getMetadata(MediaInterface $media)
@@ -194,7 +185,7 @@ class VimeoProvider extends AbstractProvider
         try {
             $oembed_endpoint = 'http://vimeo.com/api/oembed';
 
-            $xml_url = $oembed_endpoint . '.xml?url=' . rawurlencode($media->getReference());
+            $xml_url = $oembed_endpoint.'.xml?url='.rawurlencode($media->getReference());
 
             $curl = curl_init($xml_url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);

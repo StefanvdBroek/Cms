@@ -9,22 +9,22 @@ use Symfony\Component\Form\FormBuilderInterface;
 class RequirementType extends AbstractType
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('parameter', TextType::class, [
-                'label' =>'opifer_redirect.form.parameter.label',
+                'label' => 'opifer_redirect.form.parameter.label',
                 'attr' => [
                     'help_text' => 'opifer_redirect.form.parameter.help_text',
-                ]
+                ],
             ])
             ->add('value', TextType::class, [
-                'label' =>'opifer_redirect.form.value.label',
+                'label' => 'opifer_redirect.form.value.label',
                 'attr' => [
                     'help_text' => 'opifer_redirect.form.value.help_text',
-                ]
+                ],
             ])
         ;
     }

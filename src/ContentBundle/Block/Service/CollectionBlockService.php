@@ -25,11 +25,9 @@ use Opifer\ExpressionEngine\Prototype\SelectPrototype;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Content Collection Block Service.
@@ -56,14 +54,6 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
 
     /**
      * constructor.
-     *
-     * @param BlockRenderer $blockRenderer
-     * @param DoctrineExpressionEngine $expressionEngine
-     * @param ContentManagerInterface $contentManager
-     * @param SiteManager $siteManager
-     * @param ContentTypeManager $contentTypeManager
-     * @param AttributeManager $attributeManager
-     * @param array $config
      */
     public function __construct(
         BlockRenderer $blockRenderer,
@@ -95,9 +85,9 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
                 'prototypes' => $this->getPrototypes(),
                 'attr' => [
                     'help_text' => 'Limit the collection with some predefined conditions.',
-                    'tag' => 'general'
+                    'tag' => 'general',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('order_by', ChoiceType::class, [
                 'label' => 'Order by',
@@ -108,8 +98,8 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
                 ],
                 'attr' => [
                     'help_text' => 'Define the order of the collection',
-                    'tag' => 'general'
-                ]
+                    'tag' => 'general',
+                ],
             ])
             ->add('order_direction', ChoiceType::class, [
                 'label' => 'Order direction',
@@ -119,15 +109,15 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
                 ],
                 'attr' => [
                     'help_text' => 'Set the direction to ascending or descending',
-                    'tag' => 'general'
-                ]
+                    'tag' => 'general',
+                ],
             ])
             ->add('limit', IntegerType::class, [
                 'attr' => [
                     'help_text' => 'The amount of items shown per page',
-                    'tag' => 'general'
+                    'tag' => 'general',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('filters', CollectionType::class, [
                 'allow_add' => true,
@@ -135,18 +125,18 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
                 'entry_type' => FilterType::class,
                 'attr' => [
                     'help_text' => 'Filters the user can use to search the collection',
-                    'tag' => 'general'
+                    'tag' => 'general',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('filter_placement', ChoiceType::class, [
                 'label' => 'Filter placement',
                 'choices' => (isset($this->config['filter_placement'])) ? $this->config['filter_placement'] : [],
                 'attr' => [
                     'help_text' => 'The position of the defined filters',
-                    'tag' => 'general'
+                    'tag' => 'general',
                 ],
-                'required' => false
+                'required' => false,
             ])
             ->add('load_more', CheckboxType::class, [
                 'label' => 'Load more',
@@ -154,7 +144,7 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
                 'attr' => [
                     'align_with_widget' => true,
                     'help_text' => 'Adds a `load more` button to the block',
-                    'tag' => 'general'
+                    'tag' => 'general',
                 ],
             ]);
 
@@ -163,7 +153,7 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
                 ->add('template', ChoiceType::class, [
                     'label' => 'label.template',
                     'placeholder' => 'placeholder.choice_optional',
-                    'attr' => ['help_text' => 'help.template','tag' => 'styles'],
+                    'attr' => ['help_text' => 'help.template', 'tag' => 'styles'],
                     'choices' => $this->config['templates'],
                     'required' => false,
             ]);
@@ -198,7 +188,6 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
     }
 
     /**
-     * @param PrototypeCollection $collection
      * @throws \Exception
      */
     protected function addAttributeChoices(PrototypeCollection $collection)
@@ -255,8 +244,6 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
 
     /**
      * Load the collection if any conditions are defined.
-     *
-     * @param BlockInterface $block
      */
     protected function loadCollection(BlockInterface $block)
     {
@@ -276,7 +263,7 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
             ->andWhere('a.active = :active')
             ->andWhere('a.layout = :layout');
 
-        if ($site == null) {
+        if (null == $site) {
             $qb->andWhere('a.site IS NULL');
         } else {
             $qb->andWhere('a.site = :site')
@@ -326,6 +313,7 @@ class CollectionBlockService extends AbstractBlockService implements BlockServic
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

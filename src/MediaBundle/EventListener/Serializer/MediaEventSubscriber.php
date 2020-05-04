@@ -35,11 +35,6 @@ class MediaEventSubscriber implements EventSubscriberInterface
 
     /**
      * Constructor.
-     *
-     * @param CacheManager        $cacheManager
-     * @param FilterConfiguration $filterConfig
-     * @param Pool                $pool
-     * @param CacheProvider       $cache
      */
     public function __construct(CacheManager $cacheManager, FilterConfiguration $filterConfig, Pool $pool, CacheProvider $cache)
     {
@@ -61,8 +56,6 @@ class MediaEventSubscriber implements EventSubscriberInterface
 
     /**
      * Listens to the post_serialize event and generates urls to the different image formats.
-     *
-     * @param ObjectEvent $event
      */
     public function onPostSerialize(ObjectEvent $event)
     {
@@ -76,7 +69,7 @@ class MediaEventSubscriber implements EventSubscriberInterface
 
         $provider = $this->getProvider($media);
 
-        if ($provider->getName() == 'image') {
+        if ('image' == $provider->getName()) {
             $images = $this->getImages($media, ['medialibrary']);
 
             $event->getVisitor()->setData('images', $images);
@@ -87,9 +80,6 @@ class MediaEventSubscriber implements EventSubscriberInterface
 
     /**
      * Gets the cached images if any. If the cache is not present, it generates images for all filters.
-     *
-     * @param MediaInterface $media
-     * @param array $filters
      *
      * @return MediaInterface[]
      */
@@ -103,7 +93,7 @@ class MediaEventSubscriber implements EventSubscriberInterface
 
             $images = [];
             foreach ($filters as $filter) {
-                if ($media->getContentType() == 'image/svg+xml') {
+                if ('image/svg+xml' == $media->getContentType()) {
                     $images[$filter] = $provider->getUrl($media);
                 } else {
                     $images[$filter] = $this->cacheManager->getBrowserPath($reference, $filter);
@@ -117,8 +107,6 @@ class MediaEventSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param MediaInterface $media
-     *
      * @return ProviderInterface
      */
     protected function getProvider(MediaInterface $media)

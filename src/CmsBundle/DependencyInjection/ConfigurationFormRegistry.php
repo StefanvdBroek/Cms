@@ -11,9 +11,6 @@ class ConfigurationFormRegistry
      */
     protected $forms = [];
 
-    /**
-     * @param ConfigurationFormTypeInterface $form
-     */
     public function addForm(ConfigurationFormTypeInterface $form)
     {
         $this->forms[] = $form;

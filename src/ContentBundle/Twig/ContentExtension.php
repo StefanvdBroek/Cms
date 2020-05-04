@@ -10,7 +10,6 @@ use Opifer\ContentBundle\Entity\PointerBlock;
 use Opifer\ContentBundle\Entity\Template;
 use Opifer\ContentBundle\Environment\Environment;
 use Opifer\ContentBundle\Model\BlockInterface;
-use Opifer\ContentBundle\Model\Content;
 use Opifer\ContentBundle\Model\ContentInterface;
 use Opifer\ContentBundle\Model\ContentManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -37,11 +36,6 @@ class ContentExtension extends \Twig_Extension
 
     /**
      * ContentExtension constructor.
-     *
-     * @param \Twig_Environment  $twig
-     * @param FragmentHandler    $fragmentHandler
-     * @param ContainerInterface $container
-     * @param RequestStack       $requestStack
      */
     public function __construct(\Twig_Environment $twig, FragmentHandler $fragmentHandler, ContainerInterface $container, RequestStack $requestStack)
     {
@@ -50,7 +44,7 @@ class ContentExtension extends \Twig_Extension
         $this->container = $container;
         $this->requestStack = $requestStack;
 
-        if ($requestStack->getMasterRequest() !== null && $requestStack->getMasterRequest()->get('blockMode') === 'manage') {
+        if (null !== $requestStack->getMasterRequest() && 'manage' === $requestStack->getMasterRequest()->get('blockMode')) {
             $this->blockMode = 'manage';
         }
     }
@@ -62,16 +56,16 @@ class ContentExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('render_block', [$this, 'renderBlock'], [
-                'is_safe' => array('html'),
+                'is_safe' => ['html'],
             ]),
-            new \Twig_SimpleFunction('render_placeholder', [$this, 'renderPlaceholder'], array(
-                'is_safe' => array('html'),
+            new \Twig_SimpleFunction('render_placeholder', [$this, 'renderPlaceholder'], [
+                'is_safe' => ['html'],
                 'needs_context' => true,
-            )),
-            new \Twig_SimpleFunction('manage_tags', [$this, 'renderManageTags'], array(
-                'is_safe' => array('html'),
+            ]),
+            new \Twig_SimpleFunction('manage_tags', [$this, 'renderManageTags'], [
+                'is_safe' => ['html'],
                 'needs_context' => true,
-            )),
+            ]),
         ];
     }
 
@@ -98,12 +92,11 @@ class ContentExtension extends \Twig_Extension
     }
 
     /**
-     * @param BlockInterface $block
-     * @param array          $arguments
+     * @param array $arguments
      *
      * @return string
      */
-    public function renderBlock(BlockInterface $block, $arguments = array())
+    public function renderBlock(BlockInterface $block, $arguments = [])
     {
         /** @var BlockManager $manager */
         $manager = $this->container->get('opifer.content.block_manager');
@@ -111,7 +104,7 @@ class ContentExtension extends \Twig_Extension
         $service = $manager->getService($block);
         $service->setEnvironment($this->blockEnvironment);
 
-        if ($this->blockEnvironment->getBlockMode($block) == 'manage') {
+        if ('manage' == $this->blockEnvironment->getBlockMode($block)) {
             $content = $service->manage($block)->getContent();
 
             return $content;
@@ -128,6 +121,7 @@ class ContentExtension extends \Twig_Extension
      * @param null   $data
      *
      * @return string
+     *
      * @throws \Exception
      */
     public function renderPlaceholder($context, $key = 0, $label = false, $htmlTag = 'div', $data = null)
@@ -152,12 +146,12 @@ class ContentExtension extends \Twig_Extension
             }
 
             foreach ($blocks as $block) {
-                if ($block->getPosition() === (int) $key || ((int) $key === 0 && $block->getPosition() === 0)) {
+                if ($block->getPosition() === (int) $key || (0 === (int) $key && 0 === $block->getPosition())) {
                     $content .= $this->renderBlock($block);
                 }
             }
 
-            if ($this->blockEnvironment->getBlockMode() === 'manage') {
+            if ('manage' === $this->blockEnvironment->getBlockMode()) {
                 $data['class'] = 'pm-placeholder '.$data['class'];
             }
 
@@ -167,7 +161,7 @@ class ContentExtension extends \Twig_Extension
                 'data' => $data,
                 'key' => $key,
                 'id' => (isset($container)) ? $container->getId() : 0,
-                'manage_type' => 'placeholder'
+                'manage_type' => 'placeholder',
             ]);
         }
 
@@ -176,7 +170,7 @@ class ContentExtension extends \Twig_Extension
 
     public function renderManageTags($context)
     {
-        if (!$this->blockEnvironment || $this->blockEnvironment->getBlockMode() !== 'manage') {
+        if (!$this->blockEnvironment || 'manage' !== $this->blockEnvironment->getBlockMode()) {
             return;
         }
 
@@ -193,13 +187,13 @@ class ContentExtension extends \Twig_Extension
             } else {
                 $tags .= sprintf(' data-pm-block-manage="true" data-pm-block-id="%d" data-pm-block-owner-id="%d" data-pm-block-type="%s"', $block->getId(), $ownerId, $context['manage_type']);
             }
-        } elseif ($context['manage_type'] == 'placeholder') {
+        } elseif ('placeholder' == $context['manage_type']) {
             $tags .= sprintf(' data-pm-type="placeholder" data-pm-placeholder-key="%s" data-pm-placeholder-id="%s"', $context['key'], $context['id']);
         }
 
         if (isset($context['block_service'])) {
             $service = $context['block_service'];
-            $tags .= sprintf(' data-pm-tool=\'%s\'', json_encode(array('icon' => $service->getTool($block)->getIcon())));
+            $tags .= sprintf(' data-pm-tool=\'%s\'', json_encode(['icon' => $service->getTool($block)->getIcon()]));
         }
 
         return $tags;
@@ -212,17 +206,15 @@ class ContentExtension extends \Twig_Extension
      */
     public function parseString($string)
     {
-
         $stringHelper = $this->container->get('opifer.content.string_helper');
 
         $string = $stringHelper->replaceLinks($string);
 
         return $string;
     }
-    
+
     /**
      * @param string|ContentInterface $content
-     * @param ContentInterface        $child
      *
      * @return bool
      */
@@ -234,12 +226,12 @@ class ContentExtension extends \Twig_Extension
 
         if (is_string($content)) {
             // Strip the dev front controller if its defined
-            if (strpos($content, '/app_dev.php') !== false) {
+            if (false !== strpos($content, '/app_dev.php')) {
                 $content = substr($content, strlen('/app_dev.php'));
             }
 
             // Strip the first character if it's a slash
-            if (substr($content, 0, 1) === '/') {
+            if ('/' === substr($content, 0, 1)) {
                 $content = ltrim($content, '/');
             }
 

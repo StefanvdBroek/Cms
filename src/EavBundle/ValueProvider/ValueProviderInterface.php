@@ -8,17 +8,11 @@ interface ValueProviderInterface
 {
     /**
      * Build form.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options);
 
     /**
      * Build a form to define additional data on the Attribute.
-     *
-     * @param FormBuilderInterface $builder
-     * @param array|null           $options
      */
     public function buildParametersForm(FormBuilderInterface $builder, array $options = null);
 

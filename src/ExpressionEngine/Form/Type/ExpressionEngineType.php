@@ -15,9 +15,7 @@ class ExpressionEngineType extends AbstractType
     protected $expressionEngine;
 
     /**
-     * Constructor
-     *
-     * @param ExpressionEngine $expressionEngine
+     * Constructor.
      */
     public function __construct(ExpressionEngine $expressionEngine)
     {
@@ -32,7 +30,7 @@ class ExpressionEngineType extends AbstractType
         $view->vars['prototypes'] = $this->expressionEngine->serialize($options['prototypes']);
         $view->vars['debug'] = $options['debug'];
 
-        if ($view->vars['value'] == '') {
+        if ('' == $view->vars['value']) {
             $view->vars['value'] = '[]';
         }
     }
@@ -43,7 +41,7 @@ class ExpressionEngineType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'debug' => false
+            'debug' => false,
         ]);
 
         $resolver->setRequired('prototypes');

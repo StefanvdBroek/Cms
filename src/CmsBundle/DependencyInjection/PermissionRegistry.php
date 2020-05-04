@@ -75,7 +75,7 @@ class PermissionRegistry
 
     public function addPermission(string $permission)
     {
-         $this->permissions[] = $permission;
+        $this->permissions[] = $permission;
     }
 
     public function addPermissions(array $permissions)
@@ -83,7 +83,7 @@ class PermissionRegistry
         $this->permissions = array_merge($this->permissions, $permissions);
     }
 
-    public function hasPermission(string $permission) : bool
+    public function hasPermission(string $permission): bool
     {
         return in_array($permission, $this->permissions);
     }

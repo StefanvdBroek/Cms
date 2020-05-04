@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class OptionController extends Controller
 {
     /**
-     * Find options
+     * Find options.
      *
      * @Route(
      *     "/options",
@@ -19,8 +19,6 @@ class OptionController extends Controller
      *     options={"expose"=true}
      * )
      * @Method({"GET"})
-     *
-     * @param Request $request
      *
      * @return Response
      */
@@ -32,7 +30,7 @@ class OptionController extends Controller
 
             $options = $attribute->getOptions();
         } else {
-            $options = array();
+            $options = [];
         }
 
         return new Response($this->get('jms_serializer')->serialize($options, 'json'), 200, ['Content-Type' => 'application/json']);

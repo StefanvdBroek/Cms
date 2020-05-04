@@ -2,23 +2,18 @@
 
 namespace Opifer\ContentBundle\Block\Service;
 
+use Opifer\CmsBundle\Form\Type\CKEditorType;
 use Opifer\ContentBundle\Block\BlockRenderer;
-use Opifer\ContentBundle\Entity\CookieWallBlock;
-use Opifer\ContentBundle\Block\Service\AbstractBlockService;
-use Opifer\ContentBundle\Block\Service\BlockServiceInterface;
 use Opifer\ContentBundle\Block\Tool\Tool;
 use Opifer\ContentBundle\Block\Tool\ToolsetMemberInterface;
+use Opifer\ContentBundle\Entity\CookieWallBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Opifer\CmsBundle\Form\Type\CKEditorType;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
- * CookieWall Block Service
+ * CookieWall Block Service.
  */
 class CookieWallBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -60,16 +55,16 @@ class CookieWallBlockService extends AbstractBlockService implements BlockServic
     {
         $this->setCookie($id);
 
-        $response = new JsonResponse;
+        $response = new JsonResponse();
         $response->setData(['message' => 'Cookiewall block added to session']);
 
         return $response;
     }
 
     /**
-     * @param int $id The site ID
+     * @param int $id the site ID
      *
-     * Note: Uses a fixed ID for now, since multi-site is not supported yet.
+     * Note: Uses a fixed ID for now, since multi-site is not supported yet
      */
     public function setCookie($id)
     {
@@ -91,15 +86,15 @@ class CookieWallBlockService extends AbstractBlockService implements BlockServic
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
-        return new CookieWallBlock;
+        return new CookieWallBlock();
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -115,7 +110,7 @@ class CookieWallBlockService extends AbstractBlockService implements BlockServic
     {
         $parameters = [
             'block_service' => $this,
-            'block'         => $block,
+            'block' => $block,
         ];
 
         if (in_array(1, $this->siteIds)) {
@@ -127,6 +122,7 @@ class CookieWallBlockService extends AbstractBlockService implements BlockServic
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

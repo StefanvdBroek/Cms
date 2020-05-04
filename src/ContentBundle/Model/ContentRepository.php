@@ -34,8 +34,6 @@ class ContentRepository extends NestedTreeRepository
     /**
      * Get a querybuilder by request.
      *
-     * @param Request $request
-     *
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getContentFromRequest(Request $request)
@@ -48,7 +46,7 @@ class ContentRepository extends NestedTreeRepository
             $qb->leftJoin('c.template', 't');
             $qb->andWhere('c.title LIKE :query OR c.alias LIKE :query OR c.slug LIKE :query OR t.displayName LIKE :query');
             $qb->setParameter('query', '%'.$request->get('q').'%');
-        } else if ($request->get('parent_id')) {
+        } elseif ($request->get('parent_id')) {
             $qb->leftJoin('c.parent', 'p');
             $qb->andWhere('p.id = :parent')->setParameter('parent', $request->get('parent_id'));
         } else {
@@ -122,7 +120,7 @@ class ContentRepository extends NestedTreeRepository
      * @param int|string $idOrSlug
      * @param bool       $allow404
      *
-     * @return null|object|ContentInterface
+     * @return object|ContentInterface|null
      */
     public function findOneByIdOrSlug($idOrSlug, $allow404 = false)
     {
@@ -133,7 +131,7 @@ class ContentRepository extends NestedTreeRepository
         }
 
         // If no content was found for the passed id, return the 404 page
-        if (!$content && $allow404 == true) {
+        if (!$content && true == $allow404) {
             $content = $this->findOneBySlug('404');
         }
 
@@ -162,7 +160,7 @@ class ContentRepository extends NestedTreeRepository
                 'active' => true,
                 'layout' => false,
                 'now' => new \DateTime(),
-                'host' => $host
+                'host' => $host,
             ])
             ->getQuery();
 
@@ -191,7 +189,7 @@ class ContentRepository extends NestedTreeRepository
                 'active' => true,
                 'layout' => false,
                 'now' => new \DateTime(),
-                'host' => $host
+                'host' => $host,
             ])
             ->getQuery();
 
@@ -215,7 +213,7 @@ class ContentRepository extends NestedTreeRepository
             ->setParameters([
                 'id' => $id,
                 'active' => false,
-                'layout' => false
+                'layout' => false,
             ])
             ->getQuery();
 
@@ -284,7 +282,6 @@ class ContentRepository extends NestedTreeRepository
      * Sort the items by an array of ids.
      *
      * @param ArrayCollection $items
-     * @param array           $order
      *
      * @return array
      */
@@ -312,7 +309,7 @@ class ContentRepository extends NestedTreeRepository
      *
      * @return array
      */
-    public function findByLevels($levels = 1, $ids = array())
+    public function findByLevels($levels = 1, $ids = [])
     {
         $query = $this->createQueryBuilder('c');
 
@@ -325,7 +322,7 @@ class ContentRepository extends NestedTreeRepository
             $query->select($selects);
 
             for ($i = 1; $i <= $levels; ++$i) {
-                $previous = ($i - 1 == 0) ? '' : ($i - 1);
+                $previous = (0 == $i - 1) ? '' : ($i - 1);
                 $query->leftJoin('c'.$previous.'.children', 'c'.$i, 'WITH', 'c'.$i.'.active = :active AND c'.$i.'.showInNavigation = :show');
             }
         }
@@ -397,7 +394,7 @@ class ContentRepository extends NestedTreeRepository
 
         if (!empty($results)) {
             foreach ($results as $result) {
-                if (stripos($result->getTitle(), $term) !== false) {
+                if (false !== stripos($result->getTitle(), $term)) {
                     array_unshift($sortedResults, $result);
                 } else {
                     $sortedResults[] = $result;

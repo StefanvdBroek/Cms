@@ -12,7 +12,7 @@ class MailChimpProvider implements MailingListProviderInterface
 {
     const API_KEY_SETTING = 'mailchimp_api_key';
 
-    /** @var SubscriptionManager  */
+    /** @var SubscriptionManager */
     protected $subscriptionManager;
 
     /** @var ConfigManager */
@@ -30,9 +30,6 @@ class MailChimpProvider implements MailingListProviderInterface
 
     /**
      * Constructor.
-     *
-     * @param SubscriptionManager $subscriptionManager
-     * @param ConfigManager       $configManager
      */
     public function __construct(SubscriptionManager $subscriptionManager, ConfigManager $configManager)
     {
@@ -42,7 +39,7 @@ class MailChimpProvider implements MailingListProviderInterface
 
     public function client()
     {
-        if ($this->client == null) {
+        if (null == $this->client) {
             $apiKey = $this->configManager->get(self::API_KEY_SETTING);
 
             if (!$apiKey) {
@@ -72,7 +69,7 @@ class MailChimpProvider implements MailingListProviderInterface
     {
         $results = $this->client()->get('lists');
 
-        $lists = array();
+        $lists = [];
 
         foreach ($results['lists'] as $result) {
             $lists[] = ['id' => $result['id'], 'name' => $result['name']];
@@ -131,7 +128,7 @@ class MailChimpProvider implements MailingListProviderInterface
                 'status' => array_search($subscription->getStatus(), $this->statusMap),
             ]);
 
-            $logger(sprintf('Processed updates to MailChimp for %s - %d/%d',  $subscription->getEmail(), $i, count($subscriptions)));
+            $logger(sprintf('Processed updates to MailChimp for %s - %d/%d', $subscription->getEmail(), $i, count($subscriptions)));
         }
 
         $list->setSyncedAt($now);

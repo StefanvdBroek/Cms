@@ -39,7 +39,7 @@ class PointerBlock extends CompositeBlock
     }
 
     /**
-     * Overrides the CompositeBlock's getChildren method to pass the reference as this block's children
+     * Overrides the CompositeBlock's getChildren method to pass the reference as this block's children.
      *
      * {@inheritdoc}
      */

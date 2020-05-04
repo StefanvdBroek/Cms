@@ -9,9 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class SchemaController
- *
- * @package Opifer\EavBundle\Controller
+ * Class SchemaController.
  */
 class SchemaController extends Controller
 {
@@ -31,7 +29,7 @@ class SchemaController extends Controller
             $attribute = $this->get('opifer.eav.attribute_manager')->getRepository()
                 ->find($request->get('attribute'));
 
-            if ($attribute->getAllowedSchemas()->count() === 0) {
+            if (0 === $attribute->getAllowedSchemas()->count()) {
                 // Remove attribute from request because we want all schemas if this attribute doesn't
                 // have any allowed schemas.
                 $request->query->remove('attribute');
@@ -42,6 +40,6 @@ class SchemaController extends Controller
 
         $data = $this->get('jms_serializer')->serialize($schemas, 'json');
 
-        return new Response($data, 200, [ 'Content-Type' => 'application/json' ]);
+        return new Response($data, 200, ['Content-Type' => 'application/json']);
     }
 }

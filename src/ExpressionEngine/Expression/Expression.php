@@ -2,8 +2,6 @@
 
 namespace Opifer\ExpressionEngine\Expression;
 
-use Opifer\ExpressionEngine\Prototype\Prototype;
-
 class Expression implements ExpressionInterface
 {
     /** @var string */
@@ -122,9 +120,10 @@ class Expression implements ExpressionInterface
     }
 
     /**
-     * Transforms the value based on the type
+     * Transforms the value based on the type.
      *
      * @param $value
+     *
      * @return \DateTime
      */
     protected function transformValue($value)

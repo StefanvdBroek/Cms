@@ -7,13 +7,11 @@ use Opifer\ContentBundle\Block\BlockManager;
 
 class BlockDiscriminatorListener
 {
-    /** @var BlockManager $pool */
+    /** @var BlockManager */
     protected $blockManager;
 
     /**
      * BlockDiscriminatorListener constructor.
-     *
-     * @param BlockManager $blockManager
      */
     public function __construct(BlockManager $blockManager)
     {
@@ -21,32 +19,30 @@ class BlockDiscriminatorListener
     }
 
     /**
-     * loadClassMetadata event
+     * loadClassMetadata event.
      *
      * Retrieves the discriminatorMap from the BlockManagar, so we can
      * add entities to the discriminatorMap without adjusting the annotations
      * in the Block entity.
-     *
-     * @param LoadClassMetadataEventArgs $args
      *
      * @return void
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $args)
     {
         $metadata = $args->getClassMetadata();
-        if ($metadata->name == 'Opifer\\CmsBundle\\Entity\\Block') {
+        if ('Opifer\\CmsBundle\\Entity\\Block' == $metadata->name) {
             $metadata->setDiscriminatorMap($this->getDiscriminatorMap());
         }
     }
 
     /**
-     * Transforms the registered blocks into a discriminatorMap
+     * Transforms the registered blocks into a discriminatorMap.
      *
      * @return array
      */
     public function getDiscriminatorMap()
     {
-        $map = array();
+        $map = [];
         foreach ($this->blockManager->getValues() as $alias => $value) {
             $map[$alias] = $value->getEntity();
         }

@@ -13,7 +13,6 @@ class ValidJsonValidator extends ConstraintValidator
      * encode the value first and then check if the encode value is valid.
      *
      * @param string|array $value
-     * @param Constraint   $constraint
      */
     public function validate($value, Constraint $constraint)
     {
@@ -24,7 +23,7 @@ class ValidJsonValidator extends ConstraintValidator
         if (!json_decode($value, true)) {
             $this->context->addViolation(
                 $constraint->message,
-                array()
+                []
             );
         }
     }

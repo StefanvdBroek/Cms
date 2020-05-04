@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Multi Content Picker Form Type
+ * Multi Content Picker Form Type.
  */
 class ContentTreePickerType extends AbstractType
 {
@@ -21,10 +21,7 @@ class ContentTreePickerType extends AbstractType
     protected $blockService;
 
     /**
-     * Constructor
-     *
-     * @param ContentManager         $contentManager
-     * @param NavigationBlockService $blockService
+     * Constructor.
      */
     public function __construct(ContentManager $contentManager, NavigationBlockService $blockService)
     {
@@ -56,10 +53,10 @@ class ContentTreePickerType extends AbstractType
     }
 
     /**
-     * Strips metadata that should not be stored
+     * Strips metadata that should not be stored.
      *
-     * @param array $array
      * @param array $stripped
+     *
      * @return array
      */
     protected function stripMetadata(array $array, $stripped = [])

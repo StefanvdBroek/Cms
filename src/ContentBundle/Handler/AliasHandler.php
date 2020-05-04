@@ -8,16 +8,14 @@ use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
 use Gedmo\Sluggable\SluggableListener;
 
 /**
-* Class AliasHandler
-*/
+ * Class AliasHandler.
+ */
 class AliasHandler implements SlugHandlerInterface
 {
-
     /**
      * @var SluggableListener
      */
     protected $sluggable;
-
 
     /**
      * $options = array(
@@ -57,32 +55,32 @@ class AliasHandler implements SlugHandlerInterface
      */
     public function onSlugCompletion(SluggableAdapter $ea, array &$config, $object, &$slug)
     {
-        if(!$slug) {
+        if (!$slug) {
             return;
         }
-        
+
         $newSlug = $slug;
         $repository = $ea->getObjectManager()->getRepository(get_class($object));
         $usedOptions = $config['handlers'][get_called_class()];
-        
+
         $results = $repository->createQueryBuilder('c')
-            ->where("c.".$usedOptions['field']." LIKE :term")
-            ->andWhere("c.id != :id")
+            ->where('c.'.$usedOptions['field'].' LIKE :term')
+            ->andWhere('c.id != :id')
             ->orderBy('c.'.$usedOptions['field'], 'ASC')
             ->setParameter('term', $slug.'%')
             ->setParameter('id', $object->getId())
             ->getQuery()
             ->getResult();
-        
+
         $i = 1;
-        
+
         foreach ($results as $content) {
-            if($content->getSlug() == $newSlug) {
-                $newSlug = $slug . $usedOptions['separator'] . $i;
-                $i++;
+            if ($content->getSlug() == $newSlug) {
+                $newSlug = $slug.$usedOptions['separator'].$i;
+                ++$i;
             }
         }
-        
+
         $slug = $newSlug;
     }
 

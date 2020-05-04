@@ -16,8 +16,9 @@ class BooleanColumn extends Column
 
     /**
      * @param string $value
-     * @param Row $row
+     * @param Row    $row
      * @param $router
+     *
      * @return string
      */
     public function renderCell($value, $row, $router)
@@ -25,6 +26,7 @@ class BooleanColumn extends Column
         if ($value) {
             return '<span class="label label-success">Yes</span>';
         }
+
         return '<span class="label label-danger">No</span>';
     }
 

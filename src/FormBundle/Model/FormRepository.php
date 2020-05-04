@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 class FormRepository extends EntityRepository
 {
     /**
-     * Find all forms, joined by it's posts
+     * Find all forms, joined by it's posts.
      *
      * @return \Doctrine\Common\Collections\ArrayCollection|array
      */

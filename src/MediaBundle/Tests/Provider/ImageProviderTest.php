@@ -57,20 +57,20 @@ class ImageProviderTest extends TestCase
     public function testIgnoreSettingNameWhenIsNotNull()
     {
         $file = m::mock(UploadedFile::class);
-        $file->shouldReceive(array(
+        $file->shouldReceive([
             'guessExtension' => 'png',
             'getClientMimeType' => 'image/png',
             'getClientOriginalName' => 'testimage.png',
             'getClientOriginalExtension' => 'png',
             'getSize' => 2954043,
             '__toString' => __DIR__.'/../testimage.png',
-        ));
+        ]);
 
         $this->filesystem->shouldReceive([
             'listKeys' => ['keys' => ['testimage-1.png']],
         ]);
 
-        $this->media->shouldReceive(array(
+        $this->media->shouldReceive([
             'getFile' => $file,
             'getName' => 'name',
             'getStatus' => 1,
@@ -78,7 +78,7 @@ class ImageProviderTest extends TestCase
             'setContentType' => $this->media,
             'setFilesize' => $this->media,
             'setMetadata' => $this->media,
-        ));
+        ]);
         $this->media->shouldReceive('setName')->never();
 
         $this->provider->prePersist($this->media);

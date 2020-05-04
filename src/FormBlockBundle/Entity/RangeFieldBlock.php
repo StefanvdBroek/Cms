@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Opifer\ContentBundle\Entity\Block;
 
 /**
- * Range Field Block
+ * Range Field Block.
  *
  * @ORM\Entity
  */

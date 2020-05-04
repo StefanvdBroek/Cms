@@ -3,18 +3,15 @@
 namespace Opifer\ContentBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Opifer\ContentBundle\Block\BlockOwnerInterface;
 use Opifer\ContentBundle\Provider\BlockProviderInterface;
 
 /**
- * Class TemplateRepository
- *
- * @package Opifer\ContentBundle\Model
+ * Class TemplateRepository.
  */
 class TemplateRepository extends EntityRepository implements BlockProviderInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getBlockOwner($id)
     {

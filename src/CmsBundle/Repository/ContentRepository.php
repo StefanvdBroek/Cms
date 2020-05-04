@@ -69,7 +69,7 @@ class ContentRepository extends BaseContentRepository
             ->setParameters([
                 'active' => true,
                 'layout' => false,
-                'indexable' => true
+                'indexable' => true,
             ])
             ->orderBy('c.slug', 'ASC')
             ->getQuery()

@@ -10,14 +10,12 @@ use Opifer\ContentBundle\Entity\GalleryBlock;
 use Opifer\ContentBundle\Model\BlockInterface;
 use Opifer\MediaBundle\Form\Type\MediaPickerType;
 use Opifer\MediaBundle\Model\MediaManager;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Gallery Block Service
+ * Gallery Block Service.
  */
 class GalleryBlockService extends AbstractBlockService implements BlockServiceInterface, ToolsetMemberInterface
 {
@@ -26,10 +24,6 @@ class GalleryBlockService extends AbstractBlockService implements BlockServiceIn
 
     /**
      * Constructor.
-     *
-     * @param BlockRenderer $blockRenderer
-     * @param array $config
-     * @param MediaManager $mediaManager
      */
     public function __construct(BlockRenderer $blockRenderer, array $config, MediaManager $mediaManager)
     {
@@ -46,47 +40,44 @@ class GalleryBlockService extends AbstractBlockService implements BlockServiceIn
         parent::buildManageForm($builder, $options);
 
         $builder->get('default')
-            ->add('value',  MediaPickerType::class, [
+            ->add('value', MediaPickerType::class, [
                 'to_json' => true,
                 'multiple' => true,
-                'label'    => 'Media',
+                'label' => 'Media',
                 'required' => false,
-                'attr'     => ['help_text' => 'help.gallery_media'],
+                'attr' => ['help_text' => 'help.gallery_media'],
             ])
         ;
 
         $builder->get('properties')
-            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'],'required' => false])
-            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'],'required' => false])
+            ->add('id', TextType::class, ['attr' => ['help_text' => 'help.html_id'], 'required' => false])
+            ->add('extra_classes', TextType::class, ['attr' => ['help_text' => 'help.extra_classes'], 'required' => false])
         ;
 
         if (isset($this->config['templates'])) {
             $builder->get('properties')
                 ->add('template', ChoiceType::class, [
-                    'label'       => 'label.template',
+                    'label' => 'label.template',
                     'placeholder' => 'placeholder.choice_optional',
-                    'attr'        => ['help_text' => 'help.block_template','tag' => 'styles'],
-                    'choices'     => $this->config['templates'],
-                    'required'    => false,
+                    'attr' => ['help_text' => 'help.block_template', 'tag' => 'styles'],
+                    'choices' => $this->config['templates'],
+                    'required' => false,
             ]);
         }
     }
 
-    /**
-     * @param BlockInterface $block
-     */
     public function load(BlockInterface $block)
     {
         $ids = json_decode($block->getValue());
 
-        if (empty($ids) || ! count($ids)) {
+        if (empty($ids) || !count($ids)) {
             return;
         }
 
         $gallery = $this->mediaManager->getRepository()->findByIds($ids);
 
         usort($gallery, function ($a, $b) use ($ids) {
-            return (array_search($a->getId(), $ids) > array_search($b->getId(), $ids));
+            return array_search($a->getId(), $ids) > array_search($b->getId(), $ids);
         });
 
         if ($gallery) {
@@ -95,7 +86,7 @@ class GalleryBlockService extends AbstractBlockService implements BlockServiceIn
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createBlock()
     {
@@ -103,7 +94,7 @@ class GalleryBlockService extends AbstractBlockService implements BlockServiceIn
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getTool(BlockInterface $block = null)
     {
@@ -117,6 +108,7 @@ class GalleryBlockService extends AbstractBlockService implements BlockServiceIn
 
     /**
      * @param BlockInterface $block
+     *
      * @return string
      */
     public function getDescription(BlockInterface $block = null)

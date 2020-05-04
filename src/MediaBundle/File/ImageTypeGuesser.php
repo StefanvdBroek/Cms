@@ -15,7 +15,7 @@ class ImageTypeGuesser implements MimeTypeGuesserInterface
         $line = fgets($f);
         fclose($f);
 
-        if (strpos($line, '<svg') !== false) {
+        if (false !== strpos($line, '<svg')) {
             return 'image/svg+xml';
         }
 

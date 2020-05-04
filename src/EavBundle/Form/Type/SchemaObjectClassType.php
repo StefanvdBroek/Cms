@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * ObjectClass form field for schemas
+ * ObjectClass form field for schemas.
  *
  * Gives the option to choose one of the available objectclasses for schemas.
  */
@@ -16,11 +16,9 @@ class SchemaObjectClassType extends AbstractType
     protected $entities;
 
     /**
-     * Constructor
-     *
-     * @param array $entities
+     * Constructor.
      */
-    public function __construct(array $entities = array())
+    public function __construct(array $entities = [])
     {
         $this->entities = $entities;
     }
@@ -30,7 +28,7 @@ class SchemaObjectClassType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = array();
+        $choices = [];
         foreach ($this->entities as $label => $class) {
             $choices[ucfirst($label)] = $class;
         }

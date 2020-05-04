@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Content Form Type
+ * Content Form Type.
  */
 class LayoutType extends AbstractType
 {
@@ -33,57 +33,57 @@ class LayoutType extends AbstractType
         // Add the default form fields
         $builder
             ->add('template', EntityType::class, [
-                'class'    => 'OpiferContentBundle:Template',
+                'class' => 'OpiferContentBundle:Template',
                 'choice_label' => 'displayName',
-                'attr'     => [
-                    'help_text' => 'help.template'
+                'attr' => [
+                    'help_text' => 'help.template',
                 ],
             ])
             ->add('title', TextType::class, [
                 'label' => 'label.title',
-                'attr'  => [
+                'attr' => [
                     'placeholder' => 'placeholder.content_title',
-                    'help_text'   => 'help.content_title',
-                ]
+                    'help_text' => 'help.content_title',
+                ],
             ])
             ->add('shortTitle', TextType::class, [
                 'label' => 'label.short_title',
-                'attr'  => [
+                'attr' => [
                     'placeholder' => 'placeholder.content_short_title',
-                    'help_text'   => 'help.content_short_title',
-                ]
+                    'help_text' => 'help.content_short_title',
+                ],
             ])
             ->add('description', TextType::class, [
                 'label' => 'label.description',
-                'attr'  => [
+                'attr' => [
                     'placeholder' => 'placeholder.content_description',
-                    'help_text'   => 'help.content_description',
-                ]
+                    'help_text' => 'help.content_description',
+                ],
             ])
             ->add('active', HiddenType::class, [
                 'attr' => [
-                    'value' => 0
+                    'value' => 0,
                 ],
             ])
             ->add('indexable', HiddenType::class, [
                 'label' => 'label.indexable',
                 'attr' => [
-                    'value' => 0
+                    'value' => 0,
                 ],
             ])
             ->add('searchable', HiddenType::class, [
                 'attr' => [
-                    'value' => 0
+                    'value' => 0,
                 ],
             ])
             ->add('showInNavigation', HiddenType::class, [
                 'attr' => [
-                    'value' => 0
+                    'value' => 0,
                 ],
             ])
             ->add('layout', HiddenType::class, [
                 'attr' => [
-                    'value' => 1
+                    'value' => 1,
                 ],
             ])
             ->add('preview', MediaPickerType::class, [

@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Review Type
+ * Review Type.
  */
 class ReviewType extends AbstractType
 {

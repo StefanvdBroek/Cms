@@ -155,8 +155,6 @@ class Form implements FormInterface
     }
 
     /**
-     * @param SchemaInterface $schema
-     *
      * @return Form
      */
     public function setSchema(SchemaInterface $schema)
@@ -255,8 +253,6 @@ class Form implements FormInterface
     }
 
     /**
-     * @param PostInterface $post
-     *
      * @return $this
      */
     public function addPost(PostInterface $post)
@@ -267,8 +263,6 @@ class Form implements FormInterface
     }
 
     /**
-     * @param PostInterface $post
-     *
      * @return $this
      */
     public function removePost(PostInterface $post)
@@ -355,7 +349,6 @@ class Form implements FormInterface
     }
 
     /**
-     * @param Locale $locale
      * @return $this
      */
     public function setLocale(Locale $locale)

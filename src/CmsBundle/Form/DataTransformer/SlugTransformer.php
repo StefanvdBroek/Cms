@@ -21,7 +21,7 @@ class SlugTransformer implements DataTransformerInterface
 
         // If the slug ends with a slash, return just a slash
         // so the item is used as the index page of that directory
-        if (substr($slug, -1) == '/') {
+        if ('/' == substr($slug, -1)) {
             return '/';
         }
 

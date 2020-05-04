@@ -36,10 +36,7 @@ class ContentRouter implements RouterInterface
     protected $frontendUrl;
 
     /**
-     * Constructor
-     *
-     * @param RequestStack            $requestStack
-     * @param ContentManagerInterface $contentManager
+     * Constructor.
      */
     public function __construct(RequestStack $requestStack, ContentManagerInterface $contentManager, $frontendUrl)
     {
@@ -61,20 +58,20 @@ class ContentRouter implements RouterInterface
                 '_controller' => 'FrameworkBundle:Redirect:urlRedirect',
                 'path' => $this->frontendUrl,
             ], [
-                'slug'        => "[a-zA-Z0-9\-_\/]*",
+                'slug' => "[a-zA-Z0-9\-_\/]*",
             ], [
-                'expose'      => true,
-                'utf8'        => true,
+                'expose' => true,
+                'utf8' => true,
             ]));
         } else {
             $this->routeCollection->add('_content', new Route('/{slug}', [
                 '_controller' => 'OpiferContentBundle:Frontend/Content:view',
-                'slug'        => '',
+                'slug' => '',
             ], [
-                'slug'        => "[a-zA-Z0-9\-_\/]*",
+                'slug' => "[a-zA-Z0-9\-_\/]*",
             ], [
-                'expose'      => true,
-                'utf8'        => true,
+                'expose' => true,
+                'utf8' => true,
             ]));
         }
     }
@@ -106,7 +103,7 @@ class ContentRouter implements RouterInterface
 
             try {
                 //is it directory index
-                if (substr($slug, -1) == '/') {
+                if ('/' == substr($slug, -1)) {
                     $slug = rtrim($slug, '/');
                 }
 
@@ -130,9 +127,9 @@ class ContentRouter implements RouterInterface
      * @param array  $parameters The route parameters
      * @param bool   $absolute   Absolute url or not
      *
-     * @return null|string
+     * @return string|null
      */
-    public function generate($name, $parameters = array(), $absolute = false)
+    public function generate($name, $parameters = [], $absolute = false)
     {
         $this->urlGenerator = new UrlGenerator($this->routeCollection, $this->context);
 
@@ -175,7 +172,7 @@ class ContentRouter implements RouterInterface
     }
 
     /**
-     * @return null|\Symfony\Component\HttpFoundation\Request
+     * @return \Symfony\Component\HttpFoundation\Request|null
      */
     protected function getRequest()
     {

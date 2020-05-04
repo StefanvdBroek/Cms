@@ -2,25 +2,21 @@
 
 namespace Opifer\MediaBundle\Controller\Api;
 
+use FOS\RestBundle\Controller\Annotations\RequestParam;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcher;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\RequestParam;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Opifer\MediaBundle\Entity\MediaDirectory;
 use Opifer\MediaBundle\Entity\MediaDirectoryInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class MediaDirectoryController extends FOSRestController
 {
     /**
-     * Get a single directory
+     * Get a single directory.
      *
      * @ParamConverter()
      * @ApiDoc()
-     *
-     * @param MediaDirectory $directory
      *
      * @return MediaDirectoryInterface
      */
@@ -30,7 +26,7 @@ class MediaDirectoryController extends FOSRestController
     }
 
     /**
-     * Create a new directory
+     * Create a new directory.
      *
      * @ApiDoc()
      *

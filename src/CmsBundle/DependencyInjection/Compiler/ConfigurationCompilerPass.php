@@ -12,8 +12,6 @@ class ConfigurationCompilerPass implements CompilerPassInterface
      * Process the compiler pass.
      *
      * Adds all tagged forms to the ConfigurationRegistry
-     *
-     * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)
     {

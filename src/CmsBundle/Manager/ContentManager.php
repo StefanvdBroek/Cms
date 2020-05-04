@@ -40,14 +40,11 @@ class ContentManager extends BaseContentManager
     /**
      * Creates a ValueSet entity for Content when missing and there is a ContentType set.
      *
-     * @param Content $content
-     *
      * @return Content
      */
     public function createMissingValueSet(Content $content)
     {
-        if ($content->getContentType() !== null && $content->getValueSet() === null)
-        {
+        if (null !== $content->getContentType() && null === $content->getValueSet()) {
             $valueSet = new ValueSet();
             $this->em->persist($valueSet);
 

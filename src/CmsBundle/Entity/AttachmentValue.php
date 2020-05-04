@@ -2,14 +2,13 @@
 
 namespace Opifer\CmsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Opifer\EavBundle\Entity\Value;
 use Opifer\EavBundle\Model\MediaInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * class AttachmentValue
+ * class AttachmentValue.
  */
 class AttachmentValue extends Value
 {
@@ -33,9 +32,6 @@ class AttachmentValue extends Value
         return $this->file;
     }
 
-    /**
-     * @param UploadedFile $file
-     */
     public function setFile(UploadedFile $file)
     {
         $this->file = $file;

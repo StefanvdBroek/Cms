@@ -10,12 +10,12 @@ use Opifer\CmsBundle\Form\Type\UserFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class UserController extends Controller
 {
     /**
-     * The user index
+     * The user index.
+     *
      * @return Response
      */
     public function indexAction()
@@ -34,15 +34,13 @@ class UserController extends Controller
         $grid->setId('users')
             ->setSource($source)
             ->addRowAction($editAction);
-            //->addRowAction($deleteAction);
+        //->addRowAction($deleteAction);
 
         return $grid->getGridResponse('@OpiferCms/Backend/User/index.html.twig');
     }
 
     /**
      * Create a new user.
-     *
-     * @param Request $request
      *
      * @return Response
      */
@@ -75,8 +73,7 @@ class UserController extends Controller
     /**
      * Edit a user.
      *
-     * @param Request $request
-     * @param int     $id
+     * @param int $id
      *
      * @return Response
      */
@@ -91,8 +88,7 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            if ($user->isTwoFactorEnabled() == false) {
+            if (false == $user->isTwoFactorEnabled()) {
                 $user->setGoogleAuthenticatorSecret(null);
             }
 
@@ -114,8 +110,6 @@ class UserController extends Controller
     /**
      * Edit the current users' profile.
      *
-     * @param Request $request
-     *
      * @return Response
      */
     public function profileAction(Request $request)
@@ -128,14 +122,13 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            if ($user->isTwoFactorEnabled() == false) {
+            if (false == $user->isTwoFactorEnabled()) {
                 $user->setGoogleAuthenticatorSecret(null);
             }
 
             $this->get('fos_user.user_manager')->updateUser($user, true);
 
-            if ($user->isTwoFactorEnabled() == true && empty($user->getGoogleAuthenticatorSecret())) {
+            if (true == $user->isTwoFactorEnabled() && empty($user->getGoogleAuthenticatorSecret())) {
                 return $this->redirectToRoute('opifer_cms_user_activate_2fa');
             }
 
@@ -151,9 +144,7 @@ class UserController extends Controller
     }
 
     /**
-     * Activate Google Authenticator
-     *
-     * @param Request $request
+     * Activate Google Authenticator.
      *
      * @return Response
      */
@@ -161,11 +152,11 @@ class UserController extends Controller
     {
         $user = $this->getUser();
 
-        $secret = $this->container->get("scheb_two_factor.security.google_authenticator")->generateSecret();
+        $secret = $this->container->get('scheb_two_factor.security.google_authenticator')->generateSecret();
         $user->setGoogleAuthenticatorSecret($secret);
 
         //Generate QR url
-        $qrUrl = $this->container->get("scheb_two_factor.security.google_authenticator")->getUrl($user);
+        $qrUrl = $this->container->get('scheb_two_factor.security.google_authenticator')->getUrl($user);
 
         $form = $this->createForm(GoogleAuthType::class, $user);
         $form->handleRequest($request);

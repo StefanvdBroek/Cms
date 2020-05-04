@@ -3,8 +3,6 @@
 namespace Opifer\CmsBundle\Controller\Backend;
 
 use APY\DataGridBundle\Grid\Action\RowAction;
-use APY\DataGridBundle\Grid\Column\ActionsColumn;
-use APY\DataGridBundle\Grid\Column\JoinColumn;
 use APY\DataGridBundle\Grid\Column\TextColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Opifer\CmsBundle\Entity\Post;
@@ -54,12 +52,12 @@ class PostController extends BasePostController
             ->addRowAction($deleteAction);
 
         return $grid->getGridResponse('@OpiferCms/Backend/Post/index.html.twig', [
-            'form' => $form
+            'form' => $form,
         ]);
     }
 
     /**
-     * Lists all posts from every form
+     * Lists all posts from every form.
      *
      * @return Response
      */
@@ -71,7 +69,7 @@ class PostController extends BasePostController
 
         $formColumn = new TextColumn(['id' => 'posts', 'title' => 'Form', 'source' => false, 'filterable' => false, 'sortable' => false, 'safe' => false]);
         $formColumn->manipulateRenderCell(function ($value, $row, $router) {
-            return '<a href="'.$this->generateUrl('opifer_form_form_edit', ['id'=> $row->getEntity()->getForm()->getId()]).'">'.$row->getEntity()->getForm()->getName().'</a>';
+            return '<a href="'.$this->generateUrl('opifer_form_form_edit', ['id' => $row->getEntity()->getForm()->getId()]).'">'.$row->getEntity()->getForm()->getName().'</a>';
         });
 
         $viewAction = new RowAction('view', 'opifer_form_post_view');
