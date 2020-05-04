@@ -97,7 +97,7 @@ class ActiveCampaignProvider implements MailingListProviderInterface
     {
         $i = 0;
         $size = 10;
-        for ($page = 1; $page < $size; ++$page ) {
+        for ($page = 1; $page < $size; ++$page) {
             $updates = $this->getClient()->api(sprintf('contact/list?filters[listid]=%d&full=1sort=datetime&sort_direction=DESC&page=%d', $list->getRemoteListId(), $page));
 
             $i = 0;
