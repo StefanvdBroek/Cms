@@ -1,7 +1,11 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->exclude(['src/CmsBundle/Resources/public/components'])
+    ->exclude([
+        'CmsBundle/Resources/public/components',
+        'CmsBundle/Resources/xms/node_modules',
+        'CmsBundle/node_modules'
+    ])
     ->in(__DIR__ . '/src')
     ->name('*.php')
 ;
