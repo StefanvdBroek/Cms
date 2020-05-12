@@ -5,6 +5,7 @@ node_modules/
 phpunit.xml
 
 Resources/public/components/*
+!Resources/public/components/ckeditor/
 
 !Resources/public/components/bootstrap/
 Resources/public/components/bootstrap/*
