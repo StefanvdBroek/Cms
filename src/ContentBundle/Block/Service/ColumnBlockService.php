@@ -126,7 +126,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
                 ])
                 ->add('spans', SpanCollectionType::class, [
                     'column_count' => $block->getColumnCount(),
-                    'label' => 'label.spans',
+                    'label' => 'Column widths',
                     'attr' => [
                         'help_text' => 'help.column_spans',
                         'tag' => 'styles'
@@ -135,7 +135,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
                 ])
                 ->add('offsets', SpanCollectionType::class, [
                     'column_count' => $block->getColumnCount(),
-                    'label' => 'label.offsets',
+                    'label' => 'Column offsets',
                     'attr' => [
                         'help_text' => 'help.column_offsets',
                         'tag' => 'styles'
@@ -144,7 +144,7 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
                 ])
                 ->add('gutters', GutterCollectionType::class, [
                     'column_count' => $block->getColumnCount(),
-                    'label' => 'label.gutters',
+                    'label' => 'Gutter widths',
                     'attr' => [
                         'help_text' => 'help.column_gutters',
                         'tag' => 'styles'
