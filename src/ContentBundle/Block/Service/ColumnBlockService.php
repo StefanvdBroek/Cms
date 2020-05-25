@@ -74,7 +74,6 @@ class ColumnBlockService extends AbstractBlockService implements LayoutBlockServ
                     '4' => '4',
                 ],
                 'required' => true,
-                'expanded' => true,
                 'multiple' => false,
                 'attr' => [
                     'help_text' => 'help.column_count',
