@@ -19,9 +19,9 @@ help:
     block_display_name: The human readable reference name of this block
     block_name: Reference name to this block. Only for application purposes.
     block_template: Pick a template to change how this block is displayed
-    column_spans: Width of columns at a maximum of 16 units
-    column_gutters: Width of spacing between columns (px)
-    column_offsets: Offset columns per viewport (http://getbootstrap.com/css/#grid-offsetting)
+    column_spans: Change helptext into This defines the width of each column, the sum can be max 12 units. This determines the ratio of the columns.
+    column_gutters: Width of spacing between columns applied on both sides (left & right).
+    column_offsets: This is the margin on the left side of each column.(E.g. offset 2 = 2/12 = 16,67%).
     container_sizing: Strategy to determine width at different viewports
     content_description: Describe your page in a few important keywords
     content_short_title: Short version of the title, used in navigation
@@ -39,7 +39,7 @@ help:
     template: Choose a template as your starting point to create content with
     list_horizontal_scroll: Enable a horizontal scroll list.
     list_display_type: Choose list if you want items displayed as rows, and cards if you want your items to resemble tiles.
-    list_display_size: Sizing of each list item
+    list_display_size: Add styling to the ColumnBlock, adds margin (outside) to the top and/or bottom of the column(s). Multiple styles can be selected.
     list_image_ratio: Ratio defines in which proportions your image will be cropped and displayed.
     block_social_title: Custom title for sharing by mail
     block_social_text: Custom text for sharing by mail
@@ -99,7 +99,6 @@ label:
     gutter.md: Gutter md
     gutter.lg: Gutter lg
     gutter.xl: Gutter xl
-    gutters: Gutter width
     header: Header
     indexable: Indexable
     levels: Levels
@@ -110,8 +109,6 @@ label:
     rich_text: RTF-editor
     style: Style
     styling: Styles
-    spans: Widths
-    offsets: Offsets
     title: Title
     caption: Caption
     message: Message
@@ -175,7 +172,7 @@ warning:
 caption:
     columnblock: Divide content in columns
 description:
-    columnblock: Divide your content by 1-4 responsive columns. Generates placeholders for content for each column.
+    columnblock: Divide your content by 1-4 responsive columns. A column can hold an image, text, etc or can function as placeholders.
 
 # Content
 content:
