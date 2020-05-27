@@ -276,6 +276,7 @@ services:
     opifer.doctrine_expression_engine:
         class: 'Opifer\ExpressionEngine\DoctrineExpressionEngine'
         arguments: ['@doctrine.orm.entity_manager']
+        public: true
 
     opifer.expression_engine_type:
         class: 'Opifer\ExpressionEngine\Form\Type\ExpressionEngineType'
