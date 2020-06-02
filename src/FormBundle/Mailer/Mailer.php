@@ -75,7 +75,7 @@ class Mailer
      */
     public function createMessage($recipient, $subject, $body)
     {
-        $recipients = explode(',', trim($recipient));
+        $recipients = explode(',', str_replace(' ', '', $recipient));
 
         return (new \Swift_Message($subject))
             ->setSender($this->sender)
