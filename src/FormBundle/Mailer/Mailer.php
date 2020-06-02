@@ -8,12 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * Mailer.
- */
 class Mailer
 {
-    /** @var \Swift_mailer */
+    /** @var \Swift_Mailer */
     protected $mailer;
 
     /** @var EngineInterface */
@@ -33,7 +30,7 @@ class Mailer
      *
      * @param $sender
      */
-    public function __construct(TranslatorInterface $translator, RequestStack $requestStack, EngineInterface $templating, \Swift_mailer $mailer, $sender)
+    public function __construct(TranslatorInterface $translator, RequestStack $requestStack, EngineInterface $templating, \Swift_Mailer $mailer, $sender)
     {
         $this->templating = $templating;
         $this->mailer = $mailer;
@@ -74,24 +71,23 @@ class Mailer
      * @param string $subject
      * @param string $body
      *
-     * @return \Swift_Mime_Message
+     * @return \Swift_Message
      */
     public function createMessage($recipient, $subject, $body)
     {
         $recipients = explode(',', trim($recipient));
 
-        return \Swift_Message::newInstance()
+        return (new \Swift_Message($subject))
             ->setSender($this->sender)
             ->setFrom($this->sender)
             ->setTo($recipients)
-            ->setSubject($subject)
             ->setBody($body, 'text/html');
     }
 
     /**
      * @return int
      */
-    protected function send(\Swift_Mime_Message $message)
+    protected function send(\Swift_Message $message)
     {
         return $this->mailer->send($message);
     }
